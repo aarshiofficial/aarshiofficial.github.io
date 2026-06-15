@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AARSHI Members</title>
+
+<style>
+body{
+background:#0d0d0d;
+color:white;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#e8c547;
+text-align:center;
+}
+
+.member{
+background:#1c1c1c;
+padding:20px;
+margin:15px auto;
+border-radius:15px;
+max-width:700px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>AARSHI Members</h1>
+
+<div id="membersList"></div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w"
+
+authDomain: "aarshi-3ce95.firebaseapp.com",
+
+databaseURL:
+"https://aarshi-3ce95-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId: "aarshi-3ce95",
+
+storageBucket: "aarshi-3ce95.firebasestorage.app",
+
+messagingSenderId: "267278913707",
+
+appId:
+"1:267278913707:web:3b3379b43b3486453627ee"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const database = getDatabase(app);
+
+const membersRef = ref(database,"members");
+
+onValue(membersRef,(snapshot)=>{
+
+const data = snapshot.val();
+
+let html = "";
+
+for(let id in data){
+
+html += `
+
+<div class="member">
+
+<h2>${data[id].name}</h2>
+
+<p><b>Year Joined:</b> ${data[id].yearJoined}</p>
+
+<p><b>Departments:</b> ${data[id].departments.join(", ")}</p>
+
+<p><b>Achievements:</b> ${data[id].approvedAchievements}</p>
+
+<p><b>Attendance:</b> ${data[id].attendance}%</p>
+
+</div>
+
+`;
+
+}
+
+document.getElementById("membersList").innerHTML = html;
+
+});
+
+</script>
+
+</body>
+</html>
