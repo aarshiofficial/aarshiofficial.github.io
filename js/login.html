@@ -70,9 +70,73 @@
 </div>
 
 <script>
-function login(){
-    alert("Firebase connection coming next step");
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword
 }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w",
+
+authDomain: "aarshi-3ce95.firebaseapp.com",
+
+databaseURL:
+"https://aarshi-3ce95-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId: "aarshi-3ce95",
+
+storageBucket: "aarshi-3ce95.firebasestorage.app",
+
+messagingSenderId: "267278913707",
+
+appId:
+"1:267278913707:web:3b3379b43b3486453627ee"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+window.login = function(){
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+signInWithEmailAndPassword(
+auth,
+email,
+password
+)
+
+.then((userCredential)=>{
+
+alert("Login Successful");
+
+window.location.href =
+"dashboard.html";
+
+})
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+}
+
+</script>
 </script>
 
 </body>
