@@ -61,6 +61,61 @@ cursor:pointer;
 <button onclick="signup()">Create Account</button>
 
 </div>
+<script type="module">
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBEwJ8H_QYK_6CeY0A7UTJ1iynkv5wD_9w",
+  authDomain: "aarshi-3ce95.firebaseapp.com",
+  projectId: "aarshi-3ce95",
+  storageBucket: "aarshi-3ce95.firebasestorage.app",
+  messagingSenderId: "267278913707",
+  appId: "1:267278913707:web:3b3379b43b3486453627ee",
+  databaseURL: "https://aarshi-3ce95-default-rtdb.asia-southeast1.firebasedatabase.app"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+
+window.signup = function() {
+
+const name = document.getElementById("name").value;
+const position = document.getElementById("position").value;
+const attendance = document.getElementById("attendance").value;
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+createUserWithEmailAndPassword(auth,email,password)
+
+.then((userCredential)=>{
+
+const user = userCredential.user;
+
+set(ref(database,'members/'+user.uid),{
+
+name:name,
+position:position,
+attendance:attendance,
+email:email
+
+});
+
+alert("Account Created Successfully!");
+
+})
+
+.catch((error)=>{
+alert(error.message);
+});
+
+}
+
+</script>
 </body>
 </html>
