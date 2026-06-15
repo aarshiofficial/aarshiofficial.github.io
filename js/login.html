@@ -105,6 +105,12 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 window.login = function(){
+    window.login = function(){
+
+alert("Button Pressed");
+
+document.getElementById("test").innerHTML =
+"Button Clicked";
 
 document.getElementById("test").innerHTML =
 "Button Clicked";
@@ -124,8 +130,7 @@ password
 
 alert("Login Successful");
 
-window.location.href =
-"dashboard.html";
+window.location.href = "/js/dashboard.html";
 
 })
 
