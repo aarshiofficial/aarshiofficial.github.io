@@ -24,14 +24,21 @@ margin:15px auto;
 border-radius:15px;
 max-width:700px;
 }
+
+h2{
+color:#e8c547;
+}
 </style>
+
 </head>
 
 <body>
 
 <h1>AARSHI Members</h1>
 
-<div id="membersList"></div>
+<div id="membersList">
+Loading members...
+</div>
 
 <script type="module">
 
@@ -47,7 +54,7 @@ from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w"
+apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w",
 
 authDomain: "aarshi-3ce95.firebaseapp.com",
 
@@ -75,6 +82,17 @@ onValue(membersRef,(snapshot)=>{
 
 const data = snapshot.val();
 
+console.log(data);
+
+if(!data){
+
+document.getElementById("membersList").innerHTML =
+"No members found.";
+
+return;
+
+}
+
 let html = "";
 
 for(let id in data){
@@ -83,15 +101,22 @@ html += `
 
 <div class="member">
 
-<h2>${data[id].name}</h2>
+<h2>${data[id].name || "No Name"}</h2>
 
-<p><b>Year Joined:</b> ${data[id].yearJoined}</p>
+<p><b>Year Joined:</b>
+${data[id].yearJoined || "Not Added"}</p>
 
-<p><b>Departments:</b> ${data[id].departments.join(", ")}</p>
+<p><b>Departments:</b>
+${data[id].departments ?
+data[id].departments.join(", ")
+: "Not Added"}</p>
 
-<p><b>Achievements:</b> ${data[id].approvedAchievements}</p>
+<p><b>Approved Achievements:</b>
+${data[id].approvedAchievements ||
+"No approved achievements yet"}</p>
 
-<p><b>Attendance:</b> ${data[id].attendance}%</p>
+<p><b>Attendance:</b>
+${data[id].attendance || "0"}%</p>
 
 </div>
 
@@ -106,4 +131,5 @@ document.getElementById("membersList").innerHTML = html;
 </script>
 
 </body>
+
 </html>
