@@ -18,13 +18,6 @@
     localStorage.setItem("aarshi-theme", theme);
   }
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const current = root.getAttribute("data-theme");
-      applyTheme(current === "dark" ? "light" : "dark");
-    });
-  }
-
   // Listen for OS-level changes
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
     if (!localStorage.getItem("aarshi-theme")) {
