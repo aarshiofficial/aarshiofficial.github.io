@@ -24,7 +24,92 @@ color:#e8c547;
 }
 </style>
 </head>
+<script type="module">
 
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+
+import { getAuth, onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+import { getDatabase, ref, get }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w",
+
+authDomain: "aarshi-3ce95.firebaseapp.com",
+
+databaseURL:
+"https://aarshi-3ce95-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId: "aarshi-3ce95",
+
+storageBucket: "aarshi-3ce95.firebasestorage.app",
+
+messagingSenderId: "267278913707",
+
+appId:
+"1:267278913707:web:3b3379b43b3486453627ee"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const database = getDatabase(app);
+
+onAuthStateChanged(auth, (user)=>{
+
+if(user){
+
+get(
+ref(database,"members/"+user.uid)
+)
+
+.then((snapshot)=>{
+
+const data = snapshot.val();
+
+document.getElementById("welcome")
+.innerHTML =
+"Welcome, " + data.name;
+
+document.getElementById("attendance")
+.innerHTML =
+data.attendance;
+
+document.getElementById("achievements")
+.innerHTML =
+data.approvedAchievements || "No approved achievements yet";
+
+document.getElementById("departments")
+.innerHTML =
+data.departments ?
+data.departments.join(", ")
+:
+"None";
+
+document.getElementById("yearJoined")
+.innerHTML =
+data.yearJoined;
+
+});
+
+}
+
+else{
+
+window.location.href =
+"login.html";
+
+}
+
+});
+
+</script>
 <body>
 
 <div class="card">
