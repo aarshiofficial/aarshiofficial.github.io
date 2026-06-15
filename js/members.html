@@ -28,6 +28,15 @@ max-width:700px;
 h2{
 color:#e8c547;
 }
+  .member h2{
+color:#e8c547;
+text-align:center;
+margin-top:10px;
+}
+
+.member p{
+margin:6px 0;
+}
 </style>
 
 </head>
@@ -101,7 +110,18 @@ html += `
 
 <div class="member">
 
-<h2>${data[id].name || "No Name"}</h2>
+<img
+src="https://via.placeholder.com/120"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+">
+
+<h2>${data[id].name}</h2>
 
 <p><b>Membership:</b>
 ${data[id].yearJoined} - ${data[id].yearLeft}
