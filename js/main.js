@@ -318,4 +318,100 @@
   );
   statNumbers.forEach((el) => counterObserver.observe(el));
 
+  /* --- BACK TO TOP --- */
+  const backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("visible", window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  /* --- LAZY LOAD BLUR IMAGES --- */
+  const lazyImgs = document.querySelectorAll(
+    ".gal-item img, .poster-img-wrap img, .team-photo, .renowned-photo, .download-preview img"
+  );
+  const imgObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        if (img.complete) {
+          img.classList.add("loaded");
+        } else {
+          img.addEventListener("load", () => img.classList.add("loaded"), { once: true });
+        }
+        imgObserver.unobserve(img);
+      }
+    });
+  }, { rootMargin: "100px" });
+  lazyImgs.forEach((img) => imgObserver.observe(img));
+
+  /* --- COUNTDOWN TIMERS --- */
+  const countdowns = document.querySelectorAll(".countdown");
+  function updateCountdowns() {
+    const now = Date.now();
+    countdowns.forEach((cd) => {
+      const deadline = new Date(cd.dataset.deadline).getTime();
+      const timer = cd.querySelector(".cd-timer");
+      if (!timer) return;
+      const diff = deadline - now;
+      if (diff <= 0) {
+        timer.textContent = "Deadline passed";
+        timer.classList.add("expired");
+        return;
+      }
+      const days  = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins  = Math.floor((diff % 3600000)  / 60000);
+      timer.textContent = days > 0
+        ? `${days}d ${hours}h ${mins}m`
+        : `${hours}h ${mins}m`;
+    });
+  }
+  if (countdowns.length) {
+    updateCountdowns();
+    setInterval(updateCountdowns, 60000);
+  }
+
+  /* --- FLIP CARDS (tap on touch devices) --- */
+  const flipCards = document.querySelectorAll(".flip-card");
+  // Only add tap-to-flip on touch devices (hover handles desktop)
+  if (window.matchMedia("(hover: none)").matches) {
+    flipCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+      });
+    });
+  }
+
+  /* --- LIGHTBOX SWIPE (mobile) --- */
+  let touchStartX = 0;
+  let touchStartY = 0;
+  if (lightbox) {
+    lightbox.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    lightbox.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      // Only trigger swipe if horizontal movement > vertical (not a scroll)
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) {
+          // Swipe left → next
+          currentIndex = (currentIndex + 1) % visibleItems.length;
+        } else {
+          // Swipe right → prev
+          currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+        }
+        showLbImage();
+      } else if (Math.abs(dy) > 80 && dy > 0) {
+        // Swipe down → close
+        closeLightbox();
+      }
+    }, { passive: true });
+  }
+
 })();

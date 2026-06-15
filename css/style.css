@@ -1582,3 +1582,385 @@ strong { color: var(--gold); font-weight: 600; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* =============================================
+   NEW FEATURES CSS
+   ============================================= */
+
+/* --- BACK TO TOP --- */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--black);
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 500;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s, transform 0.3s, background 0.2s;
+  box-shadow: 0 4px 16px rgba(232,197,71,0.35);
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); }
+.back-to-top:hover   { background: var(--gold-dim); transform: translateY(-2px); }
+
+/* --- ACTIVE NAV HIGHLIGHT --- */
+.nav-links a.active {
+  color: var(--gold);
+  position: relative;
+}
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0.85rem;
+  right: 0.85rem;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+[data-theme="light"] .nav-links a.active { color: var(--gold); }
+
+/* --- IMAGE LAZY-LOAD BLUR --- */
+.gal-item img,
+.poster-img-wrap img,
+.team-photo,
+.renowned-photo,
+.download-preview img {
+  transition: filter 0.5s ease, transform 0.4s var(--ease-out-expo);
+  filter: blur(6px) saturate(0.6);
+}
+.gal-item img.loaded,
+.poster-img-wrap img.loaded,
+.team-photo.loaded,
+.renowned-photo.loaded,
+.download-preview img.loaded {
+  filter: none;
+}
+
+/* --- COUNTDOWN TIMER --- */
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+.cd-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.cd-timer {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gold);
+  background: rgba(232,197,71,0.1);
+  border: 1px solid rgba(232,197,71,0.25);
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+.cd-timer.expired { color: var(--muted); background: transparent; border-color: transparent; }
+
+/* --- FLIP CARDS --- */
+.flip-card {
+  perspective: 900px;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+/* Touch devices: tap to flip */
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+.flip-card-front {
+  background: var(--dark);
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.flip-card-back {
+  background: linear-gradient(135deg, #1A1208 0%, #0D0D0D 100%);
+  border: 1px solid rgba(232,197,71,0.3);
+  transform: rotateY(180deg);
+  justify-content: center;
+}
+[data-theme="light"] .flip-card-front { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .flip-card-back  { background: linear-gradient(135deg, #F5EDD8 0%, #EDE5CC 100%); border-color: rgba(153,111,26,0.35); }
+
+.flip-quote {
+  font-family: var(--font-italic);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(245,240,232,0.85);
+  line-height: 1.65;
+  margin: 0.5rem 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+[data-theme="light"] .flip-quote { color: #3D3528; }
+
+.flip-card-back .team-role  { color: var(--gold); }
+.flip-card-back .team-name  { color: var(--white); font-size: 1.05rem; }
+[data-theme="light"] .flip-card-back .team-name { color: #0D0A06; }
+.flip-card-back .team-contact { color: rgba(232,197,71,0.7); font-size: 0.8rem; }
+
+/* Flip hint label */
+.flip-card-front::after {
+  content: 'Hover for quote ✦';
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(232,197,71,0.35);
+  text-transform: uppercase;
+}
+@media (hover: none) {
+  .flip-card-front::after { content: 'Tap for quote ✦'; }
+}
+
+/* secretary card front special bg */
+.team-card--secretary .flip-card-front {
+  background: linear-gradient(135deg, rgba(232,197,71,0.07) 0%, var(--dark) 60%);
+  border-color: rgba(232,197,71,0.2);
+}
+[data-theme="light"] .team-card--secretary .flip-card-front {
+  background: linear-gradient(135deg, rgba(153,111,26,0.07) 0%, #FFFFFF 60%);
+  border-color: rgba(153,111,26,0.2);
+}
+
+/* --- PRODUCTIONS TIMELINE --- */
+.timeline-section { background: var(--black); }
+[data-theme="light"] .timeline-section { background: #FAFAF8; }
+
+.timeline {
+  position: relative;
+  margin-top: 3rem;
+  padding-left: 0;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 80px 40px 1fr;
+  gap: 0 1.5rem;
+  margin-bottom: 0;
+  align-items: start;
+}
+
+.tl-year-col { text-align: right; padding-top: 0.2rem; }
+.tl-year {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  opacity: 0.85;
+}
+.tl-year--upcoming { color: var(--muted); opacity: 0.6; }
+
+.tl-dot-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tl-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--dark-2);
+  border: 3px solid var(--muted);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.tl-dot--gold    { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px rgba(232,197,71,0.5); }
+.tl-dot--upcoming { background: transparent; border-color: var(--muted); border-style: dashed; }
+.tl-line {
+  width: 2px;
+  flex: 1;
+  min-height: 4rem;
+  background: linear-gradient(to bottom, rgba(232,197,71,0.25), rgba(232,197,71,0.06));
+  margin-top: 4px;
+}
+[data-theme="light"] .tl-line { background: linear-gradient(to bottom, rgba(153,111,26,0.2), rgba(153,111,26,0.05)); }
+
+.tl-content {
+  padding-bottom: 2.5rem;
+  padding-top: 0;
+}
+.tl-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.tl-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+[data-theme="light"] .tl-title { color: #0D0A06; }
+.tl-desc {
+  font-size: 0.925rem;
+  color: rgba(245,240,232,0.72);
+  line-height: 1.75;
+  max-width: 560px;
+  margin-bottom: 0.75rem;
+}
+[data-theme="light"] .tl-desc { color: #3D3528; }
+.tl-desc em { color: var(--gold); font-style: italic; }
+.tl-watch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.1rem;
+  background: rgba(192,57,43,0.15);
+  border: 1px solid rgba(192,57,43,0.4);
+  border-radius: 4px;
+  color: #E74C3C;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+.tl-watch-btn:hover { background: rgba(192,57,43,0.28); transform: translateX(3px); }
+.tl-item--upcoming .tl-content { opacity: 0.65; }
+.tl-item--upcoming .tl-title { font-style: italic; }
+
+@media (max-width: 640px) {
+  .tl-item { grid-template-columns: 56px 32px 1fr; gap: 0 1rem; }
+  .tl-year { font-size: 1.1rem; }
+}
+
+/* --- POSTER DOWNLOADS --- */
+.downloads-section { background: var(--dark); }
+[data-theme="light"] .downloads-section { background: var(--bg-alt); }
+
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.download-card {
+  background: var(--dark-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.download-card:hover { border-color: var(--border-accent); transform: translateY(-4px); }
+[data-theme="light"] .download-card { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .download-card:hover { border-color: rgba(153,111,26,0.3); }
+
+.download-preview {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.download-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s var(--ease-out-expo), filter 0.5s ease !important;
+}
+.download-card:hover .download-preview img { transform: scale(1.04); }
+.download-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.download-card:hover .download-overlay { opacity: 1; }
+.download-btn {
+  padding: 0.65rem 1.4rem;
+  background: var(--gold);
+  color: var(--black);
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.download-btn:hover { background: var(--gold-dim); transform: scale(1.04); }
+
+.download-info { padding: 1.25rem; }
+.download-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.download-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.3rem;
+}
+[data-theme="light"] .download-name { color: #0D0A06; }
+.download-meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.85rem;
+}
+.download-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: rgba(232,197,71,0.1);
+  border: 1px solid rgba(232,197,71,0.3);
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+.download-link-btn:hover { background: rgba(232,197,71,0.2); border-color: var(--gold); }
+
+@media (max-width: 900px) { .downloads-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) { .downloads-grid { grid-template-columns: 1fr; } }
