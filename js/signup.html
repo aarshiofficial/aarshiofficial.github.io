@@ -89,11 +89,31 @@ cursor:pointer;
 <option>2014</option>
 <option>2013</option>
 <option>2012</option>
-<option>2011</option>
-<option>2010</option>
-<option>2009</option>
-<option>2008</option>
-<option>2007</option>
+
+</select>
+
+<br><br>
+
+<label>Year Left Aarshi</label>
+
+<select id="yearLeft">
+
+<option>Present</option>
+
+<option>2025</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+<option>2019</option>
+<option>2018</option>
+<option>2017</option>
+<option>2016</option>
+<option>2015</option>
+<option>2014</option>
+<option>2013</option>
+<option>2012</option>
 
 </select>
 
@@ -199,6 +219,7 @@ const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
 const yearJoined = document.getElementById("yearJoined").value;
+const yearLeft = document.getElementById("yearLeft").value;
 const achievements = document.getElementById("achievements").value;
 
 const departments = [];
@@ -217,11 +238,17 @@ set(ref(database,'members/'+user.uid),{
 
 name:name,
 email:email,
+
 yearJoined:yearJoined,
+yearLeft:yearLeft,
+
 departments:departments,
+
 submittedAchievements:achievements,
 approvedAchievements:"",
+
 attendance:"0",
+
 role:"Member"
 
 });
