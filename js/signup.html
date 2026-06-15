@@ -175,11 +175,21 @@ const database = getDatabase(app);
 window.signup = function() {
 
 const name = document.getElementById("name").value;
-const position = document.getElementById("position").value;
-const attendance = document.getElementById("attendance").value;
+const yearJoined =
+document.getElementById("yearJoined").value;
+
+const achievements =
+document.getElementById("achievements").value;
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
+const departments = [];
 
+document.querySelectorAll(".dept:checked")
+.forEach(item => {
+
+departments.push(item.value);
+
+});
 createUserWithEmailAndPassword(auth,email,password)
 
 .then((userCredential)=>{
@@ -189,9 +199,22 @@ const user = userCredential.user;
 set(ref(database,'members/'+user.uid),{
 
 name:name,
-position:position,
-attendance:attendance,
-email:email
+
+email:email,
+
+yearJoined:yearJoined,
+
+departments:departments,
+
+submittedAchievements:achievements,
+
+approvedAchievements:"",
+
+attendance:0,
+
+role:"Member",
+
+contributions:""
 
 });
 
