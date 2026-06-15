@@ -10,12 +10,21 @@
   const root = document.documentElement;
 
   // Initialise: use saved preference, then system preference, then default dark
-  const initialTheme = "dark" ;
+  const savedTheme = localStorage.getItem("aarshi-theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
   root.setAttribute("data-theme", initialTheme);
 
   function applyTheme(theme) {
     root.setAttribute("data-theme", theme);
     localStorage.setItem("aarshi-theme", theme);
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme");
+      applyTheme(current === "dark" ? "light" : "dark");
+    });
   }
 
   // Listen for OS-level changes

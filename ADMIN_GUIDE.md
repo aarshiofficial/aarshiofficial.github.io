@@ -1,18 +1,19 @@
 # AARSHI Website — Admin Guide
-**For anyone managing the website — no coding experience needed for most tasks.**
+**For anyone managing the website. No coding experience needed for most tasks.**
+**Live site: https://aarshiofficial.github.io/**
 
 ---
 
-## 📁 File Structure (What's Where)
+## 📁 File Structure
 
 ```
 AARSHI_WEBSITE/
-├── index.html          ← The entire website (one file)
+├── index.html          ← The entire website (one file — edit this for content)
 ├── css/style.css       ← All colours, fonts, layout
-├── js/main.js          ← Animations, filters, lightbox
+├── js/main.js          ← Animations, filters, lightbox, theme toggle
 ├── assets/             ← ALL images go here
-│   ├── logo_dark.png           ← Logo (dark bg version)
-│   ├── logo_light.jpg          ← Logo (light bg version)
+│   ├── logo_dark.png           ← Logo for dark mode
+│   ├── logo_light.jpg          ← Logo for light mode
 │   ├── ob_*.jpg                ← Current OB (26-27) photos
 │   ├── ob2526_*.jpg            ← Previous OB (25-26) photos
 │   ├── gal_*.jpg               ← Gallery photos
@@ -20,30 +21,30 @@ AARSHI_WEBSITE/
 │   ├── iicm_*.jpg              ← IICM gallery photos
 │   ├── event_*.jpg/png         ← Event posters
 │   └── mentor_*.jpg            ← Renowned faces photos
-├── .github/workflows/deploy.yml ← Auto-deploy (don't touch)
-├── README.md           ← Basic readme
+├── .github/workflows/deploy.yml ← Auto-deploy (do not touch)
+├── README.md
 └── ADMIN_GUIDE.md      ← This file
 ```
 
 ---
 
-## 🔧 HOW TO EDIT: Open index.html in any text editor
-Use **VS Code** (free, recommended) or even Notepad.  
-Use **Ctrl+F** (Find) to locate any text you want to change.  
-After editing, **push to GitHub** → site auto-deploys in ~2 minutes.
+## 🔧 HOW TO EDIT
+
+1. Download the repo from GitHub or open it in VS Code
+2. Open `index.html` in any text editor
+3. Use **Ctrl+F** to search for the text you want to change
+4. Edit and save
+5. Push to GitHub → site updates at **https://aarshiofficial.github.io/** in ~2 min
 
 ---
 
-## 👥 CHANGING OFFICE BEARERS (OBs)
+## 👥 CHANGING OFFICE BEARERS
 
 ### Step 1 — Add the new photo
-Copy the photo into the `assets/` folder. Name it clearly, e.g. `ob_newname.jpg`
+Copy photo into `assets/` folder. Name it simply: `ob_firstname.jpg`
 
 ### Step 2 — Find the Team section
-Open `index.html`, press **Ctrl+F**, search for:
-```
-Current Office Bearers
-```
+In `index.html`, press **Ctrl+F**, search for: `Current Office Bearers`
 
 ### Step 3 — Update each card
 Each OB card looks like this:
@@ -57,48 +58,30 @@ Each OB card looks like this:
   <a href="tel:6295076503" class="team-contact">+91 62950 76503</a>
 </div>
 ```
+Change: photo filename, alt name, role, name, phone number.
 
-**To update:** Change:
-- `assets/ob_chhandak.jpg` → new photo filename
-- `alt="Chhandak Dutta"` → new person's name
-- `Secretary` → their role
-- `Chhandak Dutta` → their name
-- `tel:6295076503` and `+91 62950 76503` → their number
-
-### Moving old OBs to "Previous" section
-Search for `Tenure 2025–26` to find the previous OB section.  
-Copy-paste a card there and update the details.  
-Update the historical table further down (search for `All Past Office Bearers`).
+### Moving outgoing OBs to "Previous" section
+Search for `Tenure 2025–26`. Copy a card there with updated details.
+Also update the historical table (search: `All Past Office Bearers`).
 
 ---
 
 ## 📅 ADDING / REMOVING CURRENT EVENTS
 
-### To ADD a new event poster:
-1. Copy the poster image to `assets/`, e.g. `event_newname.jpg`
-2. In `index.html`, find the Events section (search for `Flagship Events`)
-3. The events use cards. Add a new card by copying this template:
-```html
-<div class="event-card">
-  <div class="event-card-accent"></div>
-  <div class="event-tag">Competition</div>
-  <h3 class="event-name">YOUR EVENT NAME</h3>
-  <p class="event-desc">Description of the event goes here.</p>
-</div>
-```
-
-### To add a poster with image (like Mrignayanee):
-The poster cards are in the **poster-grid** section. Each looks like:
+### Add a new event poster card
+1. Copy poster image to `assets/`, e.g. `event_newname.jpg`
+2. Find the `poster-grid` section (search: `Current & Upcoming 2026`)
+3. Copy this template and fill in your details:
 ```html
 <div class="poster-card">
   <div class="poster-img-wrap">
-    <img src="assets/event_mrignayanee.jpg" alt="Event Name" />
+    <img src="assets/event_newname.jpg" alt="Event Name" />
     <div class="poster-badge poster-badge--live">Open</div>
   </div>
   <div class="poster-info">
     <div class="event-tag">Category</div>
     <h3 class="event-name">Event Name</h3>
-    <p class="event-desc">Details here.</p>
+    <p class="event-desc">Description here.</p>
     <div class="poster-meta">
       <span class="poster-meta-item">📅 Deadline: DATE</span>
     </div>
@@ -106,73 +89,73 @@ The poster cards are in the **poster-grid** section. Each looks like:
 </div>
 ```
 
-**Badge types:**
-- `poster-badge--live` → Red "Open" badge (for active events)
+**Badge options:**
+- `poster-badge--live` → Red pulsing "Open" badge
 - `poster-badge--soon` → Gold "Coming Soon" badge
 
-### To REMOVE an event:
-Find the event card in `index.html` and delete from its opening `<div class="event-card">` or `<div class="poster-card">` to its closing `</div>`.
+### Remove an event
+Delete from the opening `<div class="poster-card">` to its closing `</div>`.
 
-### To mark an event as CLOSED:
-Change `poster-badge--live` to `poster-badge--soon` and change "Open" to "Closed".  
-Or simply delete the badge line entirely.
+### Mark event as closed
+Change `poster-badge--live` to `poster-badge--soon` and text to "Closed".
 
 ---
 
-## 🖼️ ADDING IMAGES TO GALLERY / PAST EVENTS
+## 🖼️ ADDING IMAGES
 
-### Adding to Gallery (current year events):
-1. Copy image to `assets/`, name it `gal_12_description.jpg` (continue numbering)
-2. Find in `index.html`: search for `id="galleryGrid"`
-3. Add a new item inside the grid:
+### To Gallery (current year):
+1. Copy image to `assets/`, name it `gal_12_description.jpg`
+2. Find `id="galleryGrid"` in `index.html`
+3. Add inside the grid:
 ```html
-<div class="gal-item" data-category="CATEGORY" data-caption="Caption Text">
+<div class="gal-item" data-category="CATEGORY" data-caption="Caption Here">
   <img src="assets/gal_12_description.jpg" alt="Description" loading="lazy" />
-  <div class="gal-overlay"><span>Caption Text</span></div>
+  <div class="gal-overlay"><span>Caption Here</span></div>
 </div>
 ```
+**Gallery categories:** `rangabhumi` · `abhivyakti` · `lakeer`
 
-**Categories for Gallery:** `rangabhumi`, `abhivyakti`, `lakeer`  
-(Add a new category by also adding a filter button — see below)
+### To Past Events:
+Same, but find `id="pastGrid"` and use `data-past="CATEGORY"`.
+**Past Events categories:** `abhivyakti` · `nukkad` · `productions` · `rangabhumi` · `iicm25` · `iicm23` · `farewell`
 
-### Adding to Past Events:
-Same process but search for `id="pastGrid"`.  
-Use `data-past="CATEGORY"` instead of `data-category`.
-
-**Categories for Past Events:** `abhivyakti`, `nukkad`, `productions`, `rangabhumi`, `iicm25`, `iicm23`, `farewell`
-
-### Wide images (span 2 columns):
-Add `gal-item--wide` to the class:
+### Wide image (spans 2 columns):
 ```html
 <div class="gal-item gal-item--wide" data-category="...">
 ```
 
-### Adding a NEW filter category:
-1. Add the button in the filter bar:
+### Add a new filter tab:
+1. Add button in the filter bar:
 ```html
-<button class="gf-btn" data-past-filter="newcategory">New Category</button>
+<button class="gf-btn" data-past-filter="newcategory">Label</button>
 ```
-2. Tag your images with `data-past="newcategory"`
+2. Tag images: `data-past="newcategory"`
 
 ---
 
-## 🏆 ADDING ACHIEVEMENTS
+## 🏆 UPDATING ACHIEVEMENTS
 
-### To add a new trophy item:
-Find `trophy-banner` in `index.html` and add:
+### Update stat counters
+Search `data-target` in index.html. Change the number:
+```html
+<div class="stat-number" data-target="3">0</div>
+```
+
+### Add a trophy item
+Find `trophy-banner` and add:
 ```html
 <div class="trophy-divider"></div>
 <div class="trophy-item">
   <div class="trophy-icon">🥇</div>
   <div class="trophy-info">
     <span class="trophy-year">YEAR</span>
-    <h3>Achievement Title</h3>
-    <p>Brief description</p>
+    <h3>Title</h3>
+    <p>Description</p>
   </div>
 </div>
 ```
 
-### To add to "Other Accolades":
+### Add to Other Accolades
 Find `ach-list` and add:
 ```html
 <div class="ach-item">
@@ -184,83 +167,166 @@ Find `ach-list` and add:
 </div>
 ```
 
-### Updating the stat counters:
-Search for `data-target` in `index.html`. Change the number:
-```html
-<div class="stat-number" data-target="3">0</div>
-```
-Change `3` to whatever the new number is.
+---
+
+## 📸 ACTIVATING THE INSTAGRAM FEED — FULL GUIDE
+
+The Instagram section currently shows a styled placeholder with a link to the profile.
+To show a real live feed of posts, follow these steps:
 
 ---
 
-## 📸 ACTIVATING THE INSTAGRAM FEED
+### OPTION 1 — Elfsight (Recommended · Free tier available)
 
-The Instagram section currently shows a placeholder. To activate a live feed:
+**Step 1: Create an Elfsight account**
+1. Go to **https://elfsight.com**
+2. Click "Sign Up" → use the AARSHI email or any Google account
+3. Free tier allows 1 widget with 200 views/month (enough for a club site)
 
-**Option 1 — Elfsight (easiest, free tier available):**
-1. Go to https://elfsight.com/instagram-feed-widget/
-2. Sign up free, connect `@aarshi_iiserk`
-3. Customise the feed (grid style, number of posts)
-4. Copy the embed code they give you
-5. In `index.html`, find the comment that says `PASTE YOUR WIDGET SCRIPT TAG HERE`
-6. Replace the `<div class="insta-placeholder">` block with the embed code
+**Step 2: Create the Instagram Feed widget**
+1. On the Elfsight dashboard, click **"Create Widget"**
+2. Search for **"Instagram Feed"** and select it
+3. Click **"Connect Instagram Account"**
+4. Log in with the `@aarshi_iiserk` Instagram account credentials
+5. Authorise Elfsight to read the feed
 
-**Option 2 — EmbedSocial:**
-1. Go to https://embedsocial.com
-2. Same process — connect Instagram, get code, paste
+**Step 3: Customise the widget**
+- Layout: choose **Grid** (3 columns looks best on this site)
+- Posts to show: **9 or 12**
+- Header: you can show the profile picture and follower count
+- Click **"Continue"** when done
+
+**Step 4: Get the embed code**
+1. Click **"Add to Website"** → choose **"Any Website (HTML)"**
+2. You will see two pieces of code — a `<script>` tag and a `<div>` tag
+3. Copy both
+
+**Step 5: Paste into the website**
+1. Open `index.html`
+2. Search for: `PASTE YOUR WIDGET SCRIPT TAG HERE`
+3. You will see this block:
+```html
+<div class="insta-placeholder">
+  ...
+</div>
+<!-- PASTE YOUR WIDGET SCRIPT TAG HERE when ready -->
+```
+4. **Delete** the entire `<div class="insta-placeholder">...</div>` block
+5. **Paste** your Elfsight code in its place, like this:
+```html
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div class="elfsight-app-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"></div>
+```
+(The X's will be your unique widget ID from Elfsight)
+
+**Step 6: Save and push to GitHub**
+The feed will now show live Instagram posts automatically.
+
+---
+
+### OPTION 2 — Behold (Free · No account login needed)
+
+Behold works without needing to log in with Instagram credentials — it uses a public access token.
+
+**Step 1:** Go to **https://behold.so**
+**Step 2:** Click "Create a Free Feed"
+**Step 3:** Enter `aarshi_iiserk` as the Instagram username
+**Step 4:** Choose "Grid" layout, set number of posts (9 recommended)
+**Step 5:** Click "Publish" → copy the embed snippet
+**Step 6:** Same as Elfsight Step 5 above — delete placeholder, paste snippet
+
+---
+
+### OPTION 3 — EmbedSocial (More features · Paid plans)
+
+**Step 1:** Go to **https://embedsocial.com**
+**Step 2:** Start free trial → Connect Instagram → choose `@aarshi_iiserk`
+**Step 3:** Design the feed (grid, colours, etc.)
+**Step 4:** Get embed code → paste into `index.html` as above
+
+---
+
+### Troubleshooting Instagram Feed
+
+| Problem | Fix |
+|---|---|
+| Feed not loading | Check widget ID in the div tag is correct |
+| Shows old posts | Elfsight refreshes every few hours automatically |
+| Free tier limit reached | Upgrade plan or switch to Behold (free) |
+| Instagram account disconnected | Re-connect in your Elfsight dashboard |
+| Feed looks wrong size | Add `style="max-width:100%"` to the widget div |
 
 ---
 
 ## 🔗 ADDING VIDEO LINKS TO PRODUCTIONS
 
-Find the productions list (search for `prod-tag`) and change a plain tag to a link:
+Find `prod-tag` in `index.html`. Change a plain span to a link:
 ```html
-<!-- Plain tag (no link): -->
+<!-- Before (no link): -->
 <span class="prod-tag">Sab Changa Si <em>2022</em></span>
 
-<!-- Linked tag (with YouTube): -->
-<a class="prod-tag prod-tag--link" href="https://youtu.be/YOUR_LINK" target="_blank">
+<!-- After (with YouTube link): -->
+<a class="prod-tag prod-tag--link" href="https://youtu.be/YOUR_ID" target="_blank">
   Sab Changa Si <em>2022</em> <span class="prod-watch">▶ Watch</span>
 </a>
 ```
 
 ---
 
-## 🌓 THEME (LIGHT/DARK MODE)
+## 🌓 LIGHT / DARK MODE
 
-The toggle button is in the top-right of the nav bar (🌙/☀️).  
-Users' preference is saved automatically in their browser.  
-No action needed from admins — it just works.
+The 🌙/☀️ toggle is in the top-right of the nav. User preference saves automatically.
+No admin action needed.
+
+---
+
+## 🌐 CHANGING THE WEBSITE URL
+
+The site currently lives at: **https://aarshiofficial.github.io/**
+
+**To point it to a custom domain like https://aarshi.iiserk.org:**
+
+1. **Get the domain** — ask your institute IT team to set up `aarshi.iiserk.org`
+2. **Add a CNAME DNS record:**
+   - Type: `CNAME`
+   - Name: `aarshi` (or `@` for root)
+   - Value: `aarshiofficial.github.io`
+   - Ask IT to add this in their DNS settings
+3. **Create a CNAME file** in the repo root:
+   - Create a file called exactly `CNAME` (no extension)
+   - Content: just one line: `aarshi.iiserk.org`
+4. **Set in GitHub:**
+   - Go to the repo → Settings → Pages
+   - Under "Custom domain", type `aarshi.iiserk.org`
+   - Tick "Enforce HTTPS"
+5. Wait 10–30 minutes for DNS to propagate
+6. Site will then be live at **https://aarshi.iiserk.org**
 
 ---
 
 ## 🚀 DEPLOYING CHANGES
 
-After any edit to files in this folder:
-1. Open Terminal / Git Bash in the `AARSHI_WEBSITE` folder
-2. Run:
 ```bash
 git add .
-git commit -m "Brief description of what you changed"
+git commit -m "Brief description of what changed"
 git push
 ```
-3. Go to GitHub → Actions tab → watch the deploy (takes ~2 min)
-4. Visit https://berasankhadeep20-lang.github.io/AARSHI_WEBSITE/ to see live site
+Then visit **https://aarshiofficial.github.io/** after ~2 minutes.
 
-**GitHub Pages settings:** Settings → Pages → Source: GitHub Actions
+**Check deploy status:** GitHub repo → Actions tab
 
 ---
 
-## ❓ COMMON MISTAKES TO AVOID
+## ❓ COMMON MISTAKES
 
 | Mistake | Fix |
 |---|---|
-| Image doesn't show | Check filename matches exactly (case-sensitive). No spaces in filenames. |
-| Broke the layout | Undo (Ctrl+Z) or check you closed all `<div>` tags properly |
-| Changes not showing | Clear browser cache (Ctrl+Shift+R) or wait 2 min for deploy |
-| Filter button not working | Make sure `data-category` on image matches `data-filter` on button exactly |
-| Photo looks wrong shape | Add `object-position: center top` to the img in CSS if face is cut off |
+| Image doesn't show | Check filename matches exactly — case-sensitive, no spaces |
+| Layout looks broken | Make sure every `<div>` you opened is also closed with `</div>` |
+| Changes not visible | Hard-refresh: Ctrl+Shift+R, or wait 2 min for deploy |
+| Filter not working | `data-category` on image must exactly match `data-filter` on button |
+| Photo face cut off | Use `object-position: center top` in CSS for that image |
 
 ---
 
-*Last updated: June 2026 | For help contact: aarshi@iiserkol.ac.in*
+*Last updated: June 2026 | Contact: aarshi@iiserkol.ac.in*

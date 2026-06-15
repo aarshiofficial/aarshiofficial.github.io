@@ -37,23 +37,173 @@
 /* --- LIGHT MODE --- */
 [data-theme="light"] {
   --black:      #FFFFFF;
-  --dark:       #F4F1EC;
-  --dark-2:     #EAE6DE;
-  --gold:       #B8952D;
-  --gold-dim:   #96751E;
-  --red:        #C0392B;
-  --parchment:  #1A1610;
-  --muted:      #6B6558;
-  --white:      #111111;
+  --dark:       #F2EEE7;
+  --dark-2:     #E8E2D9;
+  --gold:       #996F1A;
+  --gold-dim:   #7A570F;
+  --red:        #B03020;
+  --red-dark:   #8A2318;
+  --parchment:  #1C1712;
+  --muted:      #5A5248;
+  --white:      #0D0A06;
 
-  --bg:         #FAFAF8;
-  --bg-alt:     #F4F1EC;
-  --bg-card:    #FFFFFF;
-  --text:       #1A1610;
-  --text-muted: #6B6558;
-  --border:     rgba(0,0,0,0.08);
-  --border-accent: rgba(184,149,45,0.3);
+  --bg:           #FAFAF8;
+  --bg-alt:       #F2EEE7;
+  --bg-card:      #FFFFFF;
+  --text:         #1C1712;
+  --text-muted:   #5A5248;
+  --border:       rgba(0,0,0,0.09);
+  --border-accent: rgba(153,111,26,0.3);
 }
+
+/* Hero */
+[data-theme="light"] .hero { background: linear-gradient(135deg, #F0EBE0 0%, #E8E1D4 100%); }
+[data-theme="light"] .hero-bg-grid { background-image: linear-gradient(rgba(153,111,26,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(153,111,26,0.07) 1px, transparent 1px); }
+[data-theme="light"] .spotlight-1 { background: #C8A030; opacity: 0.10; }
+[data-theme="light"] .spotlight-2 { background: #B03020; opacity: 0.07; }
+[data-theme="light"] .hero-eyebrow  { color: var(--gold); }
+[data-theme="light"] .hero-subtitle { color: #6B6050; }
+[data-theme="light"] .hero-desc     { color: #3D3528; }
+[data-theme="light"] .hero-logo-img { mix-blend-mode: multiply; }
+[data-theme="light"] .btn-outline   { border-color: rgba(153,111,26,0.45); color: #1C1712; }
+[data-theme="light"] .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Nav */
+[data-theme="light"] .nav-logo-img { mix-blend-mode: multiply; }
+[data-theme="light"] .nav.scrolled { background: rgba(250,250,248,0.94); border-bottom: 1px solid rgba(153,111,26,0.18); }
+[data-theme="light"] .nav-links a { color: #1C1712; }
+[data-theme="light"] .nav-links a:hover { color: var(--gold); }
+[data-theme="light"] .nav-links .nav-cta { background: var(--gold); color: #FFF; }
+[data-theme="light"] .nav-links .nav-cta:hover { background: var(--gold-dim); }
+[data-theme="light"] .nav-links { background: rgba(250,250,248,0.97); border-bottom-color: rgba(153,111,26,0.18); }
+
+/* Curtain */
+[data-theme="light"] .curtain-left,
+[data-theme="light"] .curtain-right { filter: brightness(0.88); }
+
+/* Section shared */
+[data-theme="light"] .section-label { color: var(--gold); }
+[data-theme="light"] .section-title { color: #0D0A06; }
+[data-theme="light"] .section-sub   { color: #5A5248; }
+
+/* About */
+[data-theme="light"] .about { background: var(--bg-alt); }
+[data-theme="light"] .about-text p  { color: #2E2820; }
+[data-theme="light"] .about-lead    { color: #1C1712 !important; }
+[data-theme="light"] strong         { color: var(--gold); }
+[data-theme="light"] .pillar        { background: #FFFFFF; border-color: rgba(153,111,26,0.15); }
+[data-theme="light"] .pillar h3     { color: var(--gold); }
+[data-theme="light"] .pillar p      { color: #5A5248; }
+
+/* Events */
+[data-theme="light"] .events           { background: #FAFAF8; }
+[data-theme="light"] .upcoming-title   { color: #0D0A06; }
+[data-theme="light"] .event-card       { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .event-card:hover { border-color: rgba(153,111,26,0.3); }
+[data-theme="light"] .event-tag        { color: var(--gold); }
+[data-theme="light"] .event-name       { color: #0D0A06; }
+[data-theme="light"] .event-desc       { color: #3D3528; }
+[data-theme="light"] .prod-tag         { background: rgba(153,111,26,0.08); border-color: rgba(153,111,26,0.22); color: #2E2820; }
+[data-theme="light"] .prod-tag em      { color: var(--gold); }
+[data-theme="light"] .productions-label { color: #5A5248; }
+[data-theme="light"] .flagship-divider::before,
+[data-theme="light"] .flagship-divider::after { background: rgba(0,0,0,0.12); }
+[data-theme="light"] .flagship-divider span { color: #5A5248; }
+[data-theme="light"] .poster-card      { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .poster-card:hover { border-color: rgba(153,111,26,0.3); }
+[data-theme="light"] .poster-info .event-desc { color: #3D3528; }
+[data-theme="light"] .poster-meta-item { color: #5A5248; }
+[data-theme="light"] .participation-note { background: rgba(153,111,26,0.06); border-color: rgba(153,111,26,0.2); }
+[data-theme="light"] .participation-note p { color: #2E2820; }
+[data-theme="light"] .participation-note a { color: var(--gold); }
+
+/* Gallery & Past Events */
+[data-theme="light"] .gallery { background: #FAFAF8; }
+[data-theme="light"] .past-events-section { background: var(--bg-alt); }
+[data-theme="light"] .gf-btn         { color: #5A5248; border-color: rgba(153,111,26,0.25); background: transparent; }
+[data-theme="light"] .gf-btn:hover   { color: var(--gold); border-color: var(--gold); }
+[data-theme="light"] .gf-btn.active  { background: var(--gold); border-color: var(--gold); color: #FFF; }
+[data-theme="light"] .gal-item       { background: #E8E2D9; }
+[data-theme="light"] .gal-overlay    { background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 55%); }
+
+/* Achievements */
+[data-theme="light"] .achievements   { background: var(--bg-alt); }
+[data-theme="light"] .stat-item      { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .stat-number    { color: var(--gold); }
+[data-theme="light"] .stat-label     { color: #5A5248; }
+[data-theme="light"] .trophy-banner  { border-color: rgba(153,111,26,0.22); }
+[data-theme="light"] .trophy-item    { background: rgba(153,111,26,0.05); }
+[data-theme="light"] .trophy-item:hover { background: rgba(153,111,26,0.10); }
+[data-theme="light"] .trophy-divider { background: rgba(153,111,26,0.18); }
+[data-theme="light"] .trophy-year    { color: var(--gold); }
+[data-theme="light"] .trophy-info h3 { color: #0D0A06; }
+[data-theme="light"] .trophy-info p  { color: #5A5248; }
+[data-theme="light"] .other-ach-title { color: #0D0A06; }
+[data-theme="light"] .ach-item       { background: #FFFFFF; border-left-color: var(--gold); }
+[data-theme="light"] .ach-rank       { color: var(--gold); }
+[data-theme="light"] .ach-item strong { color: #1C1712; }
+[data-theme="light"] .ach-item span  { color: #5A5248; }
+[data-theme="light"] .iicm-gallery-title { color: #0D0A06; }
+[data-theme="light"] .iicm-gallery   { border-top-color: rgba(0,0,0,0.1); }
+[data-theme="light"] .prev-ob-tenure { color: var(--gold); background: rgba(153,111,26,0.08); border-color: rgba(153,111,26,0.2); }
+
+/* Renowned */
+[data-theme="light"] .renowned       { background: #FAFAF8; }
+[data-theme="light"] .renowned-card  { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .renowned-card:hover { border-color: rgba(153,111,26,0.3); }
+[data-theme="light"] .renowned-photo-wrap { border-color: rgba(153,111,26,0.4); background: #EDE8DF; }
+[data-theme="light"] .renowned-name  { color: #0D0A06; }
+
+/* Team */
+[data-theme="light"] .team           { background: #FAFAF8; }
+[data-theme="light"] .team-card      { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .team-card:hover { border-color: rgba(153,111,26,0.3); }
+[data-theme="light"] .team-card--secretary { background: linear-gradient(135deg, rgba(153,111,26,0.07) 0%, #FFFFFF 60%); border-color: rgba(153,111,26,0.2); }
+[data-theme="light"] .team-photo-wrap { border-color: rgba(153,111,26,0.4); background: #EDE8DF; }
+[data-theme="light"] .team-role      { color: var(--gold); }
+[data-theme="light"] .team-name      { color: #0D0A06; }
+[data-theme="light"] .team-contact   { color: #5A5248; }
+[data-theme="light"] .team-contact:hover { color: var(--gold); }
+[data-theme="light"] .prev-ob-section { border-top-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .prev-ob-header { border: none; }
+[data-theme="light"] .past-ob-title  { color: #0D0A06; }
+[data-theme="light"] .ob-table th    { color: var(--gold); }
+[data-theme="light"] .ob-table thead { background: rgba(153,111,26,0.08); }
+[data-theme="light"] .ob-table td    { color: #2E2820; border-top-color: rgba(0,0,0,0.06); }
+[data-theme="light"] .ob-table tr:hover td { background: rgba(0,0,0,0.02); }
+[data-theme="light"] .table-wrapper  { border-color: rgba(0,0,0,0.1); }
+
+/* Instagram & Contact */
+[data-theme="light"] .instagram-section { background: var(--bg-alt); }
+[data-theme="light"] .insta-handle   { color: var(--gold); }
+[data-theme="light"] .insta-placeholder { background: #FFFFFF; border-color: rgba(153,111,26,0.25); }
+[data-theme="light"] .insta-placeholder p { color: #5A5248; }
+[data-theme="light"] .insta-note strong  { color: var(--gold); }
+[data-theme="light"] .contact        { background: #FAFAF8; }
+[data-theme="light"] .contact-sub    { color: #3D3528; }
+[data-theme="light"] .contact-card   { background: #FFFFFF; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .contact-card:hover { border-color: rgba(153,111,26,0.3); }
+[data-theme="light"] .contact-label  { color: #5A5248; }
+[data-theme="light"] .contact-value  { color: #1C1712; }
+[data-theme="light"] .drama-room-note { background: rgba(176,48,32,0.06); border-color: rgba(176,48,32,0.2); }
+[data-theme="light"] .drama-room-note h3 { color: #1C1712; }
+[data-theme="light"] .drama-room-note p  { color: #3D3528; }
+[data-theme="light"] .drama-room-note a  { color: var(--gold); }
+
+/* Footer */
+[data-theme="light"] .footer         { background: #EDEAE3; border-top-color: rgba(0,0,0,0.1); }
+[data-theme="light"] .footer-logo-img { mix-blend-mode: multiply; }
+[data-theme="light"] .footer-logo-tagline { color: #5A5248; }
+[data-theme="light"] .footer-links a { color: #5A5248; }
+[data-theme="light"] .footer-links a:hover { color: var(--gold); }
+[data-theme="light"] .footer-copy    { color: rgba(90,82,72,0.6); }
+
+/* Theme toggle in light mode */
+[data-theme="light"] .theme-toggle { border-color: rgba(153,111,26,0.35); color: var(--gold); }
+[data-theme="light"] .theme-toggle:hover { background: rgba(153,111,26,0.1); border-color: var(--gold); }
+
+/* Lightbox stays dark in both modes */
+[data-theme="light"] .lightbox { background: rgba(20,15,5,0.93); }
 
 /* --- RESET --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
