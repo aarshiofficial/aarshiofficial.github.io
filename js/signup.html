@@ -11,15 +11,19 @@ color:white;
 font-family:Arial;
 display:flex;
 justify-content:center;
-align-items:center;
-height:100vh;
+align-items:flex-start;
+min-height:100vh;
+padding:40px 0;
 }
 
 .box{
 background:#1c1c1c;
 padding:30px;
 border-radius:15px;
-width:400px;
+width:500px;
+max-width:95%;
+max-height:90vh;
+overflow-y:auto;
 }
 
 input{
@@ -28,6 +32,18 @@ padding:10px;
 margin:8px 0;
 border:none;
 border-radius:8px;
+}
+  select,
+textarea{
+width:95%;
+padding:10px;
+margin:8px 0;
+border:none;
+border-radius:8px;
+}
+  .dept{
+width:auto;
+margin-right:10px;
 }
 
 button{
@@ -134,6 +150,9 @@ cursor:pointer;
 <input type="checkbox" value="Event Management" class="dept"> Event Management
 
 <br><br>
+  <label>Profile Picture</label>
+
+<input type="file" id="photo" accept="image/*">
 
 <textarea
 id="achievements"
