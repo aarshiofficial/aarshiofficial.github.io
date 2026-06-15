@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AARSHI — The Drama Club | IISER Kolkata</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Anti-flash: apply saved theme before paint -->
+  <script>
+    (function(){
+      var t = localStorage.getItem('aarshi-theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- CURTAIN REVEAL -->
+  <div class="curtain" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+    <div class="curtain-center-text">
+      <img src="assets/logo_dark.png" alt="AARSHI" class="curtain-logo" />
+      <span class="curtain-tagline">The Show Begins</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="assets/logo_dark.png"  alt="AARSHI — The Drama Club" class="nav-logo-img logo-dark" />
+        <img src="assets/logo_light.jpg" alt="AARSHI — The Drama Club" class="nav-logo-img logo-light" />
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#past-events">Past Events</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#contact" class="nav-cta">Join Us</a></li>
+        <li>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+            <span class="icon-moon">🌙</span>
+            <span class="icon-sun">☀️</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="spotlight spotlight-1"></div>
+    <div class="spotlight spotlight-2"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">IISER Kolkata Presents</p>
+      <div class="hero-logo-wrap">
+        <img src="assets/logo_dark.png"  alt="AARSHI" class="hero-logo-img logo-dark" />
+        <img src="assets/logo_light.jpg" alt="AARSHI" class="hero-logo-img logo-light" />
+      </div>
+      <p class="hero-subtitle">The Theatrical &amp; Dramatics Society</p>
+      <p class="hero-desc">
+        A vibrant collective of storytellers, performers, writers, directors,
+        and theatre enthusiasts — united by a shared passion for the performing arts.
+      </p>
+      <div class="hero-actions">
+        <a href="#events" class="btn btn-gold">Our Productions</a>
+        <a href="#about" class="btn btn-outline">Discover More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-label">Act I</div>
+      <h2 class="section-title">Who We Are</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="about-lead">
+            AARSHI envisions the promotion of classical theatre acting and various
+            forms of performance — while bringing together cultures from across the country
+            onto a single stage.
+          </p>
+          <p>
+            Beyond the stage lights, AARSHI stands as a <strong>family</strong> — a space built on
+            trust, collaboration, learning, and shared memories. We nurture individuals
+            both as performers and as people: building confidence, discipline, teamwork,
+            and artistic freedom.
+          </p>
+          <p>
+            With every production, AARSHI seeks to inspire, provoke thought,
+            and celebrate the timeless magic of theatre.
+          </p>
+        </div>
+        <div class="about-pillars">
+          <div class="pillar">
+            <div class="pillar-icon">🎭</div>
+            <h3>Perform</h3>
+            <p>Classical and contemporary theatre, stage productions, and live performances.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">✍️</div>
+            <h3>Create</h3>
+            <p>Original scripts, reel storytelling, mono dramas, and creative direction.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🌐</div>
+            <h3>Unite</h3>
+            <p>Amalgamating cultures from every corner of India on a single campus stage.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🏆</div>
+            <h3>Compete</h3>
+            <p>Representing IISER Kolkata at national inter-IISER competitions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section events" id="events">
+    <div class="container">
+      <div class="section-label">Act II</div>
+      <h2 class="section-title">Flagship Events</h2>
+
+      <!-- UPCOMING / ACTIVE EVENTS with posters -->
+      <div class="upcoming-label">
+        <span class="live-badge">🔴 Happening Now</span>
+        <h3 class="upcoming-title">Current &amp; Upcoming 2026</h3>
+      </div>
+
+      <div class="poster-grid">
+
+        <!-- Mrignayanee 2026 -->
+        <div class="poster-card">
+          <div class="poster-img-wrap">
+            <img src="assets/event_mrignayanee.jpg" alt="Mrignayanee 2026 — Reel Making Competition" />
+            <div class="poster-badge poster-badge--live">Open</div>
+          </div>
+          <div class="poster-info">
+            <div class="event-tag">Annual Competition · Reel Making</div>
+            <h3 class="event-name">Mrignayanee 2026</h3>
+            <p class="event-desc">Annual Online Reel-Making Competition — grab a camera, unleash your creativity, and let your story shine on screen.</p>
+            <div class="poster-meta">
+              <span class="poster-meta-item">🏆 1st ₹1200 &nbsp;·&nbsp; 2nd ₹900 &nbsp;·&nbsp; 3rd ₹600</span>
+              <span class="poster-meta-item">📅 Last Date: 7th July 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pages to Stages 2026 -->
+        <div class="poster-card">
+          <div class="poster-img-wrap">
+            <img src="assets/event_pages_to_stages.jpg" alt="Pages to Stages 2026 — Script Writing Competition" />
+            <div class="poster-badge poster-badge--live">Open</div>
+          </div>
+          <div class="poster-info">
+            <div class="event-tag">Script Writing Competition</div>
+            <h3 class="event-name">Pages to Stages 2026</h3>
+            <p class="event-desc">Where words become worlds. A script writing competition open to all passionate storytellers. Teams of 1–3 members.</p>
+            <div class="poster-meta">
+              <span class="poster-meta-item">🏆 1st ₹1200 &nbsp;·&nbsp; 2nd ₹900 &nbsp;·&nbsp; 3rd ₹600</span>
+              <span class="poster-meta-item">📅 Submission Deadline: 14th July</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Annual Drama Workshop 2026 -->
+        <div class="poster-card">
+          <div class="poster-img-wrap">
+            <img src="assets/event_drama_workshop.png" alt="Annual Drama Workshop 2026" />
+            <div class="poster-badge poster-badge--soon">Coming Soon</div>
+          </div>
+          <div class="poster-info">
+            <div class="event-tag">Annual Production</div>
+            <h3 class="event-name">Annual Drama Workshop 2026</h3>
+            <p class="event-desc">Intensive training in acting, stage movement, voice modulation, and production — culminating in a full theatrical production before a live audience.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PARTICIPATION INFO -->
+      <div class="participation-note">
+        <span class="participation-icon">📋</span>
+        <p>For detailed participation info, visit our <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener">Instagram page</a> or contact <a href="tel:6291392362">+91 62913 92362</a></p>
+      </div>
+
+      <!-- ALL FLAGSHIP EVENTS -->
+      <div class="flagship-divider">
+        <span>All Flagship Events</span>
+      </div>
+
+      <div class="events-grid">
+
+        <div class="event-card event-card--featured">
+          <div class="event-card-accent"></div>
+          <div class="event-tag">Annual Competition</div>
+          <h3 class="event-name">Mrignayanee</h3>
+          <p class="event-desc">
+            Our annual <strong>Online Summer Reel-Making Competition</strong> encouraging participants to explore
+            storytelling, acting, editing, and cinematic creativity through short-form digital content.
+            A platform to experiment with performance beyond the stage.
+          </p>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-accent"></div>
+          <div class="event-tag">Annual Production</div>
+          <h3 class="event-name">Drama Workshop &amp; Production</h3>
+          <p class="event-desc">
+            Intensive training in acting, stage movement, voice modulation, improvisation, and production
+            under experienced mentors — culminating in a full-fledged theatrical production before a live audience.
+          </p>
+          <div class="productions-list">
+            <p class="productions-label">Past Productions</p>
+            <div class="productions">
+              <span class="prod-tag">Sab Changa Si <em>2022</em></span>
+              <a class="prod-tag prod-tag--link" href="https://youtu.be/n8cHqBtuGKw?si=-rjvDqJdOP9M9acq" target="_blank" rel="noopener">Andh-Dwand <em>2023</em> <span class="prod-watch">▶ Watch</span></a>
+              <span class="prod-tag">PankhJhat <em>2024</em></span>
+              <span class="prod-tag">Lakeer-e-Kabaddi <em>2025</em></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-accent"></div>
+          <div class="event-tag">Inter-Batch</div>
+          <h3 class="event-name">Rangabhumi</h3>
+          <p class="event-desc">
+            The Inter-Batch Drama Competition of IISER Kolkata, bringing together students from different
+            batches to conceptualize, write, direct, and perform original theatrical productions.
+          </p>
+        </div>
+
+        <div class="event-card">
+          <div class="event-card-accent"></div>
+          <div class="event-tag">Solo Performance</div>
+          <h3 class="event-name">Abhivyakti</h3>
+          <p class="event-desc">
+            The <strong>Monodrama Competition</strong> of IISER Kolkata — celebrating the art of solo performance
+            and serving as the selection platform for IISER Kolkata's representative at the IICM Monodrama Competition.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <div class="section-label">In The Spotlight</div>
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">Moments from our productions, competitions &amp; rehearsals</p>
+
+      <!-- Filter Tabs -->
+      <div class="gallery-filters">
+        <button class="gf-btn active" data-filter="all">All</button>
+        <button class="gf-btn" data-filter="rangabhumi">Rangabhumi</button>
+        <button class="gf-btn" data-filter="abhivyakti">Abhivyakti</button>
+        <button class="gf-btn" data-filter="lakeer">Lakeer-e-Kabaddi</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+
+        <!-- 1. 24MS drama — Rangabhumi -->
+        <div class="gal-item" data-category="rangabhumi" data-caption="24MS Drama · Rangabhumi">
+          <img src="assets/gal_01_24ms_drama.jpg" alt="24MS Drama" loading="lazy" />
+          <div class="gal-overlay"><span>24MS Drama · Rangabhumi</span></div>
+        </div>
+
+        <!-- 2. 23MS drama — Rangabhumi -->
+        <div class="gal-item" data-category="rangabhumi" data-caption="23MS Drama · Rangabhumi">
+          <img src="assets/gal_02_23ms_drama.jpg" alt="23MS Drama" loading="lazy" />
+          <div class="gal-overlay"><span>23MS Drama · Rangabhumi</span></div>
+        </div>
+
+        <!-- 3. Abhivyakti 2025 — Participants & Judge -->
+        <div class="gal-item" data-category="abhivyakti" data-caption="Abhivyakti 2025 · Participants &amp; Judge">
+          <img src="assets/gal_03_abhivyakti_group.jpg" alt="Abhivyakti 2025 Participants and Judge" loading="lazy" />
+          <div class="gal-overlay"><span>Abhivyakti 2025 · Participants &amp; Judge</span></div>
+        </div>
+
+        <!-- 4. Abhivyakti — 3rd Place — Ipshit Chakraborty -->
+        <div class="gal-item" data-category="abhivyakti" data-caption="Abhivyakti · 3rd Place — Ipshit Chakraborty">
+          <img src="assets/gal_04_abhivyakti_ipshit.jpg" alt="Abhivyakti 3rd Place Ipshit Chakraborty" loading="lazy" />
+          <div class="gal-overlay"><span>Abhivyakti · 3rd Place — Ipshit Chakraborty</span></div>
+        </div>
+
+        <!-- 5. Abhivyakti Winner — Sharanya Chatterjee -->
+        <div class="gal-item" data-category="abhivyakti" data-caption="Abhivyakti Winner &amp; 2× IICM Gold — Sharanya Chatterjee">
+          <img src="assets/gal_05_abhivyakti_sharanya.jpg" alt="Abhivyakti Winner Sharanya Chatterjee" loading="lazy" />
+          <div class="gal-overlay"><span>Abhivyakti Winner &amp; 2× IICM Gold — Sharanya Chatterjee</span></div>
+        </div>
+
+        <!-- 6. Rangabhumi 2026 — 23MS Curtain Call -->
+        <div class="gal-item gal-item--wide" data-category="rangabhumi" data-caption="Rangabhumi 2026 Winners · 23MS Curtain Call">
+          <img src="assets/gal_06_rangabhumi_curtain.jpg" alt="Rangabhumi 2026 Winner 23MS curtain call" loading="lazy" />
+          <div class="gal-overlay"><span>Rangabhumi 2026 Winners · 23MS Curtain Call</span></div>
+        </div>
+
+        <!-- 7. Crew — Lakeer-e-Kabaddi -->
+        <div class="gal-item gal-item--wide" data-category="lakeer" data-caption="The Full Crew · Lakeer-e-Kabaddi">
+          <img src="assets/gal_07_lakeer_crew.jpg" alt="Crew of Lakeer-e-Kabaddi" loading="lazy" />
+          <div class="gal-overlay"><span>The Full Crew · Lakeer-e-Kabaddi</span></div>
+        </div>
+
+        <!-- 8. Behind the Scenes — Lakeer-e-Kabaddi -->
+        <div class="gal-item" data-category="lakeer" data-caption="Behind the Scenes · Lakeer-e-Kabaddi">
+          <img src="assets/gal_08_lakeer_bts.jpg" alt="Behind the Scenes Lakeer-e-Kabaddi" loading="lazy" />
+          <div class="gal-overlay"><span>Behind the Scenes · Lakeer-e-Kabaddi</span></div>
+        </div>
+
+        <!-- 9. Aao Chalo Kabaddi Khelte Hai -->
+        <div class="gal-item" data-category="lakeer" data-caption="आओ चलो कबड्डी खेलते हैं · Lakeer-e-Kabaddi">
+          <img src="assets/gal_09_lakeer_red.jpg" alt="Aao chalo kabaddi khelte hai" loading="lazy" />
+          <div class="gal-overlay"><span>आओ चलो कबड्डी खेलते हैं · Lakeer-e-Kabaddi</span></div>
+        </div>
+
+        <!-- 10. Stage Arrangements — Lakeer-e-Kabaddi -->
+        <div class="gal-item" data-category="lakeer" data-caption="Stage Arrangements · Lakeer-e-Kabaddi">
+          <img src="assets/gal_10_lakeer_stage.jpg" alt="Stage arrangements for Lakeer-e-Kabaddi" loading="lazy" />
+          <div class="gal-overlay"><span>Stage Arrangements · Lakeer-e-Kabaddi</span></div>
+        </div>
+
+        <!-- 11. Rehearsals — Lakeer-e-Kabaddi -->
+        <div class="gal-item" data-category="lakeer" data-caption="Rehearsals · Lakeer-e-Kabaddi">
+          <img src="assets/gal_11_lakeer_rehearsal.jpg" alt="Rehearsals of Lakeer-e-Kabaddi" loading="lazy" />
+          <div class="gal-overlay"><span>Rehearsals · Lakeer-e-Kabaddi</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+      <button class="lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+      <button class="lb-next" id="lbNext" aria-label="Next">›</button>
+      <div class="lb-img-wrap">
+        <img src="" alt="" id="lbImg" />
+      </div>
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+  </section>
+
+  <!-- PAST EVENTS -->
+  <section class="section past-events-section" id="past-events">
+    <div class="container">
+      <div class="section-label">Memory Lane</div>
+      <h2 class="section-title">Past Events</h2>
+      <p class="section-sub">A look back at our productions, competitions &amp; performances</p>
+
+      <div class="gallery-filters past-filters">
+        <button class="gf-btn active" data-past-filter="all">All</button>
+        <button class="gf-btn" data-past-filter="abhivyakti">Abhivyakti</button>
+        <button class="gf-btn" data-past-filter="nukkad">Nukkad Natak</button>
+        <button class="gf-btn" data-past-filter="productions">Productions</button>
+        <button class="gf-btn" data-past-filter="rangabhumi">Rangabhumi</button>
+        <button class="gf-btn" data-past-filter="iicm25">IICM 2025</button>
+        <button class="gf-btn" data-past-filter="iicm23">IICM 2023</button>
+        <button class="gf-btn" data-past-filter="farewell">Farewell</button>
+      </div>
+
+      <div class="gallery-grid" id="pastGrid">
+
+        <!-- 1. Abhivyakti 2025 -->
+        <div class="gal-item past-item" data-past="abhivyakti" data-caption="Abhivyakti 2025">
+          <img src="assets/past_01_abhivyakti2025.jpg" alt="Abhivyakti 2025" loading="lazy" />
+          <div class="gal-overlay"><span>Abhivyakti 2025</span></div>
+        </div>
+
+        <!-- 2. Nukkad Natak — Inquivesta -->
+        <div class="gal-item past-item" data-past="nukkad" data-caption="Nukkad Natak · Inquivesta Event">
+          <img src="assets/past_02_nukkad.jpg" alt="Nukkad Natak Inquivesta Event" loading="lazy" />
+          <div class="gal-overlay"><span>Nukkad Natak · Inquivesta Event</span></div>
+        </div>
+
+        <!-- 3. AARSHI Productions (2) -->
+        <div class="gal-item past-item" data-past="productions" data-caption="AARSHI Productions">
+          <img src="assets/past_03_productions2.jpg" alt="AARSHI Productions" loading="lazy" />
+          <div class="gal-overlay"><span>AARSHI Productions</span></div>
+        </div>
+
+        <!-- 4. AARSHI Productions -->
+        <div class="gal-item past-item gal-item--wide" data-past="productions" data-caption="AARSHI Productions">
+          <img src="assets/past_04_productions.jpg" alt="AARSHI Productions" loading="lazy" />
+          <div class="gal-overlay"><span>AARSHI Productions</span></div>
+        </div>
+
+        <!-- 5. AARSHI Productions (1) -->
+        <div class="gal-item past-item" data-past="productions" data-caption="AARSHI Productions">
+          <img src="assets/past_05_productions1.jpg" alt="AARSHI Productions" loading="lazy" />
+          <div class="gal-overlay"><span>AARSHI Productions</span></div>
+        </div>
+
+        <!-- 6. AARSHI Productions (3) -->
+        <div class="gal-item past-item" data-past="productions" data-caption="AARSHI Productions">
+          <img src="assets/past_06_productions3.jpg" alt="AARSHI Productions" loading="lazy" />
+          <div class="gal-overlay"><span>AARSHI Productions</span></div>
+        </div>
+
+        <!-- 7. AARSHI Production Stage -->
+        <div class="gal-item past-item gal-item--wide" data-past="productions" data-caption="AARSHI Productions · On Stage">
+          <img src="assets/past_07_stage.jpg" alt="AARSHI Production stage" loading="lazy" />
+          <div class="gal-overlay"><span>AARSHI Productions · On Stage</span></div>
+        </div>
+
+        <!-- 8. Rangabhumi 2026 (1) -->
+        <div class="gal-item past-item" data-past="rangabhumi" data-caption="Rangabhumi 2026">
+          <img src="assets/past_08_rangabhumi1.jpg" alt="Rangabhumi 2026" loading="lazy" />
+          <div class="gal-overlay"><span>Rangabhumi 2026</span></div>
+        </div>
+
+        <!-- 9. Rangabhumi 2026 -->
+        <div class="gal-item past-item gal-item--wide" data-past="rangabhumi" data-caption="Rangabhumi 2026 · Curtain Call">
+          <img src="assets/past_09_rangabhumi.jpg" alt="Rangabhumi 2026 curtain call" loading="lazy" />
+          <div class="gal-overlay"><span>Rangabhumi 2026 · Curtain Call</span></div>
+        </div>
+
+        <!-- 10. IICM 25 -->
+        <div class="gal-item past-item" data-past="iicm25" data-caption="IICM 2025">
+          <img src="assets/past_10_iicm25.jpg" alt="IICM 2025" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2025</span></div>
+        </div>
+
+        <!-- 11. IICM 25 (1) -->
+        <div class="gal-item past-item" data-past="iicm25" data-caption="IICM 2025">
+          <img src="assets/past_11_iicm25_1.jpg" alt="IICM 2025" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2025</span></div>
+        </div>
+
+        <!-- 12. IICM 25 (2) -->
+        <div class="gal-item past-item" data-past="iicm25" data-caption="IICM 2025">
+          <img src="assets/past_12_iicm25_2.jpg" alt="IICM 2025" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2025</span></div>
+        </div>
+
+        <!-- 13. IICM 25 (3) -->
+        <div class="gal-item past-item" data-past="iicm25" data-caption="IICM 2025">
+          <img src="assets/past_13_iicm25_3.jpg" alt="IICM 2025" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2025</span></div>
+        </div>
+
+        <!-- 14. IICM 25 (4) -->
+        <div class="gal-item past-item" data-past="iicm25" data-caption="IICM 2025">
+          <img src="assets/past_14_iicm25_4.jpg" alt="IICM 2025" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2025</span></div>
+        </div>
+
+        <!-- 15. IICM 25 (5) -->
+        <div class="gal-item past-item gal-item--wide" data-past="iicm25" data-caption="IICM 2025">
+          <img src="assets/past_15_iicm25_5.jpg" alt="IICM 2025" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2025</span></div>
+        </div>
+
+        <!-- 16. Thespian Titans -->
+        <div class="gal-item past-item" data-past="iicm25" data-caption="Thespian Titans · IICM 2024">
+          <img src="assets/past_16_thespian_titans.jpg" alt="Thespian Titans IICM 2024" loading="lazy" />
+          <div class="gal-overlay"><span>Thespian Titans · IICM 2024</span></div>
+        </div>
+
+        <!-- 17. Rangabhumi 2026 (2) -->
+        <div class="gal-item past-item" data-past="rangabhumi" data-caption="Rangabhumi 2026">
+          <img src="assets/past_17_rangabhumi2.jpg" alt="Rangabhumi 2026" loading="lazy" />
+          <div class="gal-overlay"><span>Rangabhumi 2026</span></div>
+        </div>
+
+        <!-- 18. IICM 23 -->
+        <div class="gal-item past-item gal-item--wide" data-past="iicm23" data-caption="IICM 2023">
+          <img src="assets/past_18_iicm23.jpg" alt="IICM 2023" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2023</span></div>
+        </div>
+
+        <!-- 19. AARSHI Production -->
+        <div class="gal-item past-item" data-past="productions" data-caption="AARSHI Production">
+          <img src="assets/past_19_production.jpg" alt="AARSHI Production" loading="lazy" />
+          <div class="gal-overlay"><span>AARSHI Production</span></div>
+        </div>
+
+        <!-- 20. IICM 23 (1) -->
+        <div class="gal-item past-item" data-past="iicm23" data-caption="IICM 2023">
+          <img src="assets/past_20_iicm23_1.jpg" alt="IICM 2023" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2023</span></div>
+        </div>
+
+        <!-- 21. IICM 23_ -->
+        <div class="gal-item past-item" data-past="iicm23" data-caption="IICM 2023 · Group Play">
+          <img src="assets/past_21_iicm23_a.jpg" alt="IICM 2023 Group Play" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2023 · Group Play</span></div>
+        </div>
+
+        <!-- 22. IICM 23_(1) -->
+        <div class="gal-item past-item" data-past="iicm23" data-caption="IICM 2023 · Group Play">
+          <img src="assets/past_22_iicm23_b.jpg" alt="IICM 2023 Group Play" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2023 · Group Play</span></div>
+        </div>
+
+        <!-- 23. IICM 23(2) -->
+        <div class="gal-item past-item gal-item--wide" data-past="iicm23" data-caption="IICM 2023 · Monodrama">
+          <img src="assets/past_23_iicm23_c.jpg" alt="IICM 2023 Monodrama" loading="lazy" />
+          <div class="gal-overlay"><span>IICM 2023 · Monodrama</span></div>
+        </div>
+
+        <!-- 24. 21MS Farewell -->
+        <div class="gal-item past-item gal-item--wide" data-past="farewell" data-caption="21MS Farewell">
+          <img src="assets/past_24_farewell_21ms.jpg" alt="21MS Farewell" loading="lazy" />
+          <div class="gal-overlay"><span>21MS Farewell</span></div>
+        </div>
+
+        <!-- 25. Rangabhumi 2026 · Seniors -->
+        <div class="gal-item past-item" data-past="rangabhumi" data-caption="Rangabhumi 2026 · Seniors">
+          <img src="assets/past_25_rangabhumi_seniors.jpg" alt="Rangabhumi 2026 Seniors" loading="lazy" />
+          <div class="gal-overlay"><span>Rangabhumi 2026 · Seniors</span></div>
+        </div>
+
+        <!-- 26. Rangabhumi 2026 · Seniors (2) -->
+        <div class="gal-item past-item" data-past="rangabhumi" data-caption="Rangabhumi 2026 · Seniors">
+          <img src="assets/past_26_rangabhumi_seniors2.jpg" alt="Rangabhumi 2026 Seniors" loading="lazy" />
+          <div class="gal-overlay"><span>Rangabhumi 2026 · Seniors</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section class="section achievements" id="achievements">
+    <div class="container">
+      <div class="section-label">Act III</div>
+      <h2 class="section-title">Curtain Calls</h2>
+      <p class="section-sub">Recognition earned on the national stage</p>
+
+      <!-- ANIMATED COUNTERS -->
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-number" data-target="3">0</div>
+          <div class="stat-label">Consecutive IICM<br>Group Play Golds</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="2">0</div>
+          <div class="stat-label">Consecutive IICM<br>Monodrama Golds</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="5">0</div>
+          <div class="stat-label">Years of<br>Excellence</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="4">0</div>
+          <div class="stat-label">Annual Drama<br>Productions</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="3">0</div>
+          <div class="stat-label">External Fest<br>1st Places</div>
+        </div>
+      </div>
+
+      <div class="trophy-banner">
+        <div class="trophy-item">
+          <div class="trophy-icon">🥇</div>
+          <div class="trophy-info">
+            <span class="trophy-year">2023 · 2024 · 2025</span>
+            <h3>Gold in Group Play</h3>
+            <p>IICM Theatre Competition — three consecutive years</p>
+          </div>
+        </div>
+        <div class="trophy-divider"></div>
+        <div class="trophy-item">
+          <div class="trophy-icon">👑</div>
+          <div class="trophy-info">
+            <span class="trophy-year">IICM 2024</span>
+            <h3>"Thespian Titans"</h3>
+            <p>Best drama club across all IISERs</p>
+          </div>
+        </div>
+        <div class="trophy-divider"></div>
+        <div class="trophy-item">
+          <div class="trophy-icon">🌟</div>
+          <div class="trophy-info">
+            <span class="trophy-year">2024 · 2025</span>
+            <h3>Gold in Monodrama</h3>
+            <p>Sharanya Chatterjee — consecutive IICM wins</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="other-achievements">
+        <h3 class="other-ach-title">Other Accolades</h3>
+        <div class="ach-list">
+          <div class="ach-item">
+            <span class="ach-rank">1<sup>st</sup></span>
+            <div>
+              <strong>Stage Play</strong>
+              <span>AIIMS Kalyani Fest · 2024</span>
+            </div>
+          </div>
+          <div class="ach-item">
+            <span class="ach-rank">1<sup>st</sup></span>
+            <div>
+              <strong>Monologue</strong>
+              <span>AIIMS Kalyani Fest · 2025</span>
+            </div>
+          </div>
+          <div class="ach-item">
+            <span class="ach-rank">1<sup>st</sup></span>
+            <div>
+              <strong>Stage Play</strong>
+              <span>MAKAUT Fest · 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IICM PHOTO GALLERY -->
+      <div class="iicm-gallery">
+        <div class="iicm-gallery-header">
+          <h3 class="iicm-gallery-title">IICM in Pictures</h3>
+          <div class="gallery-filters iicm-filters">
+            <button class="gf-btn active" data-iicm-filter="all">All</button>
+            <button class="gf-btn" data-iicm-filter="iicm23">IICM 2023</button>
+            <button class="gf-btn" data-iicm-filter="iicm24">IICM 2024</button>
+            <button class="gf-btn" data-iicm-filter="iicm25">IICM 2025</button>
+          </div>
+        </div>
+
+        <div class="gallery-grid iicm-grid" id="iicmGrid">
+
+          <!-- 1. IICM 2025 Crew -->
+          <div class="gal-item iicm-item" data-iicm="iicm25" data-caption="IICM 2025 · Crew">
+            <img src="assets/iicm_01_2025_crew.jpg" alt="IICM 2025 Crew" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2025 · Crew</span></div>
+          </div>
+
+          <!-- 2. IICM 2025 Street Play -->
+          <div class="gal-item iicm-item" data-iicm="iicm25" data-caption="IICM 2025 · Street Play">
+            <img src="assets/iicm_02_2025_street.jpg" alt="IICM 2025 Street Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2025 · Street Play</span></div>
+          </div>
+
+          <!-- 3. IICM 2025 Street Play (1) -->
+          <div class="gal-item iicm-item" data-iicm="iicm25" data-caption="IICM 2025 · Street Play">
+            <img src="assets/iicm_03_2025_street2.jpg" alt="IICM 2025 Street Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2025 · Street Play</span></div>
+          </div>
+
+          <!-- 4. Street Play IICM 2025 -->
+          <div class="gal-item iicm-item" data-iicm="iicm25" data-caption="IICM 2025 · Street Play">
+            <img src="assets/iicm_04_2025_street3.jpg" alt="IICM 2025 Street Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2025 · Street Play</span></div>
+          </div>
+
+          <!-- 5. IICM 23 Group Play -->
+          <div class="gal-item iicm-item" data-iicm="iicm23" data-caption="IICM 2023 · Group Play">
+            <img src="assets/iicm_05_23_group.jpg" alt="IICM 2023 Group Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2023 · Group Play</span></div>
+          </div>
+
+          <!-- 6. IICM 23 Group Play (1) -->
+          <div class="gal-item iicm-item" data-iicm="iicm23" data-caption="IICM 2023 · Group Play">
+            <img src="assets/iicm_06_23_group2.jpg" alt="IICM 2023 Group Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2023 · Group Play</span></div>
+          </div>
+
+          <!-- 7. IICM 25 Monodrama Gold — Sharanya Chatterjee -->
+          <div class="gal-item iicm-item" data-iicm="iicm25" data-caption="IICM 2025 · Monodrama Gold — Sharanya Chatterjee">
+            <img src="assets/iicm_07_25_monodrama_sharanya.jpg" alt="IICM 2025 Monodrama Gold Sharanya Chatterjee" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2025 · Monodrama Gold — Sharanya Chatterjee</span></div>
+          </div>
+
+          <!-- 8. IICM 23 Gold Winning Team -->
+          <div class="gal-item iicm-item gal-item--wide" data-iicm="iicm23" data-caption="IICM 2023 · Gold Winning Team">
+            <img src="assets/iicm_08_23_gold_team.jpg" alt="IICM 2023 Gold Winning Team" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2023 · Gold Winning Team</span></div>
+          </div>
+
+          <!-- 9. IICM 23 Group Play -->
+          <div class="gal-item iicm-item" data-iicm="iicm23" data-caption="IICM 2023 · Group Play">
+            <img src="assets/iicm_09_23_group3.jpg" alt="IICM 2023 Group Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2023 · Group Play</span></div>
+          </div>
+
+          <!-- 10. IICM 23 Group Play (2) -->
+          <div class="gal-item iicm-item gal-item--wide" data-iicm="iicm23" data-caption="IICM 2023 · Group Play">
+            <img src="assets/iicm_10_23_group4.jpg" alt="IICM 2023 Group Play" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2023 · Group Play</span></div>
+          </div>
+
+          <!-- 11. IICM 23 Monodrama -->
+          <div class="gal-item iicm-item" data-iicm="iicm23" data-caption="IICM 2023 · Monodrama">
+            <img src="assets/iicm_11_23_monodrama.jpg" alt="IICM 2023 Monodrama" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2023 · Monodrama</span></div>
+          </div>
+
+          <!-- 12. IICM 24 Group Play Gold Winning Team with Prof Ayan Banerjee -->
+          <div class="gal-item iicm-item" data-iicm="iicm24" data-caption="IICM 2024 · Group Play Gold Winning Team with Prof. Ayan Banerjee">
+            <img src="assets/iicm_12_24_gold_team.jpg" alt="IICM 2024 Group Play Gold Winning Team with Prof Ayan Banerjee" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2024 · Gold Winning Team with Prof. Ayan Banerjee</span></div>
+          </div>
+
+          <!-- 13. IICM 25 Street Play Gold Winning Team -->
+          <div class="gal-item iicm-item gal-item--wide" data-iicm="iicm25" data-caption="IICM 2025 · Street Play Gold Winning Team">
+            <img src="assets/iicm_13_25_street_gold.jpg" alt="IICM 2025 Street Play Gold Winning Team" loading="lazy" />
+            <div class="gal-overlay"><span>IICM 2025 · Street Play Gold Winning Team</span></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RENOWNED FACES -->
+  <section class="section renowned" id="renowned">
+    <div class="container">
+      <div class="section-label">Behind the Magic</div>
+      <h2 class="section-title">Renowned Faces Who Worked With Us</h2>
+      <p class="section-sub">Theatre veterans and artists who have shaped our craft</p>
+
+      <div class="renowned-grid">
+
+        <!-- 1. Nandita Chanda -->
+        <div class="renowned-card">
+          <div class="renowned-photo-wrap">
+            <img src="assets/mentor_nandita.jpg" alt="Nandita Chanda" class="renowned-photo" />
+          </div>
+          <div class="renowned-info">
+            <h3 class="renowned-name">Nandita Chanda</h3>
+          </div>
+        </div>
+
+        <!-- 2. Soumyajit Adhikary -->
+        <div class="renowned-card">
+          <div class="renowned-photo-wrap">
+            <img src="assets/mentor_soumyajit.jpg" alt="Soumyajit Adhikary" class="renowned-photo" />
+          </div>
+          <div class="renowned-info">
+            <h3 class="renowned-name">Soumyajit Adhikary</h3>
+          </div>
+        </div>
+
+        <!-- 3. Moinak Ganguly -->
+        <div class="renowned-card">
+          <div class="renowned-photo-wrap">
+            <img src="assets/mentor_moinak.jpg" alt="Moinak Ganguly" class="renowned-photo" />
+          </div>
+          <div class="renowned-info">
+            <h3 class="renowned-name">Moinak Ganguly</h3>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section team" id="team">
+    <div class="container">
+      <div class="section-label">The Cast</div>
+      <h2 class="section-title">Current Office Bearers</h2>
+
+      <div class="team-grid">
+
+        <!-- Secretary — Chhandak Dutta — ob_chhandak.jpg -->
+        <div class="team-card team-card--secretary">
+          <div class="team-photo-wrap">
+            <img src="assets/ob_chhandak.jpg" alt="Chhandak Dutta" class="team-photo" />
+          </div>
+          <div class="team-role">Secretary</div>
+          <h3 class="team-name">Chhandak Dutta</h3>
+          <a href="tel:6295076503" class="team-contact">+91 62950 76503</a>
+        </div>
+
+        <!-- Convenor — Ruta Amol Saptarshi — ob_ruta.jpg -->
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="assets/ob_ruta.jpg" alt="Ruta Amol Saptarshi" class="team-photo" />
+          </div>
+          <div class="team-role">Convenor</div>
+          <h3 class="team-name">Ruta Amol Saptarshi</h3>
+          <a href="tel:7887526060" class="team-contact">+91 78875 26060</a>
+        </div>
+
+        <!-- Treasurer — Ipshit Chakraborty — ob_ipshit.jpg -->
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="assets/ob_ipshit.jpg" alt="Ipshit Chakraborty" class="team-photo" />
+          </div>
+          <div class="team-role">Treasurer</div>
+          <h3 class="team-name">Ipshit Chakraborty</h3>
+          <a href="tel:8653403034" class="team-contact">+91 86534 03034</a>
+        </div>
+
+        <!-- Social Media Manager — Soumyadipta Misra — ob_soumyadipta.jpg -->
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="assets/ob_soumyadipta.jpg" alt="Soumyadipta Misra" class="team-photo" />
+          </div>
+          <div class="team-role">Social Media Manager</div>
+          <h3 class="team-name">Soumyadipta Misra</h3>
+          <a href="tel:9332459218" class="team-contact">+91 93324 59218</a>
+        </div>
+
+        <!-- Event Organiser — Ayushman Samanta — ob_ayushman.jpg -->
+        <div class="team-card">
+          <div class="team-photo-wrap">
+            <img src="assets/ob_ayushman.jpg" alt="Ayushman Samanta" class="team-photo" />
+          </div>
+          <div class="team-role">Event Organiser</div>
+          <h3 class="team-name">Ayushman Samanta</h3>
+          <a href="tel:6291392362" class="team-contact">+91 62913 92362</a>
+        </div>
+      </div>
+
+      <!-- 25-26 OB PHOTO SECTION -->
+      <div class="prev-ob-section">
+        <div class="prev-ob-header">
+          <span class="prev-ob-tenure">Tenure 2025–26</span>
+          <h3 class="prev-ob-title">Previous Office Bearers</h3>
+        </div>
+        <div class="prev-ob-grid">
+
+          <!-- Secretary — Mainak Biswas — ob2526_mainak.jpg -->
+          <div class="team-card prev-ob-card team-card--secretary">
+            <div class="team-photo-wrap">
+              <img src="assets/ob2526_mainak.jpg" alt="Mainak Biswas" class="team-photo" />
+            </div>
+            <div class="team-role">Secretary</div>
+            <h3 class="team-name">Mainak Biswas</h3>
+          </div>
+
+          <!-- Convenor — Ritika Pani — ob2526_ritika.jpg -->
+          <div class="team-card prev-ob-card">
+            <div class="team-photo-wrap">
+              <img src="assets/ob2526_ritika.jpg" alt="Ritika Pani" class="team-photo" />
+            </div>
+            <div class="team-role">Convenor</div>
+            <h3 class="team-name">Ritika Pani</h3>
+          </div>
+
+          <!-- Treasurer — Ananta Narayan Sahoo — ob2526_ananta.jpg -->
+          <div class="team-card prev-ob-card">
+            <div class="team-photo-wrap">
+              <img src="assets/ob2526_ananta.jpg" alt="Ananta Narayan Sahoo" class="team-photo" />
+            </div>
+            <div class="team-role">Treasurer</div>
+            <h3 class="team-name">Ananta Narayan Sahoo</h3>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="past-ob-section">
+        <h3 class="past-ob-title">All Past Office Bearers</h3>
+        <div class="table-wrapper">
+          <table class="ob-table">
+            <thead>
+              <tr>
+                <th>Tenure</th>
+                <th>Secretary</th>
+                <th>Convenor</th>
+                <th>Treasurer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>25–26</td>
+                <td>Mainak Biswas</td>
+                <td>Ritika Pani</td>
+                <td>Ananta Narayan Sahoo</td>
+              </tr>
+              <tr>
+                <td>24–25</td>
+                <td>Shankha Shuvra Chattopadhyay</td>
+                <td>Sharanya Mondal</td>
+                <td>Rohit Raj</td>
+              </tr>
+              <tr>
+                <td>23–24</td>
+                <td>Sandra Surendran</td>
+                <td>Sanchari Saha</td>
+                <td>Sabitri Panda</td>
+              </tr>
+              <tr>
+                <td>22–23</td>
+                <td>Tannishtha Roy</td>
+                <td>Prajakta Kashyap</td>
+                <td>Hafzana Abdul Hukh</td>
+              </tr>
+              <tr>
+                <td>21–22</td>
+                <td>Prajakta Kashyap</td>
+                <td>Twishum Tah</td>
+                <td>Dhritimona Deka</td>
+              </tr>
+              <tr>
+                <td>20–21</td>
+                <td>Sanchay Agarwal</td>
+                <td>Aritra Konar</td>
+                <td>Anchit Bhair</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM FEED -->
+  <section class="section instagram-section" id="instagram">
+    <div class="container">
+      <div class="section-label">Follow Along</div>
+      <h2 class="section-title">On Instagram</h2>
+      <p class="section-sub">Live from <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener" class="insta-handle">@aarshi_iiserk</a></p>
+      <div class="instagram-embed-wrap">
+        <!-- EmbedSocial / Elfsight widget placeholder -->
+        <!-- HOW TO ACTIVATE: See ADMIN GUIDE below for instructions -->
+        <div class="insta-placeholder">
+          <div class="insta-placeholder-inner">
+            <div class="insta-icon">📸</div>
+            <p>Instagram feed loads here.</p>
+            <p class="insta-note">To activate: replace this block with your Elfsight or EmbedSocial widget code.<br>See the <strong>Admin Guide</strong> (README.md) for step-by-step instructions.</p>
+            <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener" class="btn btn-gold" style="display:inline-flex;margin-top:1rem;">View on Instagram ↗</a>
+          </div>
+        </div>
+        <!-- PASTE YOUR WIDGET SCRIPT TAG HERE when ready, e.g.:
+        <script src="https://static.elfsight.com/platform/platform.js" async></script>
+        <div class="elfsight-app-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"></div>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-label">Join Us</div>
+      <h2 class="section-title">Take the Stage</h2>
+      <p class="contact-sub">
+        Interested in performing, directing, writing, or just being part of the
+        magic? Reach out — the stage is for everyone.
+      </p>
+      <div class="contact-grid">
+        <a href="mailto:aarshi@iiserkol.ac.in" class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">aarshi@iiserkol.ac.in</div>
+        </a>
+        <a href="tel:9332459218" class="contact-card">
+          <div class="contact-icon">📞</div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+91 93324 59218</div>
+        </a>
+        <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">📸</div>
+          <div class="contact-label">Instagram</div>
+          <div class="contact-value">@aarshi_iiserk</div>
+        </a>
+      </div>
+
+      <div class="drama-room-note">
+        <h3>📋 Drama Room Booking</h3>
+        <p>
+          To book the drama room, email us at <a href="mailto:aarshi@iiserkol.ac.in">aarshi@iiserkol.ac.in</a> at least
+          <strong>24 hours in advance</strong>. Mention if you require sound support.
+          Keys to the wardrobe must be collected from and returned directly to an Office Bearer.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="assets/logo_dark.png"  alt="AARSHI" class="footer-logo-img logo-dark" />
+        <img src="assets/logo_light.jpg" alt="AARSHI" class="footer-logo-img logo-light" />
+        <span class="footer-logo-tagline">The Theatrical &amp; Dramatics Society · IISER Kolkata</span>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#events">Events</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#team">Team</a>
+        <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener">Instagram</a>
+      </div>
+      <p class="footer-copy">© 2025 AARSHI — IISER Kolkata. The show must go on.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
