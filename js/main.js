@@ -10,9 +10,7 @@
   const root = document.documentElement;
 
   // Initialise: use saved preference, then system preference, then default dark
-  const savedTheme = localStorage.getItem("aarshi-theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+  const initialTheme = "dark" ;
   root.setAttribute("data-theme", initialTheme);
 
   function applyTheme(theme) {
