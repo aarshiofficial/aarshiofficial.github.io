@@ -103,8 +103,9 @@ html += `
 
 <h2>${data[id].name || "No Name"}</h2>
 
-<p><b>Year Joined:</b>
-${data[id].yearJoined || "Not Added"}</p>
+<p><b>Membership:</b>
+${data[id].yearJoined} - ${data[id].yearLeft}
+</p>
 
 <p><b>Departments:</b>
 ${data[id].departments ?
