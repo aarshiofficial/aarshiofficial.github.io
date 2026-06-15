@@ -92,10 +92,9 @@ data.departments.join(", ")
 :
 "None";
 
-document.getElementById("yearJoined")
-.innerHTML =
-data.yearJoined;
-
+document.getElementById("membership").innerHTML =
+data.yearJoined + " - " + data.yearLeft;
+  
 });
 
 }
@@ -125,9 +124,8 @@ window.location.href =
 <h3>Departments</h3>
 <p id="departments">Loading...</p>
 
-<h3>Year Joined</h3>
-<p id="yearJoined">Loading...</p>
-
+<h3>Membership</h3>
+<p id="membership">Loading...</p>
 </div>
 
 </body>
