@@ -330,3 +330,98 @@ Then visit **https://aarshiofficial.github.io/** after ~2 minutes.
 ---
 
 *Last updated: June 2026 | Contact: aarshi@iiserkol.ac.in*
+
+---
+
+## 📢 ANNOUNCEMENT BANNER (top of page)
+
+Search in `index.html` for `ann-banner`:
+
+```html
+<div class="ann-banner" id="annBanner" data-active="true">
+  <span class="ann-text">📢 Your message here with <strong>bold text</strong></span>
+```
+
+- **Show banner:** `data-active="true"`
+- **Hide banner:** `data-active="false"`
+- **Edit text:** Change the text inside `<span class="ann-text">...</span>`
+- Banner auto-hides if a visitor dismisses it (stored in their browser)
+- To force re-show (even for dismissed visitors), change the text — they'll see it fresh
+
+---
+
+## 📱 STORY POPUP (Instagram-style card)
+
+Search for `storyPopup`:
+
+```html
+<div class="story-popup" id="storyPopup" data-active="true">
+  ...
+  <h2 class="story-title">Your Title Here</h2>
+  <p class="story-body">Your message here with <strong>bold</strong> text.</p>
+  <a href="#events" class="story-cta">Button Text →</a>
+```
+
+- **Show:** `data-active="true"` · **Hide:** `data-active="false"`
+- Shows once per browser session (won't repeat on same visit)
+- Auto-closes after 6 seconds
+- Change `href="#events"` to point to any section: `#gallery`, `#achievements` etc.
+
+---
+
+## 🔴 REHEARSAL BANNER
+
+Search for `rehearsalBanner`:
+
+```html
+<div class="rehearsal-banner" id="rehearsalBanner" data-active="false">
+  ...
+  <strong id="rehearsalProduction">Annual Drama Production 2026</strong>
+```
+
+- **Show:** `data-active="true"` · **Hide (default):** `data-active="false"`
+- Edit the production name between the `<strong>` tags
+- Edit the show date in `js/main.js` — search for `showDate`:
+  ```js
+  const showDate = "2026-12-01"; // ← Change this date (YYYY-MM-DD)
+  ```
+
+---
+
+## 👥 MEMBER WALL — Adding / Removing Members
+
+Search for `id="memberMosaic"` in `index.html`.
+
+**Add a member:**
+```html
+<div class="member-chip" data-batch="24ms">
+  <span class="mc-name">Full Name</span>
+  <span class="mc-role">Actor</span>
+</div>
+```
+
+**batch values:** `21ms` · `22ms` · `23ms` · `24ms` · `25ms`
+**role values:** `Actor` · `Director` · `Crew` · `Lighting` · `Music` · `Design`
+
+**Remove a member:** Delete their `<div class="member-chip">...</div>` line.
+
+**Add a new batch filter button:**
+Find the `member-filters` div and add:
+```html
+<button class="gf-btn" data-batch="26ms">26MS</button>
+```
+
+---
+
+## 🎭 ON THIS DAY FACTS
+
+To add your own theatre facts, open `js/main.js` and search for `const facts = [`.
+Add a new string to the array:
+```js
+"Your new theatre fact here.",
+```
+Facts rotate daily automatically based on the day of the year.
+
+---
+
+*Last updated: June 2026 | Contact: aarshi@iiserkol.ac.in*

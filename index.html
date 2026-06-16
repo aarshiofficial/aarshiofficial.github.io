@@ -27,6 +27,38 @@
 </head>
 <body>
 
+  <!-- ============================================================
+       ANNOUNCEMENT BANNER
+       TO SHOW: set data-active="true"  |  TO HIDE: set data-active="false"
+       Edit the text between the <span class="ann-text"> tags
+       ============================================================ -->
+  <div class="ann-banner" id="annBanner" data-active="true">
+    <span class="ann-text">📢 Mrignayanee 2026 deadline extended to <strong>7th July</strong>! Keep recording — visit our Instagram for details.</span>
+    <button class="ann-close" id="annClose" aria-label="Dismiss">✕</button>
+  </div>
+
+  <!-- STORY-STYLE ANNOUNCEMENT POPUP
+       TO SHOW: set data-active="true"  |  TO HIDE: set data-active="false"
+       Edit title, body, and button text below -->
+  <div class="story-popup" id="storyPopup" data-active="true">
+    <div class="story-inner">
+      <div class="story-progress"><div class="story-bar" id="storyBar"></div></div>
+      <button class="story-close" id="storyClose" aria-label="Close">✕</button>
+      <div class="story-logo">
+        <img src="assets/logo_dark.png" alt="AARSHI" class="story-logo-img logo-dark" />
+        <img src="assets/logo_light.jpg" alt="AARSHI" class="story-logo-img logo-light" />
+      </div>
+      <div class="story-content">
+        <span class="story-tag">📢 Announcement</span>
+        <!-- EDIT TITLE AND BODY TEXT HERE -->
+        <h2 class="story-title">Mrignayanee 2026 is Live!</h2>
+        <p class="story-body">Our annual reel-making competition is open. Deadline extended to <strong>7th July 2026</strong>. Prizes worth ₹2700. Grab a camera and start creating!</p>
+        <a href="#events" class="story-cta" id="storyCta">View Event Details →</a>
+      </div>
+    </div>
+  </div>
+  <div class="story-backdrop" id="storyBackdrop"></div>
+
   <!-- CURTAIN REVEAL -->
   <div class="curtain" id="curtain">
     <div class="curtain-left"></div>
@@ -64,6 +96,20 @@
     </div>
   </nav>
 
+  <!-- ============================================================
+       REHEARSAL BANNER
+       TO SHOW: set data-active="true"  |  TO HIDE: set data-active="false"
+       Edit production name and show date below
+       ============================================================ -->
+  <div class="rehearsal-banner" id="rehearsalBanner" data-active="false">
+    <div class="rehearsal-inner">
+      <span class="rehearsal-pulse"></span>
+      <!-- EDIT THESE TWO VALUES: production name and show date -->
+      <span class="rehearsal-text">Currently rehearsing <strong id="rehearsalProduction">Annual Drama Production 2026</strong></span>
+      <span class="rehearsal-weeks" id="rehearsalWeeks"></span>
+    </div>
+  </div>
+
   <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-bg-grid"></div>
@@ -75,7 +121,7 @@
         <img src="assets/logo_dark.png"  alt="AARSHI" class="hero-logo-img logo-dark" />
         <img src="assets/logo_light.jpg" alt="AARSHI" class="hero-logo-img logo-light" />
       </div>
-      <p class="hero-subtitle">The Theatrical &amp; Dramatics Society</p>
+      <p class="hero-subtitle" id="heroTypewriter"></p>
       <p class="hero-desc">
         A vibrant collective of storytellers, performers, writers, directors,
         and theatre enthusiasts — united by a shared passion for the performing arts.
@@ -84,6 +130,11 @@
         <a href="#events" class="btn btn-gold">Our Productions</a>
         <a href="#about" class="btn btn-outline">Discover More</a>
       </div>
+    </div>
+    <!-- ON THIS DAY CARD -->
+    <div class="otd-card" id="otdCard">
+      <span class="otd-label">🎭 On This Day in Theatre</span>
+      <p class="otd-text" id="otdText">Loading…</p>
     </div>
   </section>
 
@@ -168,6 +219,12 @@
                 <span class="cd-timer" data-for="mrignayanee">–</span>
               </div>
             </div>
+            <a class="wa-share-btn"
+               href="https://wa.me/?text=🎬%20AARSHI%20presents%20Mrignayanee%202026%20—%20Reel%20Making%20Competition!%20Deadline%3A%207th%20July%202026.%20Check%20it%20out%3A%20https%3A%2F%2Faarshiofficial.github.io%2F%23events"
+               target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Share on WhatsApp
+            </a>
           </div>
         </div>
 
@@ -189,6 +246,12 @@
                 <span class="cd-timer" data-for="pages">–</span>
               </div>
             </div>
+            <a class="wa-share-btn"
+               href="https://wa.me/?text=✍️%20AARSHI%20presents%20Pages%20to%20Stages%202026%20—%20Script%20Writing%20Competition!%20Deadline%3A%2014th%20July%202026.%20Check%20it%20out%3A%20https%3A%2F%2Faarshiofficial.github.io%2F%23events"
+               target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Share on WhatsApp
+            </a>
           </div>
         </div>
 
@@ -775,6 +838,115 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- TROPHY ROOM -->
+  <section class="section trophy-room-section" id="trophy-room">
+    <div class="container">
+      <div class="section-label">Hall of Fame</div>
+      <h2 class="section-title">Trophy Room</h2>
+      <p class="section-sub">Lit display of AARSHI's IICM glory</p>
+      <div class="trophy-display">
+        <div class="trophy-case">
+          <div class="trophy-light"></div>
+          <div class="trophy-shelf">
+            <div class="trophy-cup">🏆</div>
+            <div class="trophy-plaque">
+              <div class="trophy-plaque-year">2023</div>
+              <div class="trophy-plaque-award">Group Play — Gold</div>
+              <div class="trophy-plaque-event">IICM · IISER Bhopal</div>
+            </div>
+          </div>
+        </div>
+        <div class="trophy-case trophy-case--center">
+          <div class="trophy-light trophy-light--bright"></div>
+          <div class="trophy-shelf">
+            <div class="trophy-cup">👑</div>
+            <div class="trophy-plaque">
+              <div class="trophy-plaque-year">2024</div>
+              <div class="trophy-plaque-award">Thespian Titans</div>
+              <div class="trophy-plaque-event">Best Drama Club · All IISERs</div>
+            </div>
+          </div>
+        </div>
+        <div class="trophy-case">
+          <div class="trophy-light"></div>
+          <div class="trophy-shelf">
+            <div class="trophy-cup">🥇</div>
+            <div class="trophy-plaque">
+              <div class="trophy-plaque-year">2024</div>
+              <div class="trophy-plaque-award">Group Play — Gold</div>
+              <div class="trophy-plaque-event">IICM · IISER Pune</div>
+            </div>
+          </div>
+        </div>
+        <div class="trophy-case">
+          <div class="trophy-light"></div>
+          <div class="trophy-shelf">
+            <div class="trophy-cup">🌟</div>
+            <div class="trophy-plaque">
+              <div class="trophy-plaque-year">2024 · 2025</div>
+              <div class="trophy-plaque-award">Monodrama — Gold</div>
+              <div class="trophy-plaque-event">Sharanya Chatterjee</div>
+            </div>
+          </div>
+        </div>
+        <div class="trophy-case">
+          <div class="trophy-light"></div>
+          <div class="trophy-shelf">
+            <div class="trophy-cup">🥇</div>
+            <div class="trophy-plaque">
+              <div class="trophy-plaque-year">2025</div>
+              <div class="trophy-plaque-award">Group Play — Gold</div>
+              <div class="trophy-plaque-event">IICM · IISER Kolkata</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMBER WALL -->
+  <section class="section member-wall-section" id="members">
+    <div class="container">
+      <div class="section-label">The Company</div>
+      <h2 class="section-title">Member Wall</h2>
+      <p class="section-sub">Everyone who makes AARSHI what it is</p>
+      <div class="member-filters">
+        <button class="gf-btn active" data-batch="all">All</button>
+        <button class="gf-btn" data-batch="21ms">21MS</button>
+        <button class="gf-btn" data-batch="22ms">22MS</button>
+        <button class="gf-btn" data-batch="23ms">23MS</button>
+        <button class="gf-btn" data-batch="24ms">24MS</button>
+        <button class="gf-btn" data-batch="25ms">25MS</button>
+      </div>
+      <!-- ============================================================
+           MEMBER WALL — ADD/REMOVE MEMBERS HERE
+           Each member-chip has: data-batch="YYms" and two spans: name + role
+           Roles: Actor · Director · Crew · Lighting · Music · Design
+           ============================================================ -->
+      <div class="member-mosaic" id="memberMosaic">
+        <!-- 21MS -->
+        <div class="member-chip" data-batch="21ms"><span class="mc-name">Shankha Shuvra Chattopadhyay</span><span class="mc-role">Director</span></div>
+        <div class="member-chip" data-batch="21ms"><span class="mc-name">Sharanya Mondal</span><span class="mc-role">Actor</span></div>
+        <div class="member-chip" data-batch="21ms"><span class="mc-name">Rohit Raj</span><span class="mc-role">Actor</span></div>
+        <div class="member-chip" data-batch="21ms"><span class="mc-name">Sharanya Chatterjee</span><span class="mc-role">Actor</span></div>
+        <!-- 22MS -->
+        <div class="member-chip" data-batch="22ms"><span class="mc-name">Mainak Biswas</span><span class="mc-role">Director</span></div>
+        <div class="member-chip" data-batch="22ms"><span class="mc-name">Ritika Pani</span><span class="mc-role">Actor</span></div>
+        <div class="member-chip" data-batch="22ms"><span class="mc-name">Ananta Narayan Sahoo</span><span class="mc-role">Crew</span></div>
+        <!-- 23MS -->
+        <div class="member-chip" data-batch="23ms"><span class="mc-name">Chhandak Dutta</span><span class="mc-role">Actor</span></div>
+        <div class="member-chip" data-batch="23ms"><span class="mc-name">Ruta Amol Saptarshi</span><span class="mc-role">Actor</span></div>
+        <div class="member-chip" data-batch="23ms"><span class="mc-name">Ipshit Chakraborty</span><span class="mc-role">Actor</span></div>
+        <div class="member-chip" data-batch="23ms"><span class="mc-name">Soumyadipta Misra</span><span class="mc-role">Director</span></div>
+        <div class="member-chip" data-batch="23ms"><span class="mc-name">Ayushman Samanta</span><span class="mc-role">Crew</span></div>
+        <!-- 24MS -->
+        <div class="member-chip" data-batch="24ms"><span class="mc-name">Add Member</span><span class="mc-role">Actor</span></div>
+        <!-- 25MS -->
+        <div class="member-chip" data-batch="25ms"><span class="mc-name">Add Member</span><span class="mc-role">Actor</span></div>
       </div>
     </div>
   </section>
