@@ -85,13 +85,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#about">About</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#past-events">Past Events</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#contact" class="nav-cta">Join Us</a></li>
+        <li><a href="#" data-page="about" class="nav-page-link active">About</a></li>
+        <li><a href="#" data-page="events" class="nav-page-link">Events</a></li>
+        <li><a href="#" data-page="gallery" class="nav-page-link">Gallery</a></li>
+        <li><a href="#" data-page="past-events" class="nav-page-link">Past Events</a></li>
+        <li><a href="#" data-page="achievements" class="nav-page-link">Achievements</a></li>
+        <li><a href="#" data-page="team" class="nav-page-link">Team</a></li>
+        <li><a href="#" data-page="contact" class="nav-page-link nav-cta">Join Us</a></li>
       </ul>
     </div>
   </nav>
@@ -908,64 +908,6 @@
     </div>
   </section>
 
-  <!-- MEMBER WALL -->
-  <section class="section member-wall-section" id="members">
-    <div class="container">
-      <div class="section-label">The Company</div>
-      <h2 class="section-title">Member Wall</h2>
-      <p class="section-sub">Office Bearers who have served AARSHI across all tenures</p>
-      <div class="member-filters">
-        <button class="gf-btn active" data-batch="all">All</button>
-        <button class="gf-btn" data-batch="secretary">Secretary</button>
-        <button class="gf-btn" data-batch="convenor">Convenor</button>
-        <button class="gf-btn" data-batch="treasurer">Treasurer</button>
-        <button class="gf-btn" data-batch="other">Other Roles</button>
-      </div>
-      <!-- ============================================================
-           MEMBER WALL — ADD/REMOVE MEMBERS HERE
-           data-batch = their role category (secretary/convenor/treasurer/other)
-           mc-role    = their exact role title
-           mc-tenure  = tenure year range
-           ============================================================ -->
-      <div class="member-mosaic" id="memberMosaic">
-
-        <!-- SECRETARIES -->
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Chhandak Dutta</span><span class="mc-role">Secretary · 26–27</span></div>
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Mainak Biswas</span><span class="mc-role">Secretary · 25–26</span></div>
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Shankha Shuvra Chattopadhyay</span><span class="mc-role">Secretary · 24–25</span></div>
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Sandra Surendran</span><span class="mc-role">Secretary · 23–24</span></div>
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Tannishtha Roy</span><span class="mc-role">Secretary · 22–23</span></div>
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Prajakta Kashyap</span><span class="mc-role">Secretary · 21–22</span></div>
-        <div class="member-chip" data-batch="secretary"><span class="mc-name">Sanchay Agarwal</span><span class="mc-role">Secretary · 20–21</span></div>
-
-        <!-- CONVENORS -->
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Ruta Amol Saptarshi</span><span class="mc-role">Convenor · 26–27</span></div>
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Ritika Pani</span><span class="mc-role">Convenor · 25–26</span></div>
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Sharanya Mondal</span><span class="mc-role">Convenor · 24–25</span></div>
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Sanchari Saha</span><span class="mc-role">Convenor · 23–24</span></div>
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Prajakta Kashyap</span><span class="mc-role">Convenor · 22–23</span></div>
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Twishum Tah</span><span class="mc-role">Convenor · 21–22</span></div>
-        <div class="member-chip" data-batch="convenor"><span class="mc-name">Aritra Konar</span><span class="mc-role">Convenor · 20–21</span></div>
-
-        <!-- TREASURERS -->
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Ipshit Chakraborty</span><span class="mc-role">Treasurer · 26–27</span></div>
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Ananta Narayan Sahoo</span><span class="mc-role">Treasurer · 25–26</span></div>
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Rohit Raj</span><span class="mc-role">Treasurer · 24–25</span></div>
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Sabitri Panda</span><span class="mc-role">Treasurer · 23–24</span></div>
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Hafzana Abdul Hukh</span><span class="mc-role">Treasurer · 22–23</span></div>
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Dhritimona Deka</span><span class="mc-role">Treasurer · 21–22</span></div>
-        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Anchit Bhair</span><span class="mc-role">Treasurer · 20–21</span></div>
-
-        <!-- OTHER ROLES -->
-        <div class="member-chip" data-batch="other"><span class="mc-name">Soumyadipta Misra</span><span class="mc-role">Social Media Manager · 26–27</span></div>
-        <div class="member-chip" data-batch="other"><span class="mc-name">Ayushman Samanta</span><span class="mc-role">Event Organiser · 26–27</span></div>
-        <div class="member-chip" data-batch="other"><span class="mc-name">Shankha Shuvra Chattopadhyay</span><span class="mc-role">OB Mentor · 25–26</span></div>
-        <div class="member-chip" data-batch="other"><span class="mc-name">Monalisa Tripathi</span><span class="mc-role">Social Media Manager · 23–24</span></div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- TEAM -->
   <section class="section team" id="team">
     <div class="container">
@@ -1362,11 +1304,10 @@
         <span class="footer-logo-tagline">The Theatrical &amp; Dramatics Society · IISER Kolkata</span>
       </div>
       <div class="footer-links">
-        <a href="#about">About</a>
-        <a href="#events">Events</a>
-        <a href="#productions">Productions</a>
-        <a href="#achievements">Achievements</a>
-        <a href="#team">Team</a>
+        <a href="#" data-page="about" class="nav-page-link">About</a>
+        <a href="#" data-page="events" class="nav-page-link">Events</a>
+        <a href="#" data-page="achievements" class="nav-page-link">Achievements</a>
+        <a href="#" data-page="team" class="nav-page-link">Team</a>
         <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener">Instagram</a>
       </div>
       <p class="footer-copy">© 2026 AARSHI — IISER Kolkata. The show must go on.</p>

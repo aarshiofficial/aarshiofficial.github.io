@@ -5,6 +5,50 @@
 (function () {
   "use strict";
 
+  /* --- SPA PAGE SWITCHING --- */
+  function showPage(pageId) {
+    document.body.setAttribute("data-current-page", pageId);
+    // Update nav active state
+    document.querySelectorAll(".nav-page-link").forEach(a => {
+      a.classList.toggle("active", a.dataset.page === pageId);
+    });
+    // Close mobile menu
+    document.getElementById("navLinks")?.classList.remove("open");
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: "instant" });
+    // Save in history so back button works
+    history.pushState({ page: pageId }, "", "#" + pageId);
+  }
+
+  // Default to about on load
+  const initPage = location.hash.replace("#", "") || "about";
+  document.body.setAttribute("data-current-page", initPage);
+
+  document.querySelectorAll(".nav-page-link").forEach(a => {
+    a.classList.toggle("active", a.dataset.page === initPage);
+    a.addEventListener("click", e => {
+      e.preventDefault();
+      showPage(a.dataset.page);
+    });
+  });
+
+  // Handle browser back/forward
+  window.addEventListener("popstate", e => {
+    const page = (e.state && e.state.page) || "about";
+    document.body.setAttribute("data-current-page", page);
+    document.querySelectorAll(".nav-page-link").forEach(a =>
+      a.classList.toggle("active", a.dataset.page === page)
+    );
+    window.scrollTo({ top: 0, behavior: "instant" });
+  });
+
+  // Story CTA: switch to events page instead of anchor scroll
+  const storyCta = document.getElementById("storyCta");
+  if (storyCta) storyCta.addEventListener("click", e => {
+    e.preventDefault();
+    showPage("events");
+  });
+
   /* --- THEME TOGGLE --- */
   const themeToggle = document.getElementById("themeToggle");
   const root = document.documentElement;
@@ -110,26 +154,7 @@
   staggerReveal(".ach-list", ".ach-item", 80);
   staggerReveal(".contact-grid", ".contact-card", 80);
 
-  /* --- ACTIVE NAV HIGHLIGHT ON SCROLL --- */
-  const sections = document.querySelectorAll("section[id]");
-  const navAnchors = document.querySelectorAll(".nav-links a[href^='#']");
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navAnchors.forEach((a) => a.classList.remove("active"));
-          const activeAnchor = document.querySelector(
-            `.nav-links a[href='#${entry.target.id}']`
-          );
-          if (activeAnchor) activeAnchor.classList.add("active");
-        }
-      });
-    },
-    { threshold: 0.4 }
-  );
-
-  sections.forEach((s) => sectionObserver.observe(s));
+  /* Active nav now handled by SPA switcher above */
   /* --- GALLERY FILTER --- */
   const filterBtns = document.querySelectorAll(".gf-btn");
   const galItems   = document.querySelectorAll(".gal-item");

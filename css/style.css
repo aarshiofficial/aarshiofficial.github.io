@@ -2130,3 +2130,38 @@ strong { color: var(--gold); font-weight: 600; }
 .curtain.theme-transitioning .curtain-left  { transform: translateX(0) !important; }
 .curtain.theme-transitioning .curtain-right { transform: translateX(0) !important; }
 .curtain.theme-transitioning { display: flex !important; }
+
+/* ── SPA PAGE SWITCHING ── */
+/* Hero is part of "about" page — always shown on about */
+.hero,
+.section {
+  display: none;
+}
+/* About page = hero + about section */
+body[data-current-page="about"] .hero,
+body[data-current-page="about"] .about {
+  display: block;
+}
+body[data-current-page="events"] .events { display: block; }
+body[data-current-page="gallery"] .gallery { display: block; }
+body[data-current-page="past-events"] .past-events-section { display: block; }
+body[data-current-page="achievements"] .achievements,
+body[data-current-page="achievements"] .trophy-room-section { display: block; }
+body[data-current-page="team"] .renowned,
+body[data-current-page="team"] .team { display: block; }
+body[data-current-page="contact"] .contact { display: block; }
+
+/* Productions + downloads shown under events nav item */
+body[data-current-page="events"] .timeline-section,
+body[data-current-page="events"] .downloads-section { display: block; }
+
+/* Active nav link */
+.nav-page-link.active { color: var(--gold) !important; }
+.nav-page-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0.85rem; right: 0.85rem;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
