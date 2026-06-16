@@ -470,8 +470,13 @@
   if (sessionStorage.getItem("aarshi-story-shown")) return;
   // Show after 2s
   setTimeout(() => {
-    popup.classList.add("open");
-    backdrop.classList.add("open");
+    popup.classList.add("ready"); // make display:block first
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        popup.classList.add("open"); // then animate in next frame
+        backdrop.classList.add("open");
+      });
+    });
     sessionStorage.setItem("aarshi-story-shown", "true");
     // Start progress bar
     requestAnimationFrame(() => { if(bar) bar.style.width = "100%"; });
@@ -481,6 +486,7 @@
   function closeStory() {
     popup.classList.remove("open");
     backdrop.classList.remove("open");
+    setTimeout(() => popup.classList.remove("ready"), 600);
   }
   if (closeBtn) closeBtn.addEventListener("click", closeStory);
   if (backdrop) backdrop.addEventListener("click", closeStory);

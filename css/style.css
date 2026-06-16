@@ -2004,14 +2004,23 @@ strong { color: var(--gold); font-weight: 600; }
 
 /* ── STORY POPUP ── */
 .story-popup {
-  display: none; position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%);
-  width: min(420px, 96vw); z-index: 3000; border-radius: 20px 20px 0 0;
-  background: #0D0D0D; border: 1px solid rgba(232,197,71,0.2); border-bottom: none;
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: min(420px, 96vw);
+  z-index: 3000;
+  border-radius: 20px 20px 0 0;
+  background: #0D0D0D;
+  border: 1px solid rgba(232,197,71,0.2);
+  border-bottom: none;
   transition: transform 0.5s var(--ease-out-expo);
   overflow: hidden;
 }
-.story-popup[data-active="true"] { display: block; }
-.story-popup.open { transform: translateX(-50%) translateY(0); }
+.story-popup[data-active="true"] { display: none; } /* JS controls actual display */
+.story-popup.ready { display: block; }
+.story-popup.open  { transform: translateX(-50%) translateY(0); }
 .story-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2999; }
 .story-backdrop.open { display: block; }
 .story-progress { height: 3px; background: rgba(255,255,255,0.1); margin: 1rem 1rem 0; border-radius: 2px; overflow: hidden; }
