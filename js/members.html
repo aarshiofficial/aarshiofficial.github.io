@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>AARSHI Members</title>
+
+<style>
+body{
+background:#0d0d0d;
+color:white;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#e8c547;
+text-align:center;
+}
+
+.member{
+background:#1c1c1c;
+padding:20px;
+margin:15px auto;
+border-radius:15px;
+max-width:700px;
+}
+
+h2{
+color:#e8c547;
+}
+  .member h2{
+color:#e8c547;
+text-align:center;
+margin-top:10px;
+}
+
+.member p{
+margin:6px 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>AARSHI Members</h1>
+
+<div id="membersList">
+Loading members...
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+
+import {
+getDatabase,
+ref,
+onValue
+}
+from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w",
+
+authDomain: "aarshi-3ce95.firebaseapp.com",
+
+databaseURL:
+"https://aarshi-3ce95-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId: "aarshi-3ce95",
+
+storageBucket: "aarshi-3ce95.firebasestorage.app",
+
+messagingSenderId: "267278913707",
+
+appId:
+"1:267278913707:web:3b3379b43b3486453627ee"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const database = getDatabase(app);
+
+const membersRef = ref(database,"members");
+
+onValue(membersRef,(snapshot)=>{
+
+const data = snapshot.val();
+
+console.log(data);
+
+if(!data){
+
+document.getElementById("membersList").innerHTML =
+"No members found.";
+
+return;
+
+}
+
+let html = "";
+
+for(let id in data){
+
+html += `
+
+<div class="member">
+
+<img
+src="https://via.placeholder.com/120"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+">
+
+<img
+src="https://via.placeholder.com/120"
+style="
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+display:block;
+margin:auto;
+">
+
+<h2>${data[id].name}</h2>
+
+<p><b>Membership:</b>
+${data[id].yearJoined} - ${data[id].yearLeft}
+</p>
+
+<p><b>Departments:</b>
+${data[id].departments ?
+data[id].departments.join(", ")
+: "Not Added"}</p>
+
+<p><b>Approved Achievements:</b>
+${data[id].approvedAchievements ||
+"No approved achievements yet"}</p>
+
+
+
+</div>
+
+`;
+
+}
+
+document.getElementById("membersList").innerHTML = html;
+
+});
+
+</script>
+
+</body>
+
+</html>

@@ -11,15 +11,19 @@ color:white;
 font-family:Arial;
 display:flex;
 justify-content:center;
-align-items:center;
-height:100vh;
+align-items:flex-start;
+min-height:100vh;
+padding:40px 0;
 }
 
 .box{
 background:#1c1c1c;
 padding:30px;
 border-radius:15px;
-width:400px;
+width:500px;
+max-width:95%;
+max-height:90vh;
+overflow-y:auto;
 }
 
 input{
@@ -28,6 +32,18 @@ padding:10px;
 margin:8px 0;
 border:none;
 border-radius:8px;
+}
+  select,
+textarea{
+width:95%;
+padding:10px;
+margin:8px 0;
+border:none;
+border-radius:8px;
+}
+  .dept{
+width:auto;
+margin-right:10px;
 }
 
 button{
@@ -48,17 +64,129 @@ cursor:pointer;
 
 <h2>AARSHI Member Registration</h2>
 
-<input id="name" placeholder="Name">
-
-<input id="position" placeholder="Position (Director, Light, Sound etc.)">
-
-<input id="attendance" placeholder="Attendance %">
+<input id="name" placeholder="Full Name">
 
 <input id="email" placeholder="Email">
 
 <input id="password" type="password" placeholder="Password">
 
-<button onclick="signup()">Create Account</button>
+<label>Year Joined Aarshi</label>
+
+<select id="yearJoined">
+
+<option>2026</option>
+<option>2025</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+<option>2019</option>
+<option>2018</option>
+<option>2017</option>
+<option>2016</option>
+<option>2015</option>
+<option>2014</option>
+<option>2013</option>
+<option>2012</option>
+
+</select>
+
+<br><br>
+
+<label>Year Left Aarshi</label>
+
+<select id="yearLeft">
+
+<option>Present</option>
+
+<option>2025</option>
+<option>2024</option>
+<option>2023</option>
+<option>2022</option>
+<option>2021</option>
+<option>2020</option>
+<option>2019</option>
+<option>2018</option>
+<option>2017</option>
+<option>2016</option>
+<option>2015</option>
+<option>2014</option>
+<option>2013</option>
+<option>2012</option>
+
+</select>
+
+<br><br>
+
+<label>Departments of Interest</label>
+
+<br>
+
+<input type="checkbox" value="Acting" class="dept"> Acting
+
+<br>
+
+<input type="checkbox" value="Direction" class="dept"> Direction
+
+<br>
+
+<input type="checkbox" value="Script Writing" class="dept"> Script Writing
+
+<br>
+
+<input type="checkbox" value="Stage Management" class="dept"> Stage Management
+
+<br>
+
+<input type="checkbox" value="Lights" class="dept"> Lights
+
+<br>
+
+<input type="checkbox" value="Sound" class="dept"> Sound
+
+<br>
+
+<input type="checkbox" value="Props & Set Design" class="dept"> Props & Set Design
+
+<br>
+
+<input type="checkbox" value="Costume & Makeup" class="dept"> Costume & Makeup
+
+<br>
+
+<input type="checkbox" value="Photography" class="dept"> Photography
+
+<br>
+
+<input type="checkbox" value="Videography" class="dept"> Videography
+
+<br>
+
+<input type="checkbox" value="Music & Background Score" class="dept"> Music & Background Score
+
+<br>
+
+<input type="checkbox" value="Event Management" class="dept"> Event Management
+
+<br><br>
+  <label>Profile Picture</label>
+
+<input type="file" id="photo" accept="image/*">
+
+<textarea
+id="achievements"
+placeholder="Achievements in IISER Kolkata"
+style="width:95%;height:120px;">
+</textarea>
+
+<br><br>
+
+<button onclick="signup()">
+
+Create Account
+
+</button>
 
 </div>
 <script type="module">
@@ -70,7 +198,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBEwJ8H_QYK_6CeY0A7UTJ1iynkv5wD_9w",
+  apiKey: "AIzaSyBEwJ8H_QYK_6CeYOA7UTJliynkv5wD_9w",
   authDomain: "aarshi-3ce95.firebaseapp.com",
   projectId: "aarshi-3ce95",
   storageBucket: "aarshi-3ce95.firebasestorage.app",
@@ -80,16 +208,25 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+  console.log(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
 window.signup = function() {
 
 const name = document.getElementById("name").value;
-const position = document.getElementById("position").value;
-const attendance = document.getElementById("attendance").value;
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
+
+const yearJoined = document.getElementById("yearJoined").value;
+const yearLeft = document.getElementById("yearLeft").value;
+const achievements = document.getElementById("achievements").value;
+
+const departments = [];
+
+document.querySelectorAll(".dept:checked").forEach(item=>{
+departments.push(item.value);
+});
 
 createUserWithEmailAndPassword(auth,email,password)
 
@@ -100,9 +237,19 @@ const user = userCredential.user;
 set(ref(database,'members/'+user.uid),{
 
 name:name,
-position:position,
-attendance:attendance,
-email:email
+email:email,
+
+yearJoined:yearJoined,
+yearLeft:yearLeft,
+
+departments:departments,
+
+submittedAchievements:achievements,
+approvedAchievements:"",
+
+attendance:"0",
+
+role:"Member"
 
 });
 
@@ -111,9 +258,10 @@ alert("Account Created Successfully!");
 })
 
 .catch((error)=>{
-alert(error.message);
-});
 
+alert("Firebase Error: " + error.message);
+
+});
 }
 
 </script>
