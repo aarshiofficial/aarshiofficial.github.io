@@ -91,8 +91,6 @@
         <li><a href="#past-events">Past Events</a></li>
         <li><a href="#achievements">Achievements</a></li>
         <li><a href="#team">Team</a></li>
-        <li><a href="js/login.html" class="nav-cta">Login</a></li>
-        <li><a href="js/signup.html" class="nav-cta">Sign Up</a></li>
         <li><a href="#contact" class="nav-cta">Join Us</a></li>
       </ul>
     </div>
@@ -915,40 +913,55 @@
     <div class="container">
       <div class="section-label">The Company</div>
       <h2 class="section-title">Member Wall</h2>
-      <p class="section-sub">Everyone who makes AARSHI what it is</p>
+      <p class="section-sub">Office Bearers who have served AARSHI across all tenures</p>
       <div class="member-filters">
         <button class="gf-btn active" data-batch="all">All</button>
-        <button class="gf-btn" data-batch="21ms">21MS</button>
-        <button class="gf-btn" data-batch="22ms">22MS</button>
-        <button class="gf-btn" data-batch="23ms">23MS</button>
-        <button class="gf-btn" data-batch="24ms">24MS</button>
-        <button class="gf-btn" data-batch="25ms">25MS</button>
+        <button class="gf-btn" data-batch="secretary">Secretary</button>
+        <button class="gf-btn" data-batch="convenor">Convenor</button>
+        <button class="gf-btn" data-batch="treasurer">Treasurer</button>
+        <button class="gf-btn" data-batch="other">Other Roles</button>
       </div>
       <!-- ============================================================
            MEMBER WALL — ADD/REMOVE MEMBERS HERE
-           Each member-chip has: data-batch="YYms" and two spans: name + role
-           Roles: Actor · Director · Crew · Lighting · Music · Design
+           data-batch = their role category (secretary/convenor/treasurer/other)
+           mc-role    = their exact role title
+           mc-tenure  = tenure year range
            ============================================================ -->
       <div class="member-mosaic" id="memberMosaic">
-        <!-- 21MS -->
-        <div class="member-chip" data-batch="21ms"><span class="mc-name">Shankha Shuvra Chattopadhyay</span><span class="mc-role">Director</span></div>
-        <div class="member-chip" data-batch="21ms"><span class="mc-name">Sharanya Mondal</span><span class="mc-role">Actor</span></div>
-        <div class="member-chip" data-batch="21ms"><span class="mc-name">Rohit Raj</span><span class="mc-role">Actor</span></div>
-        <div class="member-chip" data-batch="21ms"><span class="mc-name">Sharanya Chatterjee</span><span class="mc-role">Actor</span></div>
-        <!-- 22MS -->
-        <div class="member-chip" data-batch="22ms"><span class="mc-name">Mainak Biswas</span><span class="mc-role">Director</span></div>
-        <div class="member-chip" data-batch="22ms"><span class="mc-name">Ritika Pani</span><span class="mc-role">Actor</span></div>
-        <div class="member-chip" data-batch="22ms"><span class="mc-name">Ananta Narayan Sahoo</span><span class="mc-role">Crew</span></div>
-        <!-- 23MS -->
-        <div class="member-chip" data-batch="23ms"><span class="mc-name">Chhandak Dutta</span><span class="mc-role">Actor</span></div>
-        <div class="member-chip" data-batch="23ms"><span class="mc-name">Ruta Amol Saptarshi</span><span class="mc-role">Actor</span></div>
-        <div class="member-chip" data-batch="23ms"><span class="mc-name">Ipshit Chakraborty</span><span class="mc-role">Actor</span></div>
-        <div class="member-chip" data-batch="23ms"><span class="mc-name">Soumyadipta Misra</span><span class="mc-role">Director</span></div>
-        <div class="member-chip" data-batch="23ms"><span class="mc-name">Ayushman Samanta</span><span class="mc-role">Crew</span></div>
-        <!-- 24MS -->
-        <div class="member-chip" data-batch="24ms"><span class="mc-name">Add Member</span><span class="mc-role">Actor</span></div>
-        <!-- 25MS -->
-        <div class="member-chip" data-batch="25ms"><span class="mc-name">Add Member</span><span class="mc-role">Actor</span></div>
+
+        <!-- SECRETARIES -->
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Chhandak Dutta</span><span class="mc-role">Secretary · 26–27</span></div>
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Mainak Biswas</span><span class="mc-role">Secretary · 25–26</span></div>
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Shankha Shuvra Chattopadhyay</span><span class="mc-role">Secretary · 24–25</span></div>
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Sandra Surendran</span><span class="mc-role">Secretary · 23–24</span></div>
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Tannishtha Roy</span><span class="mc-role">Secretary · 22–23</span></div>
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Prajakta Kashyap</span><span class="mc-role">Secretary · 21–22</span></div>
+        <div class="member-chip" data-batch="secretary"><span class="mc-name">Sanchay Agarwal</span><span class="mc-role">Secretary · 20–21</span></div>
+
+        <!-- CONVENORS -->
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Ruta Amol Saptarshi</span><span class="mc-role">Convenor · 26–27</span></div>
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Ritika Pani</span><span class="mc-role">Convenor · 25–26</span></div>
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Sharanya Mondal</span><span class="mc-role">Convenor · 24–25</span></div>
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Sanchari Saha</span><span class="mc-role">Convenor · 23–24</span></div>
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Prajakta Kashyap</span><span class="mc-role">Convenor · 22–23</span></div>
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Twishum Tah</span><span class="mc-role">Convenor · 21–22</span></div>
+        <div class="member-chip" data-batch="convenor"><span class="mc-name">Aritra Konar</span><span class="mc-role">Convenor · 20–21</span></div>
+
+        <!-- TREASURERS -->
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Ipshit Chakraborty</span><span class="mc-role">Treasurer · 26–27</span></div>
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Ananta Narayan Sahoo</span><span class="mc-role">Treasurer · 25–26</span></div>
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Rohit Raj</span><span class="mc-role">Treasurer · 24–25</span></div>
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Sabitri Panda</span><span class="mc-role">Treasurer · 23–24</span></div>
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Hafzana Abdul Hukh</span><span class="mc-role">Treasurer · 22–23</span></div>
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Dhritimona Deka</span><span class="mc-role">Treasurer · 21–22</span></div>
+        <div class="member-chip" data-batch="treasurer"><span class="mc-name">Anchit Bhair</span><span class="mc-role">Treasurer · 20–21</span></div>
+
+        <!-- OTHER ROLES -->
+        <div class="member-chip" data-batch="other"><span class="mc-name">Soumyadipta Misra</span><span class="mc-role">Social Media Manager · 26–27</span></div>
+        <div class="member-chip" data-batch="other"><span class="mc-name">Ayushman Samanta</span><span class="mc-role">Event Organiser · 26–27</span></div>
+        <div class="member-chip" data-batch="other"><span class="mc-name">Shankha Shuvra Chattopadhyay</span><span class="mc-role">OB Mentor · 25–26</span></div>
+        <div class="member-chip" data-batch="other"><span class="mc-name">Monalisa Tripathi</span><span class="mc-role">Social Media Manager · 23–24</span></div>
+
       </div>
     </div>
   </section>
@@ -1152,31 +1165,6 @@
             </tbody>
           </table>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTAGRAM FEED -->
-  <section class="section instagram-section" id="instagram">
-    <div class="container">
-      <div class="section-label">Follow Along</div>
-      <h2 class="section-title">On Instagram</h2>
-      <p class="section-sub">Live from <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener" class="insta-handle">@aarshi_iiserk</a></p>
-      <div class="instagram-embed-wrap">
-        <!-- EmbedSocial / Elfsight widget placeholder -->
-        <!-- HOW TO ACTIVATE: See ADMIN GUIDE below for instructions -->
-        <div class="insta-placeholder">
-          <div class="insta-placeholder-inner">
-            <div class="insta-icon">📸</div>
-            <p>Instagram feed loads here.</p>
-            <p class="insta-note">To activate: replace this block with your Elfsight or EmbedSocial widget code.<br>See the <strong>Admin Guide</strong> (README.md) for step-by-step instructions.</p>
-            <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener" class="btn btn-gold" style="display:inline-flex;margin-top:1rem;">View on Instagram ↗</a>
-          </div>
-        </div>
-        <!-- PASTE YOUR WIDGET SCRIPT TAG HERE when ready, e.g.:
-        <script src="https://static.elfsight.com/platform/platform.js" async></script>
-        <div class="elfsight-app-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"></div>
-        -->
       </div>
     </div>
   </section>

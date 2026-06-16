@@ -169,11 +169,6 @@ Find `ach-list` and add:
 
 ---
 
-## 📸 ACTIVATING THE INSTAGRAM FEED — FULL GUIDE
-
-The Instagram section currently shows a styled placeholder with a link to the profile.
-To show a real live feed of posts, follow these steps:
-
 ---
 
 ### OPTION 1 — Elfsight (Recommended · Free tier available)
@@ -388,28 +383,31 @@ Search for `rehearsalBanner`:
 
 ---
 
-## 👥 MEMBER WALL — Adding / Removing Members
+## 👥 MEMBER WALL — Adding / Removing OBs
+
+The Member Wall shows all Office Bearers across every AARSHI tenure, filterable by role (Secretary / Convenor / Treasurer / Other Roles).
 
 Search for `id="memberMosaic"` in `index.html`.
 
-**Add a member:**
+**Add a new OB:**
 ```html
-<div class="member-chip" data-batch="24ms">
+<div class="member-chip" data-batch="secretary">
   <span class="mc-name">Full Name</span>
-  <span class="mc-role">Actor</span>
+  <span class="mc-role">Secretary · 27–28</span>
 </div>
 ```
 
-**batch values:** `21ms` · `22ms` · `23ms` · `24ms` · `25ms`
-**role values:** `Actor` · `Director` · `Crew` · `Lighting` · `Music` · `Design`
+**data-batch values (role category):**
+- `secretary` — shows under Secretary filter
+- `convenor`  — shows under Convenor filter
+- `treasurer` — shows under Treasurer filter
+- `other`     — shows under Other Roles (Social Media Manager, Event Organiser, OB Mentor etc.)
 
-**Remove a member:** Delete their `<div class="member-chip">...</div>` line.
+**Remove an OB:** Delete their `<div class="member-chip">...</div>` line.
 
-**Add a new batch filter button:**
-Find the `member-filters` div and add:
-```html
-<button class="gf-btn" data-batch="26ms">26MS</button>
-```
+**When a new tenure begins:**
+1. Add new OBs at the top of their role group
+2. Old OBs stay — the wall is a complete historical record
 
 ---
 
