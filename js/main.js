@@ -676,3 +676,122 @@
   });
 })();
 
+
+/* ── ANNOUNCEMENT EXPIRY ── */
+(function(){
+  const ann = document.getElementById("annBanner");
+  if (!ann) return;
+  const expires = ann.dataset.expires;
+  if (expires && new Date(expires) < new Date()) {
+    ann.style.display = "none";
+  }
+})();
+
+/* ── EVENT STATUS AUTO-UPDATE (badge switches to Closed after deadline) ── */
+(function(){
+  const now = Date.now();
+  document.querySelectorAll(".countdown[data-deadline]").forEach(cd => {
+    const deadline = new Date(cd.dataset.deadline).getTime();
+    if (deadline < now) {
+      // Find the nearest poster-badge--live and switch it
+      const card = cd.closest(".poster-card");
+      if (!card) return;
+      const badge = card.querySelector(".poster-badge--live");
+      if (badge) {
+        badge.textContent = "Closed";
+        badge.classList.remove("poster-badge--live");
+        badge.classList.add("poster-badge--closed");
+      }
+    }
+  });
+})();
+
+/* ── FORM TOGGLE ── */
+window.toggleForm = function(id) {
+  const card = document.getElementById(id);
+  const body = card.querySelector(".form-embed-body") || document.getElementById(id === "bookingForm" ? "bookingForm" : null);
+  // For booking form, id IS the body element
+  const el = body || (id === "bookingForm" ? document.getElementById("bookingForm") : null);
+  if (!el) return;
+  const isOpen = el.style.display !== "none";
+  el.style.display = isOpen ? "none" : "block";
+  // Update toggle button text
+  const btn = card ? card.querySelector(".form-embed-toggle") : document.getElementById("bookingToggleBtn");
+  if (btn) btn.textContent = isOpen ? "Show Form ▼" : "Hide Form ▲";
+};
+
+// Booking form special case
+window.toggleForm = function(id) {
+  let body, btn;
+  if (id === "bookingForm") {
+    body = document.getElementById("bookingForm");
+    btn  = document.getElementById("bookingToggleBtn");
+  } else {
+    const card = document.getElementById(id);
+    if (!card) return;
+    body = card.querySelector(".form-embed-body");
+    btn  = card.querySelector(".form-embed-toggle");
+  }
+  if (!body) return;
+  const isOpen = body.style.display !== "none";
+  body.style.display = isOpen ? "none" : "block";
+  if (btn) btn.textContent = isOpen ? (id==="bookingForm"?"Show Booking Form ▼":"Show Form ▼") : (id==="bookingForm"?"Hide Booking Form ▲":"Hide Form ▲");
+};
+
+/* ── WEB PUSH REMINDERS ── */
+window.requestReminder = async function(btn) {
+  if (!("Notification" in window)) {
+    alert("Your browser does not support notifications.");
+    return;
+  }
+  const event    = btn.dataset.event;
+  const deadline = new Date(btn.dataset.deadline);
+  const perm = await Notification.requestPermission();
+  if (perm !== "granted") {
+    alert("Please allow notifications to get reminders.");
+    return;
+  }
+  // Schedule a notification 24h before deadline
+  const remindAt = deadline.getTime() - 24 * 60 * 60 * 1000;
+  const delay    = remindAt - Date.now();
+  if (delay > 0) {
+    setTimeout(() => {
+      new Notification("⏰ AARSHI Reminder", {
+        body: `${event} deadline is tomorrow! Don't forget to submit.`,
+        icon: "assets/apple-touch-icon.png"
+      });
+    }, Math.min(delay, 2147483647)); // JS max timeout
+    btn.textContent = "🔔 Reminder Set!";
+    btn.classList.add("reminded");
+    btn.disabled = true;
+  } else {
+    btn.textContent = "⚠️ Deadline passed";
+    btn.disabled = true;
+  }
+};
+
+/* ── TICKER DUPLICATION (seamless loop) ── */
+(function(){
+  const ticker = document.getElementById("achTicker");
+  if (!ticker) return;
+  ticker.innerHTML += ticker.innerHTML; // duplicate for seamless scroll
+})();
+
+/* ── POSTER LIGHTBOX ── */
+window.openPosterLightbox = function(src, title, dlHref, dlName) {
+  const lb = document.getElementById("posterLb");
+  document.getElementById("posterLbImg").src = src;
+  document.getElementById("posterLbTitle").textContent = title;
+  const dl = document.getElementById("posterLbDownload");
+  dl.href = dlHref; dl.download = dlName;
+  lb.classList.add("open");
+  document.body.style.overflow = "hidden";
+};
+window.closePosterLightbox = function() {
+  document.getElementById("posterLb").classList.remove("open");
+  document.body.style.overflow = "";
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") window.closePosterLightbox();
+});
+

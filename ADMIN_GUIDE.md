@@ -423,3 +423,108 @@ Facts rotate daily automatically based on the day of the year.
 ---
 
 *Last updated: June 2026 | Contact: aarshi@iiserkol.ac.in*
+
+---
+
+## 🔥 FIREBASE SETUP — COMPLETE GUIDE
+
+### Step 1: Create Firebase Project
+1. Go to **https://console.firebase.google.com**
+2. Click **"Add project"** → Name it `aarshi-iiserk`
+3. Disable Google Analytics (not needed) → **Create project**
+
+### Step 2: Enable Authentication
+1. Left sidebar → **Build → Authentication** → **Get started**
+2. Click **"Email/Password"** → Enable it → **Save**
+
+### Step 3: Enable Firestore Database
+1. Left sidebar → **Build → Firestore Database** → **Create database**
+2. Choose **"Start in test mode"** (we'll secure it later)
+3. Select location: `asia-south1` (Mumbai) → **Done**
+
+### Step 4: Enable Storage (for profile photos)
+1. Left sidebar → **Build → Storage** → **Get started**
+2. Start in test mode → **Done**
+
+### Step 5: Get Your Config Keys
+1. Left sidebar → ⚙️ **Project Settings** → **Your apps** tab
+2. Click **"</>  Web"** → Register app as `aarshi-web`
+3. Copy the `firebaseConfig` object shown — it looks like:
+```js
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "aarshi-iiserk.firebaseapp.com",
+  projectId: "aarshi-iiserk",
+  storageBucket: "aarshi-iiserk.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "1:123456789:web:abc123"
+};
+```
+
+### Step 6: Paste Config into Website
+Open **both** `auth.html` and `dashboard.html`.
+In each file, find `const firebaseConfig = {` and replace the placeholder values with your real values.
+
+### Step 7: Set Security Rules
+
+**Firestore Rules** (Firestore → Rules tab):
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /members/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null &&
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
+```
+
+**Storage Rules** (Storage → Rules tab):
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profiles/{userId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId
+                   && request.resource.size < 2 * 1024 * 1024;
+    }
+  }
+}
+```
+
+---
+
+## 👤 ADMIN: MANAGING MEMBERS
+
+### View all members
+1. Firebase Console → **Firestore Database** → `members` collection
+2. Each document = one member, named by their UID
+
+### Approve an achievement
+1. Find the member in Firestore
+2. The `achievements` field has their submitted text
+3. Copy it into `achievementsApproved` as an array item:
+   - Click the `achievementsApproved` field → Edit
+   - Add the achievement text as a new array item
+4. The member will see it as "✓ Approved" on their dashboard
+
+### Mark attendance
+Each member doc has an `attendance` object. To add attendance:
+1. Open the member's Firestore doc
+2. Click `attendance` field → Edit
+3. Add a key in format: `EventName||DD Mon YYYY`
+   - Value: `"present"` or `"absent"`
+   - Example key: `Annual Drama Workshop 2026||15 Jun 2026`
+
+### Make someone an admin
+1. Find their member doc in Firestore
+2. Change `role` field from `"member"` to `"admin"`
+
+### Delete a member account
+1. Firestore → delete their `members` document
+2. Firebase Console → Authentication → find their email → delete user
+
+---

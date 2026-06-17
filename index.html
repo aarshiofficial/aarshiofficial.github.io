@@ -32,7 +32,7 @@
        TO SHOW: set data-active="true"  |  TO HIDE: set data-active="false"
        Edit the text between the <span class="ann-text"> tags
        ============================================================ -->
-  <div class="ann-banner" id="annBanner" data-active="true">
+  <div class="ann-banner" id="annBanner" data-active="true" data-expires="2026-07-07">
     <span class="ann-text">📢 Mrignayanee 2026 deadline extended to <strong>7th July</strong>! Keep recording — visit our Instagram for details.</span>
     <button class="ann-close" id="annClose" aria-label="Dismiss">✕</button>
   </div>
@@ -92,6 +92,7 @@
         <li><a href="#" data-page="achievements" class="nav-page-link">Achievements</a></li>
         <li><a href="#" data-page="team" class="nav-page-link">Team</a></li>
         <li><a href="#" data-page="contact" class="nav-page-link nav-cta">Join Us</a></li>
+        <li><a href="auth.html" class="nav-portal-btn">🎭 Member Portal</a></li>
       </ul>
     </div>
   </nav>
@@ -225,6 +226,7 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Share on WhatsApp
             </a>
+            <button class="remind-btn" data-event="Mrignayanee 2026" data-deadline="2026-07-07T23:59:59" onclick="requestReminder(this)">🔔 Remind Me</button>
           </div>
         </div>
 
@@ -252,6 +254,7 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Share on WhatsApp
             </a>
+            <button class="remind-btn" data-event="Pages to Stages 2026" data-deadline="2026-07-14T23:59:59" onclick="requestReminder(this)">🔔 Remind Me</button>
           </div>
         </div>
 
@@ -334,6 +337,50 @@
         </div>
 
       </div>
+
+      <!-- MRIGNAYANEE PAST WINNERS -->
+      <div class="winners-section">
+        <div class="flagship-divider"><span>Mrignayanee — Past Winners</span></div>
+        <!-- ============================================================
+             ADD PAST WINNERS HERE
+             Replace video src with YouTube embed URL of winner's reel
+             Format: https://www.youtube.com/embed/VIDEO_ID
+             ============================================================ -->
+        <div class="winners-grid">
+          <div class="winner-card">
+            <div class="winner-year">2025</div>
+            <div class="winner-video-wrap">
+              <!-- REPLACE WITH ACTUAL YOUTUBE EMBED URL -->
+              <div class="winner-video-placeholder">🎬 Reel not yet uploaded<br><span>Add YouTube embed URL in index.html</span></div>
+            </div>
+            <div class="winner-info">
+              <div class="winner-name">Winner Name</div>
+              <div class="winner-title">Reel Title</div>
+            </div>
+          </div>
+          <div class="winner-card">
+            <div class="winner-year">2024</div>
+            <div class="winner-video-wrap">
+              <div class="winner-video-placeholder">🎬 Reel not yet uploaded<br><span>Add YouTube embed URL in index.html</span></div>
+            </div>
+            <div class="winner-info">
+              <div class="winner-name">Winner Name</div>
+              <div class="winner-title">Reel Title</div>
+            </div>
+          </div>
+          <div class="winner-card">
+            <div class="winner-year">2023</div>
+            <div class="winner-video-wrap">
+              <div class="winner-video-placeholder">🎬 Reel not yet uploaded<br><span>Add YouTube embed URL in index.html</span></div>
+            </div>
+            <div class="winner-info">
+              <div class="winner-name">Winner Name</div>
+              <div class="winner-title">Reel Title</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -621,6 +668,21 @@
       <div class="section-label">Act III</div>
       <h2 class="section-title">Curtain Calls</h2>
       <p class="section-sub">Recognition earned on the national stage</p>
+
+      <!-- ANIMATED GOLD TICKER -->
+      <div class="ach-ticker-wrap">
+        <div class="ach-ticker" id="achTicker">
+          <span>🥇 IICM Group Play Gold · 2023</span>
+          <span>👑 Thespian Titans · Best Drama Club All IISERs · 2024</span>
+          <span>🥇 IICM Group Play Gold · 2024</span>
+          <span>🌟 IICM Monodrama Gold · Sharanya Chatterjee · 2024</span>
+          <span>🥇 IICM Group Play Gold · 2025</span>
+          <span>🌟 IICM Monodrama Gold · Sharanya Chatterjee · 2025</span>
+          <span>🏆 1st Place · AIIMS Kalyani Stage Play · 2024</span>
+          <span>🏆 1st Place · AIIMS Kalyani Monologue · 2025</span>
+          <span>🏆 1st Place · MAKAUT Fest Stage Play · 2025</span>
+        </div>
+      </div>
 
       <!-- ANIMATED COUNTERS -->
       <div class="stats-row">
@@ -920,7 +982,7 @@
         <div class="team-card team-card--secretary flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <div class="team-photo-wrap">
+              <div class="team-photo-wrap team-photo-wrap--current">
                 <img src="assets/ob_chhandak.jpg" alt="Chhandak Dutta" class="team-photo" />
               </div>
               <div class="team-role">Secretary</div>
@@ -940,7 +1002,7 @@
         <div class="team-card flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <div class="team-photo-wrap">
+              <div class="team-photo-wrap team-photo-wrap--current">
                 <img src="assets/ob_ruta.jpg" alt="Ruta Amol Saptarshi" class="team-photo" />
               </div>
               <div class="team-role">Convenor</div>
@@ -960,7 +1022,7 @@
         <div class="team-card flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <div class="team-photo-wrap">
+              <div class="team-photo-wrap team-photo-wrap--current">
                 <img src="assets/ob_ipshit.jpg" alt="Ipshit Chakraborty" class="team-photo" />
               </div>
               <div class="team-role">Treasurer</div>
@@ -980,7 +1042,7 @@
         <div class="team-card flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <div class="team-photo-wrap">
+              <div class="team-photo-wrap team-photo-wrap--current">
                 <img src="assets/ob_soumyadipta.jpg" alt="Soumyadipta Misra" class="team-photo" />
               </div>
               <div class="team-role">Social Media Manager</div>
@@ -1000,7 +1062,7 @@
         <div class="team-card flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <div class="team-photo-wrap">
+              <div class="team-photo-wrap team-photo-wrap--current">
                 <img src="assets/ob_ayushman.jpg" alt="Ayushman Samanta" class="team-photo" />
               </div>
               <div class="team-role">Event Organiser</div>
@@ -1212,7 +1274,7 @@
           <div class="download-preview">
             <img src="assets/event_mrignayanee.jpg" alt="Mrignayanee 2026 Poster" />
             <div class="download-overlay">
-              <a href="assets/event_mrignayanee.jpg" download="Mrignayanee_2026_Poster.jpg" class="download-btn">⬇ Download</a>
+              <button class="download-btn" onclick="openPosterLightbox('assets/event_mrignayanee.jpg','Mrignayanee 2026','assets/event_mrignayanee.jpg','Mrignayanee_2026_Poster.jpg')">🔍 View &amp; Download</button>
             </div>
           </div>
           <div class="download-info">
@@ -1227,7 +1289,7 @@
           <div class="download-preview">
             <img src="assets/event_pages_to_stages.jpg" alt="Pages to Stages 2026 Poster" />
             <div class="download-overlay">
-              <a href="assets/event_pages_to_stages.jpg" download="Pages_to_Stages_2026_Poster.jpg" class="download-btn">⬇ Download</a>
+              <button class="download-btn" onclick="openPosterLightbox('assets/event_pages_to_stages.jpg','Pages to Stages 2026','assets/event_pages_to_stages.jpg','Pages_to_Stages_2026_Poster.jpg')">🔍 View &amp; Download</button>
             </div>
           </div>
           <div class="download-info">
@@ -1242,7 +1304,7 @@
           <div class="download-preview">
             <img src="assets/event_drama_workshop.png" alt="Annual Drama Workshop 2026 Poster" />
             <div class="download-overlay">
-              <a href="assets/event_drama_workshop.png" download="Annual_Drama_Workshop_2026_Poster.png" class="download-btn">⬇ Download</a>
+              <button class="download-btn" onclick="openPosterLightbox('assets/event_drama_workshop.png','Annual Drama Workshop 2026','assets/event_drama_workshop.png','Annual_Drama_Workshop_2026_Poster.png')">🔍 View &amp; Download</button>
             </div>
           </div>
           <div class="download-info">
@@ -1266,6 +1328,22 @@
         Interested in performing, directing, writing, or just being part of the
         magic? Reach out — the stage is for everyone.
       </p>
+
+      <!-- WHATSAPP GROUP CTA -->
+      <!-- ============================================================
+           Replace the href with your actual WhatsApp group/community invite link
+           ============================================================ -->
+      <div class="wa-group-cta">
+        <div class="wa-group-icon">💬</div>
+        <div class="wa-group-text">
+          <strong>Join the AARSHI WhatsApp Community</strong>
+          <span>Get updates, announcements and connect with fellow members</span>
+        </div>
+        <a href="https://chat.whatsapp.com/REPLACE_WITH_YOUR_INVITE_LINK" target="_blank" rel="noopener" class="wa-group-btn">
+          Join Now →
+        </a>
+      </div>
+
       <div class="contact-grid">
         <a href="mailto:aarshi@iiserkol.ac.in" class="contact-card">
           <div class="contact-icon">✉️</div>
@@ -1284,6 +1362,7 @@
         </a>
       </div>
 
+      <!-- DRAMA ROOM BOOKING -->
       <div class="drama-room-note">
         <h3>📋 Drama Room Booking</h3>
         <p>
@@ -1292,6 +1371,50 @@
           Keys to the wardrobe must be collected from and returned directly to an Office Bearer.
         </p>
       </div>
+
+      <!-- MEET YOUR SENIORS -->
+      <div class="seniors-section">
+        <div class="seniors-header">
+          <div class="section-label" style="margin-bottom:0.3rem">Alumni</div>
+          <h3 class="seniors-title">Meet Your Seniors</h3>
+        </div>
+        <!-- ============================================================
+             ADD ALUMNI HERE — copy a senior-card block for each person
+             ============================================================ -->
+        <div class="seniors-grid">
+          <div class="senior-card">
+            <div class="senior-photo-wrap">
+              <img src="assets/ob2526_mainak.jpg" alt="Mainak Biswas" class="senior-photo team-photo"/>
+            </div>
+            <div class="senior-info">
+              <div class="senior-name">Mainak Biswas</div>
+              <div class="senior-batch">Secretary 25–26</div>
+              <div class="senior-now">Continuing at IISER Kolkata</div>
+            </div>
+          </div>
+          <div class="senior-card">
+            <div class="senior-photo-wrap">
+              <img src="assets/ob2526_ritika.jpg" alt="Ritika Pani" class="senior-photo team-photo"/>
+            </div>
+            <div class="senior-info">
+              <div class="senior-name">Ritika Pani</div>
+              <div class="senior-batch">Convenor 25–26</div>
+              <div class="senior-now">Continuing at IISER Kolkata</div>
+            </div>
+          </div>
+          <div class="senior-card">
+            <div class="senior-photo-wrap">
+              <img src="assets/ob2526_ananta.jpg" alt="Ananta Narayan Sahoo" class="senior-photo team-photo"/>
+            </div>
+            <div class="senior-info">
+              <div class="senior-name">Ananta Narayan Sahoo</div>
+              <div class="senior-batch">Treasurer 25–26</div>
+              <div class="senior-now">Continuing at IISER Kolkata</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1310,9 +1433,36 @@
         <a href="#" data-page="team" class="nav-page-link">Team</a>
         <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener">Instagram</a>
       </div>
+      <div class="designer-credit">
+        <div class="designer-curtain">🎬</div>
+        <div class="designer-info">
+          <span class="designer-label">Website Designed &amp; Developed by</span>
+          <div class="designer-card">
+            <img src="assets/designer_ronnie.jpg" alt="Sankhadeep Bera" class="designer-photo"/>
+            <div>
+              <div class="designer-name">Sankhadeep Bera</div>
+              <div class="designer-role">BS-MS Student · IISER Kolkata</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <p class="footer-copy">© 2026 AARSHI — IISER Kolkata. The show must go on.</p>
+      <!-- EDIT THE DATE BELOW WHEN YOU UPDATE THE SITE -->
+      <p class="footer-updated">Site last updated: June 2026</p>
     </div>
   </footer>
+
+  <!-- POSTER LIGHTBOX -->
+  <div class="poster-lb" id="posterLb">
+    <button class="poster-lb-close" onclick="closePosterLightbox()">✕</button>
+    <div class="poster-lb-inner">
+      <img id="posterLbImg" src="" alt=""/>
+      <div class="poster-lb-footer">
+        <span id="posterLbTitle"></span>
+        <a id="posterLbDownload" href="" download="" class="poster-lb-dl">⬇ Download High-Res</a>
+      </div>
+    </div>
+  </div>
 
   <!-- BACK TO TOP -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
