@@ -9,193 +9,63 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --black: #0D0D0D; --dark: #141414; --dark-2: #1C1C1C;
-      --gold: #E8C547; --gold-dim: #B8952D; --red: #C0392B;
-      --parchment: #F5F0E8; --muted: #9A9A8A; --white: #FFFFFF;
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --ease: cubic-bezier(0.16,1,0.3,1);
+      --black:#0D0D0D;--dark:#141414;--dark-2:#1C1C1C;
+      --gold:#E8C547;--gold-dim:#B8952D;--red:#C0392B;
+      --parchment:#F5F0E8;--muted:#9A9A8A;--white:#FFFFFF;
+      --font-display:'Playfair Display',Georgia,serif;
+      --font-body:'Inter',system-ui,sans-serif;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; }
-    body {
-      background: var(--black); color: var(--parchment);
-      font-family: var(--font-body); min-height: 100vh;
-      display: flex; flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    /* BG GRID */
-    .auth-bg {
-      position: fixed; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(rgba(232,197,71,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(232,197,71,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-    .spotlight {
-      position: fixed; border-radius: 50%; pointer-events: none;
-      filter: blur(80px); opacity: 0.10;
-    }
-    .sp1 { width:500px;height:500px;background:var(--gold);top:-100px;left:-100px; }
-    .sp2 { width:400px;height:400px;background:var(--red);bottom:-100px;right:-100px; }
-
-    /* HEADER */
-    .auth-header {
-      position: relative; z-index: 10; padding: 1.25rem 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      background: rgba(13,13,13,0.8); backdrop-filter: blur(10px);
-    }
-    .auth-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-    .auth-logo img { height: 36px; mix-blend-mode: screen; }
-    .auth-logo-text { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); font-style: italic; }
-    .back-link {
-      font-size: 0.82rem; color: var(--muted); text-decoration: none;
-      display: flex; align-items: center; gap: 0.4rem;
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--gold); }
-
-    /* MAIN WRAPPER */
-    .auth-main {
-      flex: 1; display: flex; align-items: center; justify-content: center;
-      position: relative; z-index: 1; padding: 2rem 1rem;
-    }
-
-    /* CARD */
-    .auth-card {
-      width: 100%; max-width: 500px;
-      background: rgba(20,20,20,0.92); backdrop-filter: blur(16px);
-      border: 1px solid rgba(232,197,71,0.15); border-radius: 16px;
-      padding: 2.5rem 2rem; position: relative; overflow: hidden;
-    }
-    .auth-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--red), var(--gold), var(--red));
-    }
-
-    .auth-title {
-      font-family: var(--font-display); font-size: 1.9rem; font-style: italic;
-      color: var(--white); text-align: center; margin-bottom: 0.3rem;
-    }
-    .auth-subtitle {
-      text-align: center; font-size: 0.82rem; color: var(--muted);
-      letter-spacing: 0.08em; margin-bottom: 2rem;
-    }
-
-    /* TABS */
-    .auth-tabs { display: flex; border-radius: 8px; overflow: hidden; margin-bottom: 2rem; background: var(--dark-2); }
-    .auth-tab {
-      flex: 1; padding: 0.65rem; text-align: center; cursor: pointer;
-      font-size: 0.85rem; font-weight: 600; color: var(--muted);
-      transition: background 0.2s, color 0.2s; border: none; background: transparent;
-    }
-    .auth-tab.active { background: var(--gold); color: var(--black); }
-
-    /* FORM PANELS */
-    .form-panel { display: none; }
-    .form-panel.active { display: block; }
-
-    /* FORM ELEMENTS */
-    .form-group { margin-bottom: 1.1rem; }
-    .form-group label {
-      display: block; font-size: 0.75rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
-      margin-bottom: 0.4rem;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: 0.7rem 0.9rem;
-      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 8px; color: var(--parchment); font-family: var(--font-body);
-      font-size: 0.9rem; transition: border-color 0.2s, background 0.2s;
-      outline: none; appearance: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--gold); background: rgba(232,197,71,0.05);
-    }
-    .form-group input::placeholder { color: rgba(154,154,138,0.6); }
-    .form-group select option { background: #1C1C1C; color: var(--parchment); }
-    .form-group textarea { resize: vertical; min-height: 70px; }
-
-    /* Two-col row */
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-    /* Checkboxes grid */
-    .interest-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin-top: 0.4rem;
-    }
-    .interest-item { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
-    .interest-item input[type="checkbox"] {
-      width: 16px; height: 16px; accent-color: var(--gold); cursor: pointer; flex-shrink: 0;
-    }
-    .interest-item span { font-size: 0.82rem; color: var(--parchment); }
-
-    /* Profile pic upload */
-    .pic-upload-area {
-      border: 2px dashed rgba(232,197,71,0.3); border-radius: 8px;
-      padding: 1.5rem; text-align: center; cursor: pointer;
-      transition: border-color 0.2s, background 0.2s; position: relative;
-    }
-    .pic-upload-area:hover { border-color: var(--gold); background: rgba(232,197,71,0.04); }
-    .pic-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-    .pic-preview {
-      width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
-      margin: 0 auto 0.5rem; display: none; border: 2px solid var(--gold);
-    }
-    .pic-preview.visible { display: block; }
-    .pic-upload-icon { font-size: 2rem; margin-bottom: 0.4rem; }
-    .pic-upload-text { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-    .pic-upload-text strong { color: var(--gold); }
-    .pic-error { font-size: 0.75rem; color: #E74C3C; margin-top: 0.4rem; display: none; }
-    .pic-error.show { display: block; }
-
-    /* Submit button */
-    .btn-auth {
-      width: 100%; padding: 0.85rem; background: var(--gold); color: var(--black);
-      border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 700;
-      cursor: pointer; margin-top: 1.25rem; transition: background 0.2s, transform 0.15s;
-      font-family: var(--font-body); display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-    }
-    .btn-auth:hover { background: var(--gold-dim); transform: translateY(-1px); }
-    .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-    /* Messages */
-    .auth-msg {
-      padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.82rem;
-      margin-bottom: 1rem; display: none; line-height: 1.5;
-    }
-    .auth-msg.error { background: rgba(231,76,60,0.15); border: 1px solid rgba(231,76,60,0.4); color: #E74C3C; display: block; }
-    .auth-msg.success { background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.4); color: #2ECC71; display: block; }
-
-    /* Section heading */
-    .form-section-label {
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600; margin: 1.25rem 0 0.75rem;
-      padding-bottom: 0.4rem; border-bottom: 1px solid rgba(232,197,71,0.15);
-    }
-
-    /* Switch link */
-    .auth-switch { text-align: center; margin-top: 1.5rem; font-size: 0.82rem; color: var(--muted); }
-    .auth-switch a { color: var(--gold); text-decoration: underline; cursor: pointer; }
-
-    /* Spinner */
-    .spinner {
-      display: inline-block; width: 16px; height: 16px;
-      border: 2px solid rgba(0,0,0,0.3); border-top-color: var(--black);
-      border-radius: 50%; animation: spin 0.6s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 520px) {
-      .auth-card { padding: 2rem 1.25rem; }
-      .form-row { grid-template-columns: 1fr; }
-      .interest-grid { grid-template-columns: 1fr; }
-    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{font-size:16px}
+    body{background:var(--black);color:var(--parchment);font-family:var(--font-body);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+    .auth-bg{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(232,197,71,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,197,71,0.04) 1px,transparent 1px);background-size:60px 60px}
+    .spotlight{position:fixed;border-radius:50%;pointer-events:none;filter:blur(80px);opacity:0.10}
+    .sp1{width:500px;height:500px;background:var(--gold);top:-100px;left:-100px}
+    .sp2{width:400px;height:400px;background:var(--red);bottom:-100px;right:-100px}
+    .auth-header{position:relative;z-index:10;padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(13,13,13,0.8);backdrop-filter:blur(10px)}
+    .auth-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none}
+    .auth-logo img{height:36px;mix-blend-mode:screen}
+    .auth-logo-text{font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-style:italic}
+    .back-link{font-size:0.82rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .back-link:hover{color:var(--gold)}
+    .auth-main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:2rem 1rem}
+    .auth-card{width:100%;max-width:500px;background:rgba(20,20,20,0.92);backdrop-filter:blur(16px);border:1px solid rgba(232,197,71,0.15);border-radius:16px;padding:2.5rem 2rem;position:relative;overflow:hidden}
+    .auth-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold),var(--red))}
+    .auth-title{font-family:var(--font-display);font-size:1.9rem;font-style:italic;color:var(--white);text-align:center;margin-bottom:0.3rem}
+    .auth-subtitle{text-align:center;font-size:0.82rem;color:var(--muted);letter-spacing:0.08em;margin-bottom:2rem}
+    .auth-tabs{display:flex;border-radius:8px;overflow:hidden;margin-bottom:2rem;background:var(--dark-2)}
+    .auth-tab{flex:1;padding:0.65rem;text-align:center;cursor:pointer;font-size:0.85rem;font-weight:600;color:var(--muted);transition:background 0.2s,color 0.2s;border:none;background:transparent}
+    .auth-tab.active{background:var(--gold);color:var(--black)}
+    .form-panel{display:none}
+    .form-panel.active{display:block}
+    .form-group{margin-bottom:1.1rem}
+    .form-group label{display:block;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:0.7rem 0.9rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--parchment);font-family:var(--font-body);font-size:0.9rem;transition:border-color 0.2s,background 0.2s;outline:none;appearance:none}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);background:rgba(232,197,71,0.05)}
+    .form-group input::placeholder{color:rgba(154,154,138,0.6)}
+    .form-group select option{background:#1C1C1C;color:var(--parchment)}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .interest-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.4rem}
+    .interest-item{display:flex;align-items:center;gap:0.5rem;cursor:pointer}
+    .interest-item input[type="checkbox"]{width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0}
+    .interest-item span{font-size:0.82rem;color:var(--parchment)}
+    .btn-auth{width:100%;padding:0.85rem;background:var(--gold);color:var(--black);border:none;border-radius:8px;font-size:0.95rem;font-weight:700;cursor:pointer;margin-top:1.25rem;transition:background 0.2s,transform 0.15s;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;gap:0.5rem}
+    .btn-auth:hover{background:var(--gold-dim);transform:translateY(-1px)}
+    .btn-auth:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+    .auth-msg{padding:0.75rem 1rem;border-radius:8px;font-size:0.82rem;margin-bottom:1rem;display:none;line-height:1.5}
+    .auth-msg.error{background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.4);color:#E74C3C;display:block}
+    .auth-msg.success{background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.4);color:#2ECC71;display:block}
+    .form-section-label{font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:1.25rem 0 0.75rem;padding-bottom:0.4rem;border-bottom:1px solid rgba(232,197,71,0.15)}
+    .auth-switch{text-align:center;margin-top:1.5rem;font-size:0.82rem;color:var(--muted)}
+    .auth-switch a{color:var(--gold);text-decoration:underline;cursor:pointer}
+    .forgot-link{display:block;text-align:right;font-size:0.78rem;color:var(--muted);cursor:pointer;margin-top:0.3rem;transition:color 0.2s}
+    .forgot-link:hover{color:var(--gold)}
+    .field-hint{font-size:0.72rem;color:var(--muted);margin-top:0.3rem;line-height:1.4}
+    .field-hint strong{color:var(--gold)}
+    input.input-error{border-color:#E74C3C!important}
+    .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(0,0,0,0.3);border-top-color:var(--black);border-radius:50%;animation:spin 0.6s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:520px){.auth-card{padding:2rem 1.25rem}.form-row{grid-template-columns:1fr}.interest-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -213,17 +83,17 @@
 
   <main class="auth-main">
     <div class="auth-card">
-      <div class="auth-title">Member Portal</div>
+      <div class="auth-title" id="cardTitle">Member Portal</div>
       <div class="auth-subtitle">AARSHI · IISER Kolkata</div>
 
-      <div class="auth-tabs">
+      <div class="auth-tabs" id="authTabs">
         <button class="auth-tab active" onclick="switchTab('login')">Login</button>
         <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
       </div>
 
       <div id="authMsg" class="auth-msg"></div>
 
-      <!-- LOGIN PANEL -->
+      <!-- LOGIN -->
       <div class="form-panel active" id="loginPanel">
         <div class="form-group">
           <label>Email Address</label>
@@ -232,24 +102,27 @@
         <div class="form-group">
           <label>Password</label>
           <input type="password" id="loginPassword" placeholder="Your password" autocomplete="current-password"/>
+          <span class="forgot-link" onclick="switchTab('forgot')">Forgot password?</span>
         </div>
-        <button class="btn-auth" id="loginBtn" onclick="handleLogin()">
-          <span>Sign In</span>
-        </button>
+        <button class="btn-auth" id="loginBtn" onclick="handleLogin()"><span>Sign In</span></button>
         <div class="auth-switch">No account? <a onclick="switchTab('signup')">Sign up here</a></div>
       </div>
 
-      <!-- SIGNUP PANEL -->
-      <div class="form-panel" id="signupPanel">
-
-        <div class="form-section-label">Profile Photo</div>
-        <div class="pic-upload-area" id="picUploadArea">
-          <input type="file" id="profilePicInput" accept="image/jpeg,image/png,image/webp" onchange="handlePicSelect(this)"/>
-          <img class="pic-preview" id="picPreview" src="" alt="Preview"/>
-          <div class="pic-upload-icon" id="picIcon">📸</div>
-          <div class="pic-upload-text"><strong>Click to upload</strong> your profile photo<br/>JPG, PNG or WebP · Max 2MB</div>
-          <div class="pic-error" id="picError"></div>
+      <!-- FORGOT PASSWORD -->
+      <div class="form-panel" id="forgotPanel">
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6">
+          Enter your IISER Kolkata email and we'll send a password reset link.
+        </p>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="forgotEmail" placeholder="you@iiserkol.ac.in"/>
         </div>
+        <button class="btn-auth" id="forgotBtn" onclick="handleForgotPassword()"><span>Send Reset Email</span></button>
+        <div class="auth-switch"><a onclick="switchTab('login')">← Back to Login</a></div>
+      </div>
+
+      <!-- SIGNUP -->
+      <div class="form-panel" id="signupPanel">
 
         <div class="form-section-label">Personal Info</div>
         <div class="form-group">
@@ -257,8 +130,9 @@
           <input type="text" id="signupName" placeholder="Your real name" autocomplete="name"/>
         </div>
         <div class="form-group">
-          <label>Email Address *</label>
-          <input type="email" id="signupEmail" placeholder="you@iiserkol.ac.in" autocomplete="email"/>
+          <label>Email Address * <span style="font-weight:400;color:var(--muted)">(IISER only)</span></label>
+          <input type="email" id="signupEmail" placeholder="yourname@iiserkol.ac.in" autocomplete="email"/>
+          <div class="field-hint">Must end with <strong>@iiserkol.ac.in</strong></div>
         </div>
         <div class="form-group">
           <label>Password *</label>
@@ -291,67 +165,44 @@
           <label class="interest-item"><input type="checkbox" value="Event Management"/><span>📋 Event Management</span></label>
         </div>
 
-        <div class="form-section-label">Achievements in AARSHI <span style="font-weight:400;color:var(--muted)">(optional)</span></div>
-        <div class="form-group">
-          <textarea id="signupAchievements" placeholder="List any achievements, roles, or productions you were part of… These will be reviewed and approved by admin before being displayed publicly."></textarea>
-        </div>
-
-        <button class="btn-auth" id="signupBtn" onclick="handleSignup()">
-          <span>Create Account</span>
-        </button>
+        <button class="btn-auth" id="signupBtn" onclick="handleSignup()"><span>Create Account</span></button>
         <div class="auth-switch">Already a member? <a onclick="switchTab('login')">Login here</a></div>
       </div>
 
     </div>
   </main>
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
-    // ============================================================
-    // FIREBASE CONFIG — Replace with your actual config values
-    // Get these from Firebase Console → Project Settings → Your Apps
-    // ============================================================
-    const firebaseConfig = {
-      apiKey:            "AIzaSyCiIPpWPw68y5dEdt1LaeNtxVuCFGBISuU",
-      authDomain:        "aarshi-iiserk.firebaseapp.com",
-      projectId:         "aarshi-iiserk",
-      storageBucket:     "aarshi-iiserk.firebasestorage.app",
-      messagingSenderId: "195490022156",
-      appId:             "1:195490022156:web:70066f5b5a3bc79aff7f29"
-    };
-
-    const app  = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db   = getFirestore(app);
-    const storage = getStorage(app);
-
-    // Expose to window for onclick handlers
-    window._auth    = auth;
-    window._db      = db;
-    window._storage = storage;
-    window._createUser = createUserWithEmailAndPassword;
-    window._signIn     = signInWithEmailAndPassword;
-    window._updateProfile = updateProfile;
-    window._doc     = doc;
-    window._setDoc  = setDoc;
-    window._getDoc  = getDoc;
-    window._ref     = ref;
-    window._uploadBytes    = uploadBytes;
-    window._getDownloadURL = getDownloadURL;
-
-    // Check if already logged in
-    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    onAuthStateChanged(auth, user => {
-      if (user) window.location.href = "dashboard.html";
-    });
-  </script>
+  <!-- Firebase via CDN (compat mode — avoids module scope issues) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
   <script>
+    // ── FIREBASE INIT ──
+    const firebaseConfig = {
+      apiKey: "AIzaSyCiIPpWPw68y5dEdt1LaeNtxVuCFGBISuU",
+      authDomain: "aarshi-iiserk.firebaseapp.com",
+      projectId: "aarshi-iiserk",
+      storageBucket: "aarshi-iiserk.firebasestorage.app",
+      messagingSenderId: "195490022156",
+      appId: "1:195490022156:web:70066f5b5a3bc79aff7f29"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db   = firebase.firestore();
+
+    // ── AUTH STATE: only redirect if user is verified/logged in ──
+    // Use a flag so we only check once after page load
+    let authChecked = false;
+    auth.onAuthStateChanged(user => {
+      if (!authChecked) {
+        authChecked = true;
+        if (user) {
+          window.location.href = "dashboard.html";
+        }
+      }
+    });
+
     // ── YEAR DROPDOWNS ──
     const joinedSel = document.getElementById("yearJoined");
     const leftSel   = document.getElementById("yearLeft");
@@ -365,54 +216,27 @@
 
     // ── TAB SWITCH ──
     function switchTab(tab) {
-      document.querySelectorAll(".auth-tab").forEach((t,i) =>
-        t.classList.toggle("active", (i===0&&tab==="login")||(i===1&&tab==="signup"))
-      );
-      document.getElementById("loginPanel").classList.toggle("active", tab==="login");
+      document.querySelectorAll(".auth-tab").forEach((t,i) => {
+        t.classList.toggle("active", (i===0&&tab==="login")||(i===1&&tab==="signup"));
+      });
+      document.getElementById("loginPanel").classList.toggle("active",  tab==="login");
       document.getElementById("signupPanel").classList.toggle("active", tab==="signup");
+      document.getElementById("forgotPanel").classList.toggle("active", tab==="forgot");
+      document.getElementById("authTabs").style.display = tab==="forgot" ? "none" : "flex";
+      document.getElementById("cardTitle").textContent  = tab==="forgot" ? "Reset Password" : "Member Portal";
       clearMsg();
     }
-    window.switchTab = switchTab;
 
-    // ── MESSAGE HELPER ──
     function showMsg(text, type="error") {
       const el = document.getElementById("authMsg");
-      el.textContent = text;
-      el.className = "auth-msg " + type;
+      el.textContent = text; el.className = "auth-msg " + type;
     }
     function clearMsg() {
-      const el = document.getElementById("authMsg");
-      el.className = "auth-msg";
+      document.getElementById("authMsg").className = "auth-msg";
     }
 
-    // ── PROFILE PIC HANDLER ──
-    let selectedFile = null;
-    window.handlePicSelect = function(input) {
-      const file = input.files[0];
-      const errEl = document.getElementById("picError");
-      errEl.classList.remove("show");
-      if (!file) return;
-      if (!["image/jpeg","image/png","image/webp"].includes(file.type)) {
-        errEl.textContent = "❌ Only JPG, PNG or WebP images are allowed.";
-        errEl.classList.add("show"); input.value=""; return;
-      }
-      if (file.size > 2 * 1024 * 1024) {
-        errEl.textContent = "❌ File too large — maximum size is 2MB. Please compress your image.";
-        errEl.classList.add("show"); input.value=""; return;
-      }
-      selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = e => {
-        const prev = document.getElementById("picPreview");
-        prev.src = e.target.result;
-        prev.classList.add("visible");
-        document.getElementById("picIcon").style.display = "none";
-      };
-      reader.readAsDataURL(file);
-    };
-
     // ── LOGIN ──
-    window.handleLogin = async function() {
+    async function handleLogin() {
       clearMsg();
       const email    = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value;
@@ -421,25 +245,50 @@
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span><span>Signing in…</span>';
       try {
-        await window._signIn(window._auth, email, password);
+        await auth.signInWithEmailAndPassword(email, password);
         showMsg("Welcome back! Redirecting…", "success");
-        setTimeout(() => window.location.href = "dashboard.html", 1000);
+        setTimeout(() => window.location.href = "dashboard.html", 800);
       } catch(e) {
         const msgs = {
-          "auth/user-not-found":  "No account found with this email.",
-          "auth/wrong-password":  "Incorrect password. Please try again.",
-          "auth/invalid-email":   "Please enter a valid email address.",
-          "auth/too-many-requests": "Too many attempts. Please try again later.",
+          "auth/user-not-found":     "No account found with this email.",
+          "auth/wrong-password":     "Incorrect password. Please try again.",
+          "auth/invalid-email":      "Please enter a valid email address.",
+          "auth/too-many-requests":  "Too many attempts. Please try again later.",
           "auth/invalid-credential": "Invalid email or password."
         };
         showMsg(msgs[e.code] || "Login failed: " + e.message);
-        btn.disabled = false;
-        btn.innerHTML = '<span>Sign In</span>';
+        btn.disabled = false; btn.innerHTML = '<span>Sign In</span>';
       }
-    };
+    }
+
+    // ── FORGOT PASSWORD ──
+    async function handleForgotPassword() {
+      clearMsg();
+      const email = document.getElementById("forgotEmail").value.trim();
+      if (!email) { showMsg("Please enter your email address."); return; }
+      if (!email.endsWith("@iiserkol.ac.in")) {
+        showMsg("Please use your IISER Kolkata email (@iiserkol.ac.in)."); return;
+      }
+      const btn = document.getElementById("forgotBtn");
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span><span>Sending…</span>';
+      try {
+        await auth.sendPasswordResetEmail(email);
+        showMsg("✅ Reset email sent! Check your IISER inbox.", "success");
+        btn.innerHTML = '<span>Email Sent ✓</span>';
+      } catch(e) {
+        const msgs = {
+          "auth/user-not-found":    "No account found with this email.",
+          "auth/invalid-email":     "Please enter a valid email address.",
+          "auth/too-many-requests": "Too many attempts. Wait a few minutes."
+        };
+        showMsg(msgs[e.code] || "Failed: " + e.message);
+        btn.disabled = false; btn.innerHTML = '<span>Send Reset Email</span>';
+      }
+    }
 
     // ── SIGNUP ──
-    window.handleSignup = async function() {
+    async function handleSignup() {
       clearMsg();
       const name     = document.getElementById("signupName").value.trim();
       const email    = document.getElementById("signupEmail").value.trim();
@@ -447,13 +296,14 @@
       const joined   = document.getElementById("yearJoined").value;
       const left     = document.getElementById("yearLeft").value;
       const interests = [...document.querySelectorAll(".interest-item input:checked")].map(c=>c.value);
-      const achievements = document.getElementById("signupAchievements").value.trim();
 
-      // Validation
       if (!name)     { showMsg("Please enter your full name."); return; }
       if (!email)    { showMsg("Please enter your email address."); return; }
+      if (!email.endsWith("@iiserkol.ac.in")) {
+        document.getElementById("signupEmail").classList.add("input-error");
+        showMsg("❌ Please use your official IISER Kolkata email (@iiserkol.ac.in)."); return;
+      }
       if (password.length < 6) { showMsg("Password must be at least 6 characters."); return; }
-      if (!selectedFile) { showMsg("Please upload a profile photo."); return; }
       if (interests.length === 0) { showMsg("Please select at least one area of interest."); return; }
 
       const btn = document.getElementById("signupBtn");
@@ -461,46 +311,45 @@
       btn.innerHTML = '<span class="spinner"></span><span>Creating account…</span>';
 
       try {
-        // 1. Create auth user
-        const cred = await window._createUser(window._auth, email, password);
+        // 1. Create Firebase Auth user
+        const cred = await auth.createUserWithEmailAndPassword(email, password);
         const uid  = cred.user.uid;
 
-        // 2. Upload profile photo
-        btn.innerHTML = '<span class="spinner"></span><span>Uploading photo…</span>';
-        const storageRef = window._ref(window._storage, `profiles/${uid}/photo`);
-        await window._uploadBytes(storageRef, selectedFile);
-        const photoURL = await window._getDownloadURL(storageRef);
+        // 2. Update display name (no photo — Storage removed)
+        await cred.user.updateProfile({ displayName: name });
 
-        // 3. Update auth profile
-        await window._updateProfile(cred.user, { displayName: name, photoURL });
-
-        // 4. Save to Firestore
+        // 3. Save member document to Firestore
         btn.innerHTML = '<span class="spinner"></span><span>Saving profile…</span>';
-        await window._setDoc(window._doc(window._db, "members", uid), {
+        await db.collection("members").doc(uid).set({
           uid, name, email,
-          yearJoined: joined, yearLeft: left,
-          interests, photoURL,
-          achievements: achievements || "",
-          achievementsApproved: [],
-          attendance: {},
+          yearJoined: joined,
+          yearLeft: left,
+          interests,
+          achievements: [],         // Admin-managed only
+          achievementsApproved: [],  // Admin-approved
+          attendance: {},            // Admin-managed
           createdAt: new Date().toISOString(),
           role: "member"
         });
 
-        showMsg("🎭 Welcome to AARSHI! Account created successfully.", "success");
-        setTimeout(() => window.location.href = "dashboard.html", 1500);
+        showMsg("🎭 Welcome to AARSHI! Account created.", "success");
+        setTimeout(() => window.location.href = "dashboard.html", 1200);
       } catch(e) {
         const msgs = {
-          "auth/email-already-in-use": "This email is already registered. Please login instead.",
+          "auth/email-already-in-use": "This email is already registered. Please login.",
           "auth/invalid-email":        "Please enter a valid email address.",
-          "auth/weak-password":        "Password is too weak. Use at least 6 characters.",
-          "storage/unauthorized":      "Photo upload failed — storage permissions not configured yet. Contact admin.",
+          "auth/weak-password":        "Password too weak — use at least 6 characters."
         };
         showMsg(msgs[e.code] || "Signup failed: " + e.message);
-        btn.disabled = false;
-        btn.innerHTML = '<span>Create Account</span>';
+        btn.disabled = false; btn.innerHTML = '<span>Create Account</span>';
       }
-    };
+    }
+
+    // Expose to HTML onclick
+    window.switchTab          = switchTab;
+    window.handleLogin        = handleLogin;
+    window.handleForgotPassword = handleForgotPassword;
+    window.handleSignup       = handleSignup;
   </script>
 </body>
 </html>

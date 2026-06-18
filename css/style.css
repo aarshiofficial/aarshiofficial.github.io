@@ -548,26 +548,7 @@ strong { color: var(--gold); font-weight: 600; }
 }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  opacity: 0;
-  animation: fadeUp 1s 1.2s ease forwards;
-}
-.hero-scroll-hint span {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.scroll-line { display: none; }
-@keyframes scrollPulse { 0%,100%{ opacity:0; } }
+/* scroll hint removed */
 
 /* --- SECTION COMMONS --- */
 .section { padding: 6rem 1.5rem; }

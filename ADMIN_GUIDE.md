@@ -528,3 +528,300 @@ Each member doc has an `attendance` object. To add attendance:
 2. Firebase Console → Authentication → find their email → delete user
 
 ---
+
+---
+
+## 🔑 PASSWORD RESET — HOW IT WORKS
+
+### For Members (self-service)
+1. Go to **https://aarshiofficial.github.io/auth.html**
+2. Click **"Forgot password?"** below the password field
+3. Enter your `@iiserkol.ac.in` email address
+4. Click **"Send Reset Email"**
+5. Check your IISER inbox — a reset link arrives within 1–2 minutes
+6. Click the link → set a new password → login as normal
+
+The reset link expires after **1 hour**. If it doesn't arrive, check spam/junk folder.
+
+### For Admins — Manually Reset a Member's Password
+If a member can't receive the reset email (e.g. IISER mail issues):
+1. Firebase Console → **Authentication** → find the member's email
+2. Click the three dots (⋮) next to their account → **"Send password reset email"**
+3. This sends directly from Firebase — it bypasses any IISER mail filters
+
+### For Admins — Force a Password Change
+If you need to reset someone's password directly:
+1. Firebase Console → **Authentication** → find the user
+2. Click the three dots → **"Reset password"** (if available) OR **delete the account** and ask them to re-signup
+
+### Enable Email Verification (Optional but Recommended)
+To ensure only real IISER students join, you can require email verification:
+1. After a user signs up, Firebase can send a verification email automatically
+2. In `auth.html`, after the `await window._createUser(...)` line, add:
+```js
+import { sendEmailVerification } from "firebase/auth";
+await sendEmailVerification(cred.user);
+```
+3. Only verified accounts can then access the dashboard
+
+---
+
+## 📧 FIREBASE EMAIL CONFIGURATION
+
+Firebase uses its own email sender by default. To make reset emails come from an AARSHI address:
+
+1. Firebase Console → **Authentication → Templates**
+2. Click **"Password reset"** tab
+3. Edit the **From name**: `AARSHI IISER Kolkata`
+4. The from address will be `noreply@aarshi-iiserk.firebaseapp.com` by default
+5. To use a custom domain email, upgrade to Firebase Blaze plan and configure custom SMTP
+
+---
+
+---
+
+## 🔥 COMPLETE FIREBASE SETUP (with AARSHI config)
+
+The Firebase project `aarshi-iiserk` is already created. Here is everything you need.
+
+### Your Firebase Config (already in the website files)
+```js
+const firebaseConfig = {
+  apiKey: "AIzaSyCiIPpWPw68y5dEdt1LaeNtxVuCFGBISuU",
+  authDomain: "aarshi-iiserk.firebaseapp.com",
+  projectId: "aarshi-iiserk",
+  storageBucket: "aarshi-iiserk.firebasestorage.app",
+  messagingSenderId: "195490022156",
+  appId: "1:195490022156:web:70066f5b5a3bc79aff7f29"
+};
+```
+This is already pasted into `auth.html` and `dashboard.html` — no further action needed.
+
+---
+
+### Step 1: Enable Email/Password Authentication
+1. Go to **https://console.firebase.google.com**
+2. Select project **aarshi-iiserk**
+3. Left sidebar → **Build → Authentication → Get started**
+4. Click **"Email/Password"** → Toggle **Enable** ON → **Save**
+
+### Step 2: Create Firestore Database
+1. Left sidebar → **Build → Firestore Database → Create database**
+2. Choose **"Start in test mode"** → **Next**
+3. Location: **asia-south1 (Mumbai)** → **Enable**
+
+### Step 3: Enable Storage (profile photos)
+1. Left sidebar → **Build → Storage → Get started**
+2. **"Start in test mode"** → **Next** → **Done**
+
+### Step 4: Set Firestore Security Rules
+1. Firestore Database → **Rules** tab → paste this:
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /members/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read, update: if request.auth != null &&
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
+```
+3. Click **Publish**
+
+### Step 5: Set Storage Security Rules
+1. Storage → **Rules** tab → paste this:
+```
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profiles/{userId}/{allPaths=**} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == userId
+                   && request.resource.size < 2 * 1024 * 1024;
+    }
+  }
+}
+```
+2. Click **Publish**
+
+### Step 6: Make Yourself Admin
+1. Go to **https://aarshiofficial.github.io/auth.html** → Sign up with your IISER email
+2. Firebase Console → Firestore → **members** collection → click your document (long UID)
+3. Find `role` field → click pencil → change `"member"` to `"admin"` → **Update**
+
+---
+
+## 👤 ADMIN: MANAGING MEMBER ACHIEVEMENTS
+
+Members do NOT submit achievements themselves. You add them as admin.
+
+### Add an achievement to a member
+1. Firebase Console → **Firestore Database** → `members` collection
+2. Find the member's document (search by their name in the `name` field)
+3. Click the `achievements` field → Edit
+4. Add items to the array, e.g.:
+   - `"Won 1st Place — Abhivyakti 2025"`
+   - `"Performed in Lakeer-e-Kabaddi 2025"`
+   - `"IICM 2025 — Group Play Gold"`
+5. Also add to `achievementsApproved` array — these show as "✓ Approved" on the member's dashboard
+
+### Add attendance for a session
+1. Find the member's Firestore document
+2. Click `attendance` → Edit → add a new key-value:
+   - **Key format**: `EventName||DD Mon YYYY`
+   - **Example**: `Annual Drama Workshop 2026||15 Jun 2026`
+   - **Value**: `"present"` or `"absent"`
+3. Click **Update**
+
+---
+
+## 🔑 PASSWORD RESET — HOW IT WORKS
+
+### Member self-service
+1. Visit **https://aarshiofficial.github.io/auth.html**
+2. Click **"Forgot password?"** under the password field
+3. Enter `@iiserkol.ac.in` email → click **Send Reset Email**
+4. Check IISER inbox → click the link → set new password → login
+
+### Admin manually triggers reset
+1. Firebase Console → **Authentication** → find member's email
+2. Click ⋮ (three dots) → **"Send password reset email"**
+
+### Customise the reset email sender name
+1. Firebase Console → **Authentication → Templates → Password reset**
+2. Edit **From name** to: `AARSHI IISER Kolkata`
+3. Click **Save**
+
+---
+
+## 📧 EMAIL DOMAIN RESTRICTION
+The signup page only accepts `@iiserkol.ac.in` emails. This is enforced both in the frontend (JavaScript) and should also be enforced in Firestore rules if needed. If you ever need to allow a different domain (e.g. for a guest), temporarily remove the check from `auth.html` → signup handler → the `endsWith("@iiserkol.ac.in")` check.
+
+---
+
+---
+
+## 🔥 COMPLETE FIREBASE SETUP — FINAL VERSION (No Storage)
+
+Storage has been removed to avoid costs. Profile photos are replaced with initials avatars generated automatically from the member's name.
+
+### Your Firebase Config (already in all files)
+```js
+const firebaseConfig = {
+  apiKey: "AIzaSyCiIPpWPw68y5dEdt1LaeNtxVuCFGBISuU",
+  authDomain: "aarshi-iiserk.firebaseapp.com",
+  projectId: "aarshi-iiserk",
+  storageBucket: "aarshi-iiserk.firebasestorage.app",
+  messagingSenderId: "195490022156",
+  appId: "1:195490022156:web:70066f5b5a3bc79aff7f29"
+};
+```
+
+---
+
+### Step 1: Enable Email/Password Authentication
+1. Go to **https://console.firebase.google.com** → project **aarshi-iiserk**
+2. Left sidebar → **Build → Authentication → Get started**
+3. Click **"Email/Password"** → Toggle **Enable** → **Save**
+
+### Step 2: Create Firestore Database
+1. Left sidebar → **Build → Firestore Database → Create database**
+2. Choose **"Start in test mode"** → **Next**
+3. Location: **asia-south1 (Mumbai)** → **Enable**
+
+### Step 3: Set Firestore Security Rules
+1. Firestore Database → **Rules** tab
+2. Replace everything with this and click **Publish**:
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /members/{userId} {
+
+      // PUBLIC: anyone can read name, interests, yearJoined, yearLeft
+      allow read: if true;
+
+      // Members can only write their OWN document
+      allow write: if request.auth != null && request.auth.uid == userId;
+
+      // Admins can update any member document
+      allow update: if request.auth != null &&
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
+```
+
+**Why allow read: if true?**
+The Members page (members.html) is public and shows all members' names and interests to anyone visiting the site. Attendance and achievements are still only shown to the logged-in member on their own dashboard.
+
+### Step 4: Make Yourself Admin
+1. Sign up at **https://aarshiofficial.github.io/auth.html** with your IISER email
+2. Firebase Console → **Firestore → members** → click your document (long UID string)
+3. Find `role` field → click pencil icon → change `"member"` to `"admin"` → **Update**
+
+---
+
+## 👥 MEMBERS PAGE (members.html)
+
+The Members page at **https://aarshiofficial.github.io/members.html** is publicly visible and shows:
+- Member's full name
+- Year joined + Active/Alumni status
+- Areas of interest (as chips)
+- Initials avatar (auto-generated from name)
+
+**What is NOT shown publicly:**
+- Email address
+- Attendance records
+- Achievements (these show only on member's own dashboard)
+- Password (obviously)
+
+Members can filter by any interest area and search by name.
+
+---
+
+## 👤 ADMIN: MANAGING MEMBER DATA
+
+### Add achievements to a member
+1. Firebase Console → **Firestore → members** → find the member's document
+2. Edit `achievements` array → add strings like:
+   - `"Performed in Lakeer-e-Kabaddi 2025"`
+   - `"Won 1st Place — Abhivyakti 2025"`
+3. Edit `achievementsApproved` array → add the same strings to approve them
+4. Member sees "✓ Approved" on their dashboard
+
+### Mark attendance
+In the member's Firestore document, edit `attendance` object:
+- **Key**: `EventName||DD Mon YYYY` (e.g. `Drama Workshop 2026||15 Jun 2026`)
+- **Value**: `"present"` or `"absent"`
+
+### Password reset (admin)
+1. Firebase Console → **Authentication** → find member's email
+2. Click ⋮ → **"Send password reset email"**
+
+### Delete a member
+1. Firestore → delete their `members` document
+2. Authentication → find email → click ⋮ → **Delete account**
+
+---
+
+## 🔑 PASSWORD RESET — MEMBER SELF-SERVICE
+
+1. Go to **https://aarshiofficial.github.io/auth.html**
+2. Click **"Forgot password?"**
+3. Enter `@iiserkol.ac.in` email → **Send Reset Email**
+4. Check IISER inbox → click link → set new password
+
+Reset link expires after **1 hour**.
+
+---
+
+## 📧 CUSTOMISE RESET EMAIL SENDER NAME
+1. Firebase Console → **Authentication → Templates → Password reset**
+2. Change **From name** to: `AARSHI IISER Kolkata`
+3. Click **Save**
+
+---

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AARSHI — Members</title>
+  <link rel="icon" href="assets/favicon.ico"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--black:#0D0D0D;--dark:#141414;--dark-2:#1C1C1C;--gold:#E8C547;--gold-dim:#B8952D;--red:#C0392B;--parchment:#F5F0E8;--muted:#9A9A8A;--white:#FFFFFF;--font-display:'Playfair Display',Georgia,serif;--font-body:'Inter',system-ui,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--black);color:var(--parchment);font-family:var(--font-body);min-height:100vh}
+    a{color:inherit;text-decoration:none}
+
+    /* NAV */
+    nav{background:rgba(13,13,13,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    .nav-logo{font-family:var(--font-display);font-size:1.2rem;font-style:italic;color:var(--gold)}
+    .nav-links-m{display:flex;align-items:center;gap:1rem}
+    .nav-links-m a{font-size:0.82rem;color:var(--muted);transition:color 0.2s}
+    .nav-links-m a:hover{color:var(--gold)}
+    .nav-links-m .btn-portal{border:1.5px solid rgba(232,197,71,0.4);color:var(--gold);padding:0.35rem 0.85rem;border-radius:6px;font-size:0.8rem;font-weight:600;transition:all 0.2s}
+    .nav-links-m .btn-portal:hover{background:rgba(232,197,71,0.12)}
+
+    /* HERO */
+    .page-hero{padding:4rem 1.5rem 2.5rem;text-align:center;position:relative}
+    .page-hero-label{font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;font-weight:600}
+    .page-hero-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3rem);color:var(--white);margin-bottom:0.75rem}
+    .page-hero-sub{color:var(--muted);font-size:0.95rem;max-width:480px;margin:0 auto}
+
+    /* MAIN */
+    .container{max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem}
+
+    /* SEARCH + FILTERS */
+    .controls{margin-bottom:2rem}
+    .search-wrap{position:relative;margin-bottom:1rem}
+    .search-wrap input{width:100%;padding:0.75rem 1rem 0.75rem 2.75rem;background:var(--dark);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:var(--parchment);font-family:var(--font-body);font-size:0.9rem;outline:none;transition:border-color 0.2s}
+    .search-wrap input:focus{border-color:var(--gold)}
+    .search-wrap input::placeholder{color:var(--muted)}
+    .search-icon{position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1rem}
+    .filter-row{display:flex;gap:0.5rem;flex-wrap:wrap}
+    .f-btn{padding:0.4rem 0.9rem;font-size:0.78rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,0.1);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s}
+    .f-btn:hover{border-color:var(--gold);color:var(--gold)}
+    .f-btn.active{background:var(--gold);border-color:var(--gold);color:var(--black)}
+
+    /* STATS BAR */
+    .stats-bar{font-size:0.8rem;color:var(--muted);margin-bottom:1.5rem}
+    .stats-bar span{color:var(--gold);font-weight:600}
+
+    /* GRID */
+    .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+
+    /* MEMBER CARD */
+    .member-card{background:var(--dark);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.5rem 1.25rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.6rem;transition:border-color 0.25s,transform 0.25s;animation:fadeIn 0.4s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .member-card:hover{border-color:rgba(232,197,71,0.3);transform:translateY(-3px)}
+    .member-card.hidden{display:none}
+
+    /* AVATAR */
+    .m-avatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--dark-2),var(--black));border:2px solid rgba(232,197,71,0.35);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--gold);flex-shrink:0}
+
+    /* INFO */
+    .m-name{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--white);line-height:1.2}
+    .m-tenure{font-size:0.7rem;letter-spacing:0.08em;color:var(--muted);margin-top:0.1rem}
+    .m-status{font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:4px;margin-top:0.1rem}
+    .m-status.active{background:rgba(46,204,113,0.12);color:#2ECC71;border:1px solid rgba(46,204,113,0.25)}
+    .m-status.alumni{background:rgba(154,154,138,0.1);color:var(--muted);border:1px solid rgba(154,154,138,0.2)}
+
+    /* INTERESTS */
+    .m-interests{display:flex;flex-wrap:wrap;gap:0.35rem;justify-content:center;margin-top:0.4rem}
+    .m-int-chip{font-size:0.62rem;padding:0.18rem 0.5rem;border-radius:4px;background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.18);color:rgba(232,197,71,0.85)}
+
+    /* EMPTY STATE */
+    .empty-state{text-align:center;padding:4rem 2rem;color:var(--muted)}
+    .empty-state-icon{font-size:3rem;margin-bottom:1rem}
+    .empty-state p{font-size:0.9rem;line-height:1.7}
+
+    /* LOADING */
+    .loading-state{text-align:center;padding:4rem;color:var(--muted)}
+    .loading-spinner{width:36px;height:36px;border:3px solid rgba(232,197,71,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1rem}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">AARSHI</a>
+    <div class="nav-links-m">
+      <a href="index.html">← Back to Site</a>
+      <a href="auth.html" class="btn-portal">🎭 Member Portal</a>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-label">Our People</div>
+    <h1 class="page-hero-title">AARSHI Members</h1>
+    <p class="page-hero-sub">Everyone who is part of the AARSHI family — sorted by interest</p>
+  </div>
+
+  <div class="container">
+    <div class="controls">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search by name…" oninput="applyFilters()"/>
+      </div>
+      <div class="filter-row" id="filterRow">
+        <button class="f-btn active" data-interest="all" onclick="setFilter(this)">All</button>
+        <button class="f-btn" data-interest="Acting" onclick="setFilter(this)">🎭 Acting</button>
+        <button class="f-btn" data-interest="Direction" onclick="setFilter(this)">🎬 Direction</button>
+        <button class="f-btn" data-interest="Script Writing" onclick="setFilter(this)">✍️ Script Writing</button>
+        <button class="f-btn" data-interest="Stage Management" onclick="setFilter(this)">🎪 Stage Mgmt</button>
+        <button class="f-btn" data-interest="Lights & Sounds" onclick="setFilter(this)">💡 Lights &amp; Sounds</button>
+        <button class="f-btn" data-interest="Props & Set Design" onclick="setFilter(this)">🎨 Props &amp; Set</button>
+        <button class="f-btn" data-interest="Costume & Makeup" onclick="setFilter(this)">👗 Costume</button>
+        <button class="f-btn" data-interest="Photography" onclick="setFilter(this)">📷 Photography</button>
+        <button class="f-btn" data-interest="Videography" onclick="setFilter(this)">🎥 Videography</button>
+        <button class="f-btn" data-interest="Event Management" onclick="setFilter(this)">📋 Events</button>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="statsBar"></div>
+    <div class="members-grid" id="membersGrid">
+      <div class="loading-state" style="grid-column:1/-1">
+        <div class="loading-spinner"></div>
+        <p>Loading members…</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey:"AIzaSyCiIPpWPw68y5dEdt1LaeNtxVuCFGBISuU",
+      authDomain:"aarshi-iiserk.firebaseapp.com",
+      projectId:"aarshi-iiserk",
+      storageBucket:"aarshi-iiserk.firebasestorage.app",
+      messagingSenderId:"195490022156",
+      appId:"1:195490022156:web:70066f5b5a3bc79aff7f29"
+    });
+    const db = firebase.firestore();
+
+    let allMembers = [];
+    let activeFilter = "all";
+
+    // Fetch all members (public fields only)
+    async function loadMembers() {
+      try {
+        const snap = await db.collection("members").orderBy("name").get();
+        allMembers = snap.docs.map(doc => {
+          const d = doc.data();
+          return {
+            name:       d.name || "Unknown",
+            yearJoined: d.yearJoined || "–",
+            yearLeft:   d.yearLeft   || "Present",
+            interests:  d.interests  || [],
+          };
+        });
+        renderCards(allMembers);
+      } catch(e) {
+        document.getElementById("membersGrid").innerHTML =
+          `<div class="empty-state" style="grid-column:1/-1">
+            <div class="empty-state-icon">⚠️</div>
+            <p>Could not load members.<br><small style="color:#E74C3C">${e.message}</small></p>
+          </div>`;
+      }
+    }
+
+    function getInitials(name) {
+      return (name||"?").split(" ").map(w=>w[0]||"").join("").slice(0,2).toUpperCase();
+    }
+
+    function renderCards(members) {
+      const grid = document.getElementById("membersGrid");
+      const stats = document.getElementById("statsBar");
+      if (!members.length) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+          <div class="empty-state-icon">🎭</div>
+          <p>No members found.<br>Try a different filter or search term.</p>
+        </div>`;
+        stats.innerHTML = "Showing <span>0</span> members";
+        return;
+      }
+
+      stats.innerHTML = `Showing <span>${members.length}</span> of <span>${allMembers.length}</span> members`;
+
+      grid.innerHTML = members.map(m => {
+        const isActive = m.yearLeft === "Present";
+        const statusClass = isActive ? "active" : "alumni";
+        const statusText  = isActive ? "🟢 Active" : `Alumni ${m.yearLeft}`;
+        const chips = (m.interests||[]).map(i =>
+          `<span class="m-int-chip">${i}</span>`
+        ).join("");
+        return `<div class="member-card">
+          <div class="m-avatar">${getInitials(m.name)}</div>
+          <div class="m-name">${escHtml(m.name)}</div>
+          <div class="m-tenure">Joined ${m.yearJoined}</div>
+          <span class="m-status ${statusClass}">${statusText}</span>
+          ${chips ? `<div class="m-interests">${chips}</div>` : ""}
+        </div>`;
+      }).join("");
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function setFilter(btn) {
+      document.querySelectorAll(".f-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeFilter = btn.dataset.interest;
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById("searchInput").value.trim().toLowerCase();
+      const filtered = allMembers.filter(m => {
+        const nameMatch = !q || m.name.toLowerCase().includes(q);
+        const intMatch  = activeFilter === "all" || (m.interests||[]).includes(activeFilter);
+        return nameMatch && intMatch;
+      });
+      renderCards(filtered);
+    }
+
+    window.setFilter    = setFilter;
+    window.applyFilters = applyFilters;
+
+    loadMembers();
+  </script>
+</body>
+</html>

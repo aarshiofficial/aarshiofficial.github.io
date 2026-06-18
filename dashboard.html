@@ -8,266 +8,181 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --black:#0D0D0D;--dark:#141414;--dark-2:#1C1C1C;
-      --gold:#E8C547;--gold-dim:#B8952D;--red:#C0392B;
-      --parchment:#F5F0E8;--muted:#9A9A8A;--white:#FFFFFF;
-      --font-display:'Playfair Display',Georgia,serif;
-      --font-body:'Inter',system-ui,sans-serif;
-    }
+    :root{--black:#0D0D0D;--dark:#141414;--dark-2:#1C1C1C;--gold:#E8C547;--gold-dim:#B8952D;--red:#C0392B;--parchment:#F5F0E8;--muted:#9A9A8A;--white:#FFFFFF;--font-display:'Playfair Display',Georgia,serif;--font-body:'Inter',system-ui,sans-serif}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--black);color:var(--parchment);font-family:var(--font-body);min-height:100vh}
     a{color:inherit;text-decoration:none}
-
-    /* LOADING */
-    .loading-screen{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
-    .loading-screen.hidden{display:none}
+    .loading{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+    .loading.gone{display:none}
     .loading-logo{font-family:var(--font-display);font-size:2rem;font-style:italic;color:var(--gold)}
-    .loading-spinner{width:32px;height:32px;border:3px solid rgba(232,197,71,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
+    .spinner{width:32px;height:32px;border:3px solid rgba(232,197,71,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* HEADER */
-    .dash-header{background:rgba(20,20,20,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+    header{background:rgba(20,20,20,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,0.06);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
     .dash-logo{font-family:var(--font-display);font-size:1.2rem;font-style:italic;color:var(--gold)}
     .dash-user{display:flex;align-items:center;gap:0.75rem}
-    .dash-avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
     .dash-name{font-size:0.85rem;font-weight:600}
-    .dash-logout{font-size:0.78rem;color:var(--muted);cursor:pointer;padding:0.35rem 0.75rem;border:1px solid rgba(255,255,255,0.1);border-radius:6px;transition:all 0.2s;background:none}
+    .dash-logout{font-size:0.78rem;color:var(--muted);cursor:pointer;padding:0.35rem 0.75rem;border:1px solid rgba(255,255,255,0.1);border-radius:6px;background:none;transition:all 0.2s}
     .dash-logout:hover{border-color:var(--red);color:var(--red)}
-    .back-site{font-size:0.78rem;color:var(--muted);margin-right:0.75rem;transition:color 0.2s}
+    .back-site{font-size:0.78rem;color:var(--muted);transition:color 0.2s}
     .back-site:hover{color:var(--gold)}
-
-    /* LAYOUT */
-    .dash-body{max-width:960px;margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:280px 1fr;gap:1.5rem;align-items:start}
-    @media(max-width:720px){.dash-body{grid-template-columns:1fr}}
-
-    /* CARD */
-    .dash-card{background:var(--dark);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden}
-    .dash-card-header{padding:1rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between}
-    .dash-card-title{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:600}
-    .dash-card-body{padding:1.25rem}
-
-    /* PROFILE CARD */
-    .profile-photo-wrap{text-align:center;padding:1.5rem 1rem 1rem}
-    .profile-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);margin-bottom:0.75rem}
-    .profile-name{font-family:var(--font-display);font-size:1.25rem;color:var(--white);margin-bottom:0.2rem}
-    .profile-email{font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem}
-    .profile-tags{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center}
-    .profile-tag{font-size:0.68rem;padding:0.2rem 0.55rem;border-radius:4px;background:rgba(232,197,71,0.1);border:1px solid rgba(232,197,71,0.2);color:var(--gold)}
-    .profile-info-row{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem}
-    .profile-info-row:last-child{border-bottom:none}
-    .pir-label{color:var(--muted)}
-    .pir-value{color:var(--parchment);font-weight:500}
-
-    /* ATTENDANCE */
-    .att-summary{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.25rem}
+    .wrap{max-width:960px;margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:260px 1fr;gap:1.5rem;align-items:start}
+    @media(max-width:700px){.wrap{grid-template-columns:1fr}}
+    .card{background:var(--dark);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:1.25rem}
+    .card-header{padding:0.9rem 1.25rem;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;justify-content:space-between;align-items:center}
+    .card-body{padding:1.25rem}
+    .profile-top{text-align:center;padding:1.5rem 1rem 1rem}
+    .avatar-ring{width:80px;height:80px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 0.75rem;font-size:2rem;background:var(--dark-2);animation:goldGlow 2.5s ease-in-out infinite}
+    @keyframes goldGlow{0%,100%{box-shadow:0 0 0 3px rgba(232,197,71,0.15),0 0 16px rgba(232,197,71,0.3)}50%{box-shadow:0 0 0 4px rgba(232,197,71,0.3),0 0 28px rgba(232,197,71,0.6)}}
+    .p-name{font-family:var(--font-display);font-size:1.2rem;color:var(--white)}
+    .p-email{font-size:0.75rem;color:var(--muted);margin:0.2rem 0 0.75rem}
+    .p-chips{display:flex;flex-wrap:wrap;gap:0.35rem;justify-content:center}
+    .p-chip{font-size:0.65rem;padding:0.2rem 0.5rem;border-radius:4px;background:rgba(232,197,71,0.1);border:1px solid rgba(232,197,71,0.2);color:var(--gold)}
+    .info-row{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.82rem}
+    .info-row:last-child{border-bottom:none}
+    .ir-label{color:var(--muted)}
+    .ir-val{color:var(--parchment);font-weight:500}
+    .att-sum{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem}
     .att-stat{background:var(--dark-2);border-radius:8px;padding:0.85rem;text-align:center}
-    .att-stat-num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1}
-    .att-stat-label{font-size:0.7rem;color:var(--muted);margin-top:0.3rem;letter-spacing:0.08em}
-    .att-empty{text-align:center;padding:2rem;color:var(--muted);font-size:0.85rem}
-    .att-list{display:flex;flex-direction:column;gap:0.5rem}
-    .att-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.75rem;background:var(--dark-2);border-radius:8px;font-size:0.82rem}
+    .att-num{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1}
+    .att-lbl{font-size:0.68rem;color:var(--muted);margin-top:0.3rem}
+    .att-empty{text-align:center;padding:1.5rem;color:var(--muted);font-size:0.82rem;line-height:1.6}
+    .att-item{display:flex;align-items:center;gap:0.75rem;padding:0.6rem 0.75rem;background:var(--dark-2);border-radius:8px;font-size:0.82rem;margin-bottom:0.4rem}
     .att-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
     .att-dot.present{background:#2ECC71}
     .att-dot.absent{background:#E74C3C}
-    .att-event{flex:1;color:var(--parchment)}
+    .att-ev{flex:1;color:var(--parchment)}
     .att-date{color:var(--muted);font-size:0.75rem}
-    .att-status{font-size:0.72rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:4px}
-    .att-status.present{background:rgba(46,204,113,0.15);color:#2ECC71}
-    .att-status.absent{background:rgba(231,76,60,0.15);color:#E74C3C}
-
-    /* ACHIEVEMENTS */
-    .ach-item{padding:0.75rem;background:var(--dark-2);border-radius:8px;margin-bottom:0.6rem;font-size:0.85rem;border-left:3px solid var(--gold)}
-    .ach-item:last-child{margin-bottom:0}
+    .att-badge{font-size:0.7rem;font-weight:600;padding:0.15rem 0.5rem;border-radius:4px}
+    .att-badge.present{background:rgba(46,204,113,0.15);color:#2ECC71}
+    .att-badge.absent{background:rgba(231,76,60,0.15);color:#E74C3C}
+    .ach-item{padding:0.75rem;background:var(--dark-2);border-radius:8px;margin-bottom:0.5rem;font-size:0.85rem;border-left:3px solid var(--gold);line-height:1.5}
     .ach-pending{border-left-color:var(--muted);opacity:0.7}
-    .ach-badge{font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:4px;margin-left:0.5rem}
+    .ach-badge{font-size:0.68rem;padding:0.15rem 0.5rem;border-radius:4px;margin-left:0.5rem;white-space:nowrap}
     .ach-badge.approved{background:rgba(46,204,113,0.15);color:#2ECC71}
     .ach-badge.pending{background:rgba(154,154,138,0.15);color:var(--muted)}
-    .ach-empty{text-align:center;padding:1.5rem;color:var(--muted);font-size:0.82rem}
-
-    /* INTERESTS */
-    .interest-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
-    .interest-chip{font-size:0.75rem;padding:0.3rem 0.7rem;border-radius:6px;background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.2);color:var(--parchment)}
+    .ach-empty{text-align:center;padding:1.5rem;color:var(--muted);font-size:0.82rem;line-height:1.6}
+    .int-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+    .int-chip{font-size:0.75rem;padding:0.3rem 0.7rem;border-radius:6px;background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.2);color:var(--parchment)}
   </style>
 </head>
 <body>
-
-  <div class="loading-screen" id="loadingScreen">
+  <div class="loading" id="loading">
     <div class="loading-logo">AARSHI</div>
-    <div class="loading-spinner"></div>
+    <div class="spinner"></div>
   </div>
 
-  <header class="dash-header" id="dashHeader" style="display:none">
+  <header id="hdr" style="display:none">
     <a href="index.html" class="dash-logo">AARSHI</a>
     <div class="dash-user">
       <a href="index.html" class="back-site">← Site</a>
-      <img class="dash-avatar" id="dashAvatar" src="assets/logo_dark.png" alt=""/>
-      <span class="dash-name" id="dashName">Loading…</span>
-      <button class="dash-logout" onclick="handleLogout()">Logout</button>
+      <span class="dash-name" id="hdrName"></span>
+      <button class="dash-logout" onclick="auth.signOut().then(()=>location.href='auth.html')">Logout</button>
     </div>
   </header>
 
-  <div class="dash-body" id="dashBody" style="display:none">
-
-    <!-- LEFT: PROFILE -->
+  <div class="wrap" id="wrap" style="display:none">
     <div>
-      <div class="dash-card">
-        <div class="profile-photo-wrap">
-          <img class="profile-photo" id="profilePhoto" src="assets/logo_dark.png" alt=""/>
-          <div class="profile-name" id="profileName">–</div>
-          <div class="profile-email" id="profileEmail">–</div>
-          <div class="profile-tags" id="profileTags"></div>
+      <div class="card">
+        <div class="profile-top">
+          <div class="avatar-ring" id="avatarRing">🎭</div>
+          <div class="p-name" id="pName"></div>
+          <div class="p-email" id="pEmail"></div>
+          <div class="p-chips" id="pChips"></div>
         </div>
-        <div class="dash-card-body" style="padding-top:0">
-          <div class="profile-info-row">
-            <span class="pir-label">Joined</span>
-            <span class="pir-value" id="profileJoined">–</span>
-          </div>
-          <div class="profile-info-row">
-            <span class="pir-label">Status</span>
-            <span class="pir-value" id="profileLeft">–</span>
-          </div>
+        <div class="card-body" style="padding-top:0">
+          <div class="info-row"><span class="ir-label">Joined</span><span class="ir-val" id="pJoined"></span></div>
+          <div class="info-row"><span class="ir-label">Status</span><span class="ir-val" id="pLeft"></span></div>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT: ATTENDANCE + ACHIEVEMENTS -->
-    <div style="display:flex;flex-direction:column;gap:1.5rem">
-
-      <!-- ATTENDANCE -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <span class="dash-card-title">🗓 My Attendance</span>
-          <span style="font-size:0.72rem;color:var(--muted)">Only visible to you</span>
-        </div>
-        <div class="dash-card-body">
-          <div class="att-summary">
-            <div class="att-stat">
-              <div class="att-stat-num" id="attPresent">–</div>
-              <div class="att-stat-label">Present</div>
-            </div>
-            <div class="att-stat">
-              <div class="att-stat-num" id="attTotal">–</div>
-              <div class="att-stat-label">Total Sessions</div>
-            </div>
+    <div>
+      <div class="card">
+        <div class="card-header">🗓 My Attendance <span style="font-weight:400;font-size:0.68rem;color:var(--muted)">Private</span></div>
+        <div class="card-body">
+          <div class="att-sum">
+            <div class="att-stat"><div class="att-num" id="attP">–</div><div class="att-lbl">Present</div></div>
+            <div class="att-stat"><div class="att-num" id="attT">–</div><div class="att-lbl">Total Sessions</div></div>
           </div>
-          <div class="att-list" id="attList">
-            <div class="att-empty">No attendance records yet.<br/>Records are added by admin after each session.</div>
-          </div>
+          <div id="attList"><div class="att-empty">No records yet.<br>Admin adds attendance after each session.</div></div>
         </div>
       </div>
-
-      <!-- ACHIEVEMENTS -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <span class="dash-card-title">🏆 My Achievements</span>
-          <span style="font-size:0.72rem;color:var(--muted)">Admin-approved only</span>
-        </div>
-        <div class="dash-card-body">
-          <div id="achList">
-            <div class="ach-empty">No approved achievements yet.<br/>Submit achievements during signup — admin will review and approve.</div>
-          </div>
-        </div>
+      <div class="card">
+        <div class="card-header">🏆 My Achievements <span style="font-weight:400;font-size:0.68rem;color:var(--muted)">Admin-managed</span></div>
+        <div class="card-body"><div id="achList"><div class="ach-empty">No achievements yet.<br>Admin adds and approves achievements.</div></div></div>
       </div>
-
-      <!-- INTERESTS -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <span class="dash-card-title">🎭 Areas of Interest</span>
-        </div>
-        <div class="dash-card-body">
-          <div class="interest-chips" id="interestChips">–</div>
-        </div>
+      <div class="card">
+        <div class="card-header">🎭 Areas of Interest</div>
+        <div class="card-body"><div class="int-chips" id="intChips"></div></div>
       </div>
-
     </div>
   </div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey:"AIzaSyCiIPpWPw68y5dEdt1LaeNtxVuCFGBISuU",
+      authDomain:"aarshi-iiserk.firebaseapp.com",
+      projectId:"aarshi-iiserk",
+      storageBucket:"aarshi-iiserk.firebasestorage.app",
+      messagingSenderId:"195490022156",
+      appId:"1:195490022156:web:70066f5b5a3bc79aff7f29"
+    });
+    const auth = firebase.auth();
+    const db   = firebase.firestore();
 
-    // ── PASTE THE SAME firebaseConfig HERE ──
-    const firebaseConfig = {
-      apiKey:            "YOUR_API_KEY",
-      authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId:         "YOUR_PROJECT_ID",
-      storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId:             "YOUR_APP_ID"
-    };
-
-    const app  = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db   = getFirestore(app);
-
-    window.handleLogout = async () => {
-      await signOut(auth);
-      window.location.href = "auth.html";
-    };
-
-    onAuthStateChanged(auth, async user => {
+    auth.onAuthStateChanged(async user => {
       if (!user) { window.location.href = "auth.html"; return; }
+      const snap = await db.collection("members").doc(user.uid).get();
+      const d = snap.exists ? snap.data() : {};
 
-      // Fetch member doc
-      const snap = await getDoc(doc(db, "members", user.uid));
-      const data = snap.exists() ? snap.data() : {};
+      // Header
+      document.getElementById("hdrName").textContent = d.name || user.displayName || "Member";
 
-      // Populate header
-      document.getElementById("dashAvatar").src = data.photoURL || user.photoURL || "assets/logo_dark.png";
-      document.getElementById("dashName").textContent = data.name || user.displayName || "Member";
+      // Profile
+      const initials = (d.name||"?").split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+      document.getElementById("avatarRing").textContent = initials || "🎭";
+      document.getElementById("pName").textContent   = d.name || "–";
+      document.getElementById("pEmail").textContent  = d.email || user.email;
+      document.getElementById("pJoined").textContent = d.yearJoined || "–";
+      document.getElementById("pLeft").textContent   = d.yearLeft==="Present" ? "🟢 Active" : `Left ${d.yearLeft||"–"}`;
 
-      // Populate profile
-      document.getElementById("profilePhoto").src = data.photoURL || user.photoURL || "assets/logo_dark.png";
-      document.getElementById("profileName").textContent = data.name || "–";
-      document.getElementById("profileEmail").textContent = data.email || user.email;
-      document.getElementById("profileJoined").textContent = data.yearJoined || "–";
-      document.getElementById("profileLeft").textContent = data.yearLeft === "Present" ? "🟢 Active Member" : `Left ${data.yearLeft}`;
-
-      // Interests
-      const tags = document.getElementById("profileTags");
-      const chips = document.getElementById("interestChips");
-      if (data.interests && data.interests.length) {
-        tags.innerHTML = data.interests.slice(0,3).map(i=>`<span class="profile-tag">${i}</span>`).join("");
-        chips.innerHTML = data.interests.map(i=>`<span class="interest-chip">${i}</span>`).join("");
+      // Interest chips (top 3)
+      if (d.interests?.length) {
+        document.getElementById("pChips").innerHTML = d.interests.slice(0,3).map(i=>`<span class="p-chip">${i}</span>`).join("");
+        document.getElementById("intChips").innerHTML = d.interests.map(i=>`<span class="int-chip">${i}</span>`).join("");
       } else {
-        chips.textContent = "No interests listed.";
+        document.getElementById("intChips").textContent = "None listed.";
       }
 
       // Attendance
-      const att = data.attendance || {};
-      const sessions = Object.entries(att);
-      const present  = sessions.filter(([,v])=>v==="present").length;
-      document.getElementById("attPresent").textContent = present;
-      document.getElementById("attTotal").textContent = sessions.length;
-      if (sessions.length > 0) {
-        document.getElementById("attList").innerHTML = sessions
+      const att = d.attendance || {};
+      const entries = Object.entries(att);
+      const presentCount = entries.filter(([,v])=>v==="present").length;
+      document.getElementById("attP").textContent = presentCount;
+      document.getElementById("attT").textContent = entries.length;
+      if (entries.length) {
+        document.getElementById("attList").innerHTML = entries
           .sort((a,b)=>b[0].localeCompare(a[0]))
-          .map(([event,status])=>{
-            const [name,date] = event.split("||");
-            return `<div class="att-item">
-              <div class="att-dot ${status}"></div>
-              <div class="att-event">${name || event}</div>
-              <div class="att-date">${date||""}</div>
-              <span class="att-status ${status}">${status==="present"?"Present":"Absent"}</span>
-            </div>`;
+          .map(([k,status])=>{
+            const [name,date] = k.split("||");
+            return `<div class="att-item"><div class="att-dot ${status}"></div><div class="att-ev">${name||k}</div><div class="att-date">${date||""}</div><span class="att-badge ${status}">${status==="present"?"Present":"Absent"}</span></div>`;
           }).join("");
       }
 
       // Achievements
-      const approved = data.achievementsApproved || [];
-      const pending  = data.achievements && !approved.length ? data.achievements : "";
-      const achEl = document.getElementById("achList");
+      const approved = d.achievementsApproved || [];
+      const pending  = (d.achievements||[]).filter(a=>!approved.includes(a));
       let achHTML = "";
-      if (approved.length) achHTML += approved.map(a=>`<div class="ach-item">${a}<span class="ach-badge approved">✓ Approved</span></div>`).join("");
-      if (pending) achHTML += `<div class="ach-item ach-pending">${pending}<span class="ach-badge pending">⏳ Pending Review</span></div>`;
-      if (achHTML) achEl.innerHTML = achHTML;
+      approved.forEach(a => achHTML += `<div class="ach-item">${a}<span class="ach-badge approved">✓ Approved</span></div>`);
+      pending.forEach(a  => achHTML += `<div class="ach-item ach-pending">${a}<span class="ach-badge pending">⏳ Pending</span></div>`);
+      if (achHTML) document.getElementById("achList").innerHTML = achHTML;
 
-      // Show UI
-      document.getElementById("loadingScreen").classList.add("hidden");
-      document.getElementById("dashHeader").style.display = "flex";
-      document.getElementById("dashBody").style.display = "grid";
+      document.getElementById("loading").classList.add("gone");
+      document.getElementById("hdr").style.display  = "flex";
+      document.getElementById("wrap").style.display = "grid";
     });
   </script>
 </body>
