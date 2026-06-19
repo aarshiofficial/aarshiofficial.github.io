@@ -825,3 +825,53 @@ Reset link expires after **1 hour**.
 3. Click **Save**
 
 ---
+
+---
+
+## ⚠️ MEMBERS NOT SHOWING ON MEMBERS PAGE — FIX
+
+If accounts appear in Firebase Authentication but NOT on members.html, the issue is almost always **Firestore Security Rules**.
+
+### The fix — paste these rules EXACTLY:
+
+1. Firebase Console → **Firestore Database** → **Rules** tab
+2. Delete everything and paste this:
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /members/{userId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && (
+        request.auth.uid == userId ||
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin'
+      );
+      allow delete: if request.auth != null &&
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
+```
+
+3. Click **Publish**
+
+### Why this works
+- `allow read: if true` — lets the Members page load all members publicly (name + interests only shown)
+- `allow create` — lets a new user write their own document during signup
+- `allow update` — member can update their own doc; admin can update anyone's
+
+### Also check — did Firestore actually save the member doc?
+When someone signs up, two things happen:
+1. Firebase **Authentication** creates the account (you see this in Auth tab)
+2. **Firestore** saves the member document (you see this in Firestore tab)
+
+If only step 1 happened (auth exists but no Firestore doc), the member won't appear on the Members page. This can happen if the signup was interrupted. The member should sign up again or you can manually create their Firestore document.
+
+To manually create a member document:
+1. Firestore → `members` collection → **Add document**
+2. Document ID = their Firebase Auth UID (find it in Authentication tab)
+3. Add fields: `name`, `email`, `yearJoined`, `yearLeft`, `interests` (array), `role` = `"member"`, `achievements` = `[]`, `achievementsApproved` = `[]`, `attendance` = `{}`
+
+---

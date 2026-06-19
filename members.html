@@ -146,22 +146,35 @@
     // Fetch all members (public fields only)
     async function loadMembers() {
       try {
-        const snap = await db.collection("members").orderBy("name").get();
+        // Note: no orderBy to avoid requiring a Firestore index
+        const snap = await db.collection("members").get();
+        if (snap.empty) {
+          document.getElementById("membersGrid").innerHTML =
+            `<div class="empty-state" style="grid-column:1/-1">
+              <div class="empty-state-icon">🎭</div>
+              <p>No members yet.<br>Be the first to sign up!</p>
+            </div>`;
+          document.getElementById("statsBar").innerHTML = "Showing <span>0</span> members";
+          return;
+        }
         allMembers = snap.docs.map(doc => {
           const d = doc.data();
           return {
-            name:       d.name || "Unknown",
+            name:       d.name       || "Unknown",
             yearJoined: d.yearJoined || "–",
             yearLeft:   d.yearLeft   || "Present",
             interests:  d.interests  || [],
           };
-        });
+        }).sort((a,b) => a.name.localeCompare(b.name));
         renderCards(allMembers);
       } catch(e) {
         document.getElementById("membersGrid").innerHTML =
           `<div class="empty-state" style="grid-column:1/-1">
             <div class="empty-state-icon">⚠️</div>
-            <p>Could not load members.<br><small style="color:#E74C3C">${e.message}</small></p>
+            <p>Could not load members.<br>
+            <small style="color:#E74C3C">${e.message}</small><br><br>
+            <small>Make sure Firestore rules allow public read.<br>
+            See ADMIN_GUIDE.md Step 3.</small></p>
           </div>`;
       }
     }
