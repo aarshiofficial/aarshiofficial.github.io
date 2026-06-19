@@ -70,6 +70,13 @@
     .m-interests{display:flex;flex-wrap:wrap;gap:0.35rem;justify-content:center;margin-top:0.4rem}
     .m-int-chip{font-size:0.62rem;padding:0.18rem 0.5rem;border-radius:4px;background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.18);color:rgba(232,197,71,0.85)}
 
+    /* ACHIEVEMENTS ON CARD */
+    .m-achievements{width:100%;margin-top:0.6rem;padding-top:0.6rem;border-top:1px solid rgba(255,255,255,0.07);text-align:left}
+    .m-ach-label{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.4rem;text-align:center}
+    .m-ach-list{list-style:none;display:flex;flex-direction:column;gap:0.3rem}
+    .m-ach-list li{font-size:0.72rem;color:var(--parchment);line-height:1.4;padding-left:0.9rem;position:relative}
+    .m-ach-list li::before{content:'✦';position:absolute;left:0;color:var(--gold);font-size:0.65rem}
+
     /* EMPTY STATE */
     .empty-state{text-align:center;padding:4rem 2rem;color:var(--muted)}
     .empty-state-icon{font-size:3rem;margin-bottom:1rem}
@@ -164,6 +171,7 @@
             yearJoined: d.yearJoined || "–",
             yearLeft:   d.yearLeft   || "Present",
             interests:  d.interests  || [],
+            achievements: d.achievementsApproved || [],
           };
         }).sort((a,b) => a.name.localeCompare(b.name));
         renderCards(allMembers);
@@ -204,12 +212,19 @@
         const chips = (m.interests||[]).map(i =>
           `<span class="m-int-chip">${i}</span>`
         ).join("");
+        const achList = (m.achievements||[]).map(a =>
+          `<li>${escHtml(a)}</li>`
+        ).join("");
+        const achBlock = achList
+          ? `<div class="m-achievements"><div class="m-ach-label">🏆 Achievements</div><ul class="m-ach-list">${achList}</ul></div>`
+          : "";
         return `<div class="member-card">
           <div class="m-avatar">${getInitials(m.name)}</div>
           <div class="m-name">${escHtml(m.name)}</div>
           <div class="m-tenure">Joined ${m.yearJoined}</div>
           <span class="m-status ${statusClass}">${statusText}</span>
           ${chips ? `<div class="m-interests">${chips}</div>` : ""}
+          ${achBlock}
         </div>`;
       }).join("");
     }
