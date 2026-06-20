@@ -2216,7 +2216,7 @@ body[data-current-page="events"] .downloads-section { display: block; }
 .designer-card { display: flex; align-items: center; gap: 0.75rem; }
 .designer-photo {
   width: 44px; height: 44px; border-radius: 50%;
-  object-fit: cover; object-position: center top;
+  object-fit: cover; object-position: 50% 18%;
   border: 2px solid var(--gold); flex-shrink: 0;
 }
 .designer-name { font-family: var(--font-display); font-size: 1rem; color: var(--white); font-weight: 700; }
