@@ -512,3 +512,58 @@ Approved achievements (from `achievementsApproved` array in Firestore) now appea
 Achievements still in `achievements` but NOT yet in `achievementsApproved` remain private — they only show as "⏳ Pending" on the member's own dashboard, never publicly.
 
 ---
+
+---
+
+## 🛡 ADMIN APPROVAL SYSTEM (admin.html)
+
+To stop fake/random signups from appearing on the public Members page, every new signup is now created with `status: "pending"`. They stay invisible on the Members page and show a "pending approval" banner on their own dashboard until an admin approves them.
+
+### Accessing the Admin Panel
+1. Go to **https://aarshiofficial.github.io/admin.html**
+2. Log in with your admin account (must have `role: "admin"` in Firestore — see "Make Yourself Admin" above)
+3. Non-admins who visit this page see a "🚫 Admin Access Only" screen and nothing else
+
+### Using the panel
+- **⏳ Pending tab** — every new signup lands here. Click **✓ Approve** to make them public on the Members page, or **✕ Reject** to block them.
+- **✅ Approved tab** — all currently approved members. You can click **Revert** to move someone back to pending if needed.
+- **❌ Rejected tab** — anyone you've rejected. Also revertible.
+- **Search bar** — filter by name or email across all tabs.
+
+All changes are instant — no Firestore Console needed for day-to-day approvals anymore.
+
+### What changes for EXISTING members (already signed up before this feature)
+**Nothing.** Existing member documents have no `status` field at all. Every part of the code — `members.html`, `dashboard.html`, and `admin.html` — treats a **missing status as `"approved"`** automatically. They:
+- Still show on the public Members page exactly as before
+- Still see no "pending" banner on their dashboard
+- Will appear in the **✅ Approved tab** in admin.html (not Pending)
+
+You do not need to manually edit any existing Firestore documents. Only NEW signups going forward will start as `"pending"`.
+
+### Required Firestore Rules update
+The existing rules already allow this, but if you want to be extra safe, confirm your rules look like this (Firestore → Rules tab):
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /members/{userId} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && (
+        request.auth.uid == userId ||
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin'
+      );
+      allow delete: if request.auth != null &&
+        get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role == 'admin';
+    }
+  }
+}
+```
+This is identical to what you already have — admins can update (including the `status` field) any member's document, which is exactly what the Approve/Reject buttons need. **No rules change required.**
+
+### Manually setting status via Firestore (fallback, rarely needed now)
+If you ever prefer to do it directly instead of using admin.html:
+1. Firestore → `members` → find the member's document
+2. Add or edit field `status` (string) → set to `"pending"`, `"approved"`, or `"rejected"`
+
+---

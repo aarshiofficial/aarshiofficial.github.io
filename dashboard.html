@@ -63,6 +63,9 @@
     .ach-empty{text-align:center;padding:1.5rem;color:var(--muted);font-size:0.82rem;line-height:1.6}
     .int-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
     .int-chip{font-size:0.75rem;padding:0.3rem 0.7rem;border-radius:6px;background:rgba(232,197,71,0.08);border:1px solid rgba(232,197,71,0.2);color:var(--parchment)}
+    .pending-banner{background:rgba(232,197,71,0.1);border:1px solid rgba(232,197,71,0.3);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.75rem;font-size:0.85rem;line-height:1.5}
+    .pending-banner-icon{font-size:1.5rem;flex-shrink:0}
+    .pending-banner strong{color:var(--gold)}
   </style>
 </head>
 <body>
@@ -79,6 +82,8 @@
       <button class="dash-logout" onclick="auth.signOut().then(()=>location.href='auth.html')">Logout</button>
     </div>
   </header>
+
+  <div id="pendingBannerOuter" style="max-width:960px;margin:1.5rem auto 0;padding:0 1.5rem;display:none"></div>
 
   <div class="wrap" id="wrap" style="display:none">
     <div>
@@ -137,6 +142,25 @@
       if (!user) { window.location.href = "auth.html"; return; }
       const snap = await db.collection("members").doc(user.uid).get();
       const d = snap.exists ? snap.data() : {};
+
+      // ── ACCOUNT STATUS BANNER ──
+      // Accounts created before this feature has no `status` field — treat as approved
+      // so nothing changes for existing members.
+      const status = d.status || "approved";
+      const bannerOuter = document.getElementById("pendingBannerOuter");
+      if (status === "pending") {
+        bannerOuter.style.display = "block";
+        bannerOuter.innerHTML = `<div class="pending-banner">
+          <span class="pending-banner-icon">⏳</span>
+          <span>Your account is <strong>awaiting admin approval</strong>. You can still view this dashboard, but you won't appear on the public Members page until an OB approves your account.</span>
+        </div>`;
+      } else if (status === "rejected") {
+        bannerOuter.style.display = "block";
+        bannerOuter.innerHTML = `<div class="pending-banner" style="background:rgba(231,76,60,0.1);border-color:rgba(231,76,60,0.3)">
+          <span class="pending-banner-icon">❌</span>
+          <span>Your account request was <strong style="color:#E74C3C">not approved</strong>. Please contact an AARSHI OB at <a href="mailto:aarshi@iiserkol.ac.in" style="color:#E74C3C">aarshi@iiserkol.ac.in</a> if you believe this is a mistake.</span>
+        </div>`;
+      }
 
       // Header
       document.getElementById("hdrName").textContent = d.name || user.displayName || "Member";

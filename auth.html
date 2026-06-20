@@ -343,11 +343,12 @@
           achievementsApproved: [],  // Admin-approved
           attendance: {},            // Admin-managed
           createdAt: new Date().toISOString(),
-          role: "member"
+          role: "member",
+          status: "pending"          // NEW: requires admin approval before showing publicly
         });
 
-        showMsg("🎭 Welcome to AARSHI! Account created.", "success");
-        setTimeout(() => window.location.href = "dashboard.html", 1200);
+        showMsg("🎭 Account created! An admin will review and approve your account shortly.", "success");
+        setTimeout(() => window.location.href = "dashboard.html", 1800);
       } catch(e) {
         const msgs = {
           "auth/email-already-in-use": "This email is already registered. Please login.",

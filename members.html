@@ -164,16 +164,30 @@
           document.getElementById("statsBar").innerHTML = "Showing <span>0</span> members";
           return;
         }
-        allMembers = snap.docs.map(doc => {
-          const d = doc.data();
-          return {
+        allMembers = snap.docs
+          .map(doc => doc.data())
+          // Only show approved members publicly. Accounts created before this
+          // feature existed have no `status` field — treat missing status as approved
+          // so existing members aren't hidden.
+          .filter(d => d.status === "approved" || d.status === undefined)
+          .map(d => ({
             name:       d.name       || "Unknown",
             yearJoined: d.yearJoined || "–",
             yearLeft:   d.yearLeft   || "Present",
             interests:  d.interests  || [],
             achievements: d.achievementsApproved || [],
-          };
-        }).sort((a,b) => a.name.localeCompare(b.name));
+          }))
+          .sort((a,b) => a.name.localeCompare(b.name));
+
+        if (!allMembers.length) {
+          document.getElementById("membersGrid").innerHTML =
+            `<div class="empty-state" style="grid-column:1/-1">
+              <div class="empty-state-icon">🎭</div>
+              <p>No approved members yet.</p>
+            </div>`;
+          document.getElementById("statsBar").innerHTML = "Showing <span>0</span> members";
+          return;
+        }
         renderCards(allMembers);
       } catch(e) {
         document.getElementById("membersGrid").innerHTML =
