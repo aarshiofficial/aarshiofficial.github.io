@@ -229,18 +229,19 @@ strong { color: var(--gold); font-weight: 600; }
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .curtain-left,
 .curtain-right {
   position: absolute;
   top: 0;
-  width: 50%;
+  width: calc(50% + 1px);
   height: 100%;
   background: var(--red-dark);
   transition: transform 1.1s var(--ease-out-expo);
 }
 .curtain-left  { left: 0; }
-.curtain-right { right: 0; transform-origin: right; }
+.curtain-right { right: -1px; transform-origin: right; }
 
 /* Add subtle vertical fabric folds using repeating gradient */
 .curtain-left  { background: repeating-linear-gradient(90deg, var(--red-dark) 0px, #7B241C 18px, var(--red-dark) 36px); }
@@ -265,7 +266,8 @@ strong { color: var(--gold); font-weight: 600; }
 .curtain.open .curtain-left  { transform: translateX(-100%); }
 .curtain.open .curtain-right { transform: translateX(100%); }
 .curtain.open .curtain-center-text { opacity: 0; }
-.curtain.gone { display: none; }
+/* .gone always wins regardless of any other state/class combination */
+.curtain.gone { display: none !important; }
 
 /* --- NAV --- */
 .nav {

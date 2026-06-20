@@ -563,45 +563,37 @@
 
 /* ── CURTAIN THEME TRANSITION ── */
 (function(){
-  const toggle   = document.getElementById("themeToggle");
-  const curtain  = document.getElementById("curtain");
+  const toggle  = document.getElementById("themeToggle");
+  const curtain = document.getElementById("curtain");
   if (!toggle || !curtain) return;
-  // Remove the simple toggle from main block and replace with theatrical version
-  toggle.addEventListener("click", function theatricalToggle() {
+
+  let animating = false;
+
+  toggle.addEventListener("click", () => {
+    if (animating) return;
+    animating = true;
+
     const root    = document.documentElement;
     const current = root.getAttribute("data-theme") || "dark";
     const next    = current === "dark" ? "light" : "dark";
+
     // Close curtain
-    curtain.classList.remove("gone", "open");
+    curtain.classList.remove("gone");
     curtain.classList.add("theme-transitioning");
-    curtain.style.display = "flex";
+
     setTimeout(() => {
       root.setAttribute("data-theme", next);
       localStorage.setItem("aarshi-theme", next);
+
       // Reopen curtain
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         curtain.classList.remove("theme-transitioning");
         curtain.classList.add("open");
-        setTimeout(() => curtain.classList.add("gone"), 1300);
-      }, 400);
-    }, 500);
-  }, { capture: true });
-  // Remove old listener by cloning
-  const newToggle = toggle.cloneNode(true);
-  toggle.parentNode.replaceChild(newToggle, toggle);
-  newToggle.addEventListener("click", function theatricalToggle() {
-    const root    = document.documentElement;
-    const current = root.getAttribute("data-theme") || "dark";
-    const next    = current === "dark" ? "light" : "dark";
-    curtain.classList.remove("gone", "open");
-    curtain.style.display = "flex";
-    setTimeout(() => {
-      root.setAttribute("data-theme", next);
-      localStorage.setItem("aarshi-theme", next);
-      setTimeout(() => {
-        curtain.classList.add("open");
-        setTimeout(() => curtain.classList.add("gone"), 1300);
-      }, 400);
+        setTimeout(() => {
+          curtain.classList.add("gone");
+          animating = false;
+        }, 1300);
+      });
     }, 500);
   });
 })();
