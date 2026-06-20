@@ -680,7 +680,7 @@ strong { color: var(--gold); font-weight: 600; }
   display: block;
   transition: transform 0.4s var(--ease-out-expo);
 }
-.poster-card:hover .poster-img-wrap img { transform: scale(1.04); }
+/* hover scale handled by .loaded-specific rule further down to avoid blur-transform conflicts */
 
 .poster-badge {
   position: absolute;
@@ -1611,6 +1611,9 @@ strong { color: var(--gold); font-weight: 600; }
 .download-preview img {
   transition: filter 0.5s ease, transform 0.4s var(--ease-out-expo);
   filter: blur(6px) saturate(0.6);
+  /* Prevent the GPU blur filter from sampling/leaking past the cropped edge,
+     which otherwise renders as a thin seam line at the container boundary */
+  transform: scale(1.08);
 }
 .gal-item img.loaded,
 .poster-img-wrap img.loaded,
@@ -1618,6 +1621,13 @@ strong { color: var(--gold); font-weight: 600; }
 .renowned-photo.loaded,
 .download-preview img.loaded {
   filter: none;
+  transform: none;
+}
+.poster-card:hover .poster-img-wrap img.loaded { transform: scale(1.04); }
+
+/* Isolate blur compositing to its own layer so it can't bleed onto siblings */
+.gal-item, .poster-img-wrap, .download-preview {
+  isolation: isolate;
 }
 
 /* --- COUNTDOWN TIMER --- */
