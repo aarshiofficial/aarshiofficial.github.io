@@ -2177,6 +2177,7 @@ body[data-current-page="events"] .timeline-section,
 body[data-current-page="events"] .downloads-section { display: block; }
 
 /* Active nav link */
+.nav-page-link { position: relative; }
 .nav-page-link.active { color: var(--gold) !important; }
 .nav-page-link.active::after {
   content: '';
