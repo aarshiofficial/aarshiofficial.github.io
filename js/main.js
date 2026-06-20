@@ -803,3 +803,21 @@ window.closeEventModal = function() {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") window.closeEventModal();
 });
+
+/* ── RENOWNED FACES BIO MODAL ── */
+window.openBioModal = function(id) {
+  document.querySelectorAll("#bioModal .event-modal-body").forEach(b => b.style.display = "none");
+  const target = document.getElementById("bio-" + id);
+  if (target) target.style.display = "block";
+  const modal = document.getElementById("bioModal");
+  modal.classList.add("open");
+  modal.querySelector(".event-modal-card").scrollTop = 0;
+  document.body.style.overflow = "hidden";
+};
+window.closeBioModal = function() {
+  document.getElementById("bioModal").classList.remove("open");
+  document.body.style.overflow = "";
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") window.closeBioModal();
+});

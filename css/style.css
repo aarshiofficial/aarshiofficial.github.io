@@ -1200,6 +1200,30 @@ strong { color: var(--gold); font-weight: 600; }
   line-height: 1.2;
 }
 
+.renowned-tagline {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+  margin-top: -0.1rem;
+}
+.renowned-bio-btn {
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: 1.5px solid rgba(232,197,71,0.35);
+  border-radius: 6px;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-body);
+}
+.renowned-bio-btn:hover { background: rgba(232,197,71,0.1); border-color: var(--gold); }
+[data-theme="light"] .renowned-bio-btn { border-color: rgba(153,111,26,0.4); color: var(--gold); }
+[data-theme="light"] .renowned-bio-btn:hover { background: rgba(153,111,26,0.1); }
+[data-theme="light"] .renowned-tagline { color: #5A5248; }
+
 /* --- TEAM --- */
 .team { background: var(--black); }
 .team-grid {

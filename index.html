@@ -114,7 +114,7 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero-bg-grid"></div>
+    
     <div class="spotlight spotlight-1"></div>
     <div class="spotlight spotlight-2"></div>
     <div class="hero-content">
@@ -843,6 +843,8 @@
           </div>
           <div class="renowned-info">
             <h3 class="renowned-name">Nandita Chanda</h3>
+            <p class="renowned-tagline">Actor · Theatre, Film &amp; OTT</p>
+            <button class="renowned-bio-btn" onclick="openBioModal('nandita')">Read Bio →</button>
           </div>
         </div>
 
@@ -863,12 +865,100 @@
           </div>
           <div class="renowned-info">
             <h3 class="renowned-name">Moinak Ganguly</h3>
+            <p class="renowned-tagline">Actor · Filmmaker · Entrepreneur</p>
+            <button class="renowned-bio-btn" onclick="openBioModal('moinak')">Read Bio →</button>
           </div>
         </div>
 
       </div>
     </div>
   </section>
+
+  <!-- RENOWNED FACES — BIO MODAL -->
+  <div class="event-modal" id="bioModal">
+    <div class="event-modal-backdrop" onclick="closeBioModal()"></div>
+    <div class="event-modal-card">
+      <button class="event-modal-close" onclick="closeBioModal()">✕</button>
+
+      <!-- NANDITA CHANDA FULL BIO -->
+      <div class="event-modal-body" id="bio-nandita" style="display:none">
+        <div class="event-modal-tag">Renowned Face · Actor</div>
+        <h2 class="event-modal-title">Nandita Chanda</h2>
+        <p class="event-modal-intro">Born 8th June, 1998 in the City of Joy, Kolkata. Practising theatre professionally since 2017 — part of over 50 plays spanning proscenium, intimate, and street theatre, with over 200 shows across West Bengal. Co-owner of the lifestyle studio <strong>Leo Studios Productions</strong>. Working on screen across music videos, short films, feature films, serials, TVCs, and web series since 2019.</p>
+
+        <h3 class="event-modal-h3">🎭 Ongoing Plays</h3>
+        <ul class="event-modal-why">
+          <li><em>Dadur Natok</em> — Shahoj</li>
+          <li><em>Nagarbaul</em> — Anta-Ranga</li>
+          <li><em>Triptic</em> — Durgapur Bhimroti</li>
+        </ul>
+
+        <h3 class="event-modal-h3">🎬 Short Films</h3>
+        <ul class="event-modal-why">
+          <li><em>Ebong Chaad</em> — dir. Sreelekha Mitra (Pawsome Productions)</li>
+          <li><em>Unsaid</em> — dir. Moinak Ganguly (Leo Studios Productions)</li>
+          <li><em>Postman</em> — dir. Rittwik Mondal (Independent)</li>
+        </ul>
+
+        <h3 class="event-modal-h3">📺 Web Series</h3>
+        <ul class="event-modal-why">
+          <li><em>Mr. Kolketa</em> — dir. Surojit Chatterjee (hoichoi)</li>
+          <li><em>Bodhon</em> — dir. Aditi Roy (hoichoi)</li>
+          <li><em>Mahabharat Murders</em> — dir. Soumik Halder (hoichoi)</li>
+          <li><em>Kumudini Bhawan</em> — dir. Arkadeep Mallika Nath (hoichoi)</li>
+        </ul>
+
+        <h3 class="event-modal-h3">🎥 Feature Films</h3>
+        <ul class="event-modal-why">
+          <li><em>Pariah</em> — dir. Tathagata Mukherjee</li>
+          <li><em>Magic</em> — dir. Raja Chanda</li>
+          <li><em>Lost</em> — dir. Aniruddha Roy Chowdhury</li>
+          <li><em>Meter Down</em>, <em>Burning Butterflies</em>, and others</li>
+        </ul>
+
+        <h3 class="event-modal-h3">📡 Serial</h3>
+        <ul class="event-modal-why">
+          <li><em>Bipottarini</em> — Trust, yet to be released on Colors Bangla (Viacom)</li>
+        </ul>
+      </div>
+
+      <!-- MOINAK GANGULY FULL BIO -->
+      <div class="event-modal-body" id="bio-moinak" style="display:none">
+        <div class="event-modal-tag">Renowned Face · Actor &amp; Filmmaker</div>
+        <h2 class="event-modal-title">Moinak Ganguly</h2>
+        <p class="event-modal-intro">Born 5th February, 1996, in Kolkata. An actor, filmmaker, theatre practitioner, and entrepreneur — practising theatre since 2015, and working professionally as an actor in theatre, films, and web series since 2017 in his hometown. Has worked and performed in over <strong>300 plays</strong> professionally and currently works as a freelance theatre practitioner across street, proscenium, intimate, and travelling theatre formats.</p>
+
+        <h3 class="event-modal-h3">🎭 Currently Working On</h3>
+        <ul class="event-modal-why">
+          <li><em>Dadur Natok</em> — Shahoj <em>(3-time HOUSEFULL show)</em></li>
+          <li><em>Jibon Kahini</em> — Sandarbha <em>(hit drawing room drama)</em></li>
+          <li>Associated with theatre group <strong>SHOHOJ</strong></li>
+        </ul>
+
+        <h3 class="event-modal-h3">🎥 Films</h3>
+        <ul class="event-modal-why">
+          <li><em>Pariah</em> — dir. Tathagata Mukherjee</li>
+          <li><em>Padatik</em> — dir. Sreejit Mukherjee</li>
+        </ul>
+
+        <h3 class="event-modal-h3">📺 OTT / Web Series</h3>
+        <ul class="event-modal-why">
+          <li><em>Kaala</em> — dir. Bejoy Nambiar (Disney+ Hotstar)</li>
+          <li><em>Lohu</em> — dir. Rahool Mukherjee (releasing on Chorki)</li>
+          <li>Upcoming film in the <strong>Guptodhon</strong> franchise — dir. Dhrubo Banerjee (SVF Productions)</li>
+        </ul>
+
+        <h3 class="event-modal-h3">🌟 Beyond Acting</h3>
+        <ul class="event-modal-why">
+          <li>Modelling for both print and digital media</li>
+          <li>Teaching theatre and acting in schools and colleges since 2019</li>
+          <li>Founding member of professional theatre group <strong>Kolorob</strong> — known for the acclaimed street play <em>Manto Lapata Hain</em></li>
+          <li>Co-owner of lifestyle studio <strong>Leo Studios Productions</strong></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
 
   <!-- TROPHY ROOM -->
   <section class="section trophy-room-section" id="trophy-room">
