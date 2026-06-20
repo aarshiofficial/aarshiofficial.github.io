@@ -475,3 +475,40 @@ To change the link, search `chat.whatsapp.com` in `index.html` and replace the U
 ---
 
 *Last updated: June 2026 | Contact: aarshi@iiserkol.ac.in*
+---
+
+## 📖 EVENT "READ MORE" MODALS
+
+Each event poster card (Mrignayanee, Pages to Stages) has a **"Read More →"** button that opens a full-screen modal with complete rules, marking scheme, and a **"Submit Entry"** button linking to the Google Form.
+
+### How it works
+- `index.html` → search `event-modal` to find the modal HTML
+- Each contest has its own `<div class="event-modal-body" id="modal-XXX">` block
+- The poster card's button calls `onclick="openEventModal('XXX')"` to show that block
+
+### To update rules/prizes for next year
+1. Search for `modal-mrignayanee` or `modal-pages` in `index.html`
+2. Edit the text directly inside that block (rules list, marks table, prize amounts)
+3. Update the Google Form link in two places:
+   - The `submit-btn` on the poster card itself
+   - The `event-modal-submit` button inside the modal
+
+### To add a "Read More" modal for a NEW event
+1. Copy an existing `<div class="event-modal-body" id="modal-XXX">...</div>` block, give it a new `id`
+2. Add a button to the new event's poster card: `<button class="read-more-btn" onclick="openEventModal('XXX')">Read More →</button>`
+3. Add a submit button if there's a Google Form: `<a class="submit-btn" href="FORM_URL" target="_blank">Submit Entry ↗</a>`
+
+---
+
+## 🏆 ACHIEVEMENTS SHOWING ON MEMBERS PAGE
+
+Approved achievements (from `achievementsApproved` array in Firestore) now appear publicly on each member's card on `members.html`, listed under a "🏆 Achievements" heading.
+
+**To add an achievement that shows publicly:**
+1. Firestore → `members` → find the member → edit `achievementsApproved` array
+2. Add a string, e.g. `"Won 1st Place — Abhivyakti 2025"`
+3. It appears instantly on their public Members card (no separate publish step needed)
+
+Achievements still in `achievements` but NOT yet in `achievementsApproved` remain private — they only show as "⏳ Pending" on the member's own dashboard, never publicly.
+
+---

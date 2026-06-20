@@ -228,6 +228,10 @@
               Share on WhatsApp
             </a>
             <button class="remind-btn" data-event="Mrignayanee 2026" data-deadline="2026-07-07T23:59:59" onclick="requestReminder(this)">🔔 Remind Me</button>
+            <div class="poster-actions">
+              <button class="read-more-btn" onclick="openEventModal('mrignayanee')">Read More →</button>
+              <a class="submit-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdp-hDFtNow0ZLqoFLrJH5XY2R254-i5X4kxIJedARUnX4ejw/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Entry ↗</a>
+            </div>
           </div>
         </div>
 
@@ -243,7 +247,7 @@
             <p class="event-desc">Where words become worlds. A script writing competition open to all passionate storytellers. Teams of 1–3 members.</p>
             <div class="poster-meta">
               <span class="poster-meta-item">🏆 1st ₹1200 &nbsp;·&nbsp; 2nd ₹900 &nbsp;·&nbsp; 3rd ₹600</span>
-              <span class="poster-meta-item">📅 Submission Deadline: 14th July</span>
+              <span class="poster-meta-item">📅 Submission Window: 14th June – 14th July 2026</span>
               <div class="countdown" data-deadline="2026-07-14T23:59:59">
                 <span class="cd-label">Closes in</span>
                 <span class="cd-timer" data-for="pages">–</span>
@@ -256,6 +260,10 @@
               Share on WhatsApp
             </a>
             <button class="remind-btn" data-event="Pages to Stages 2026" data-deadline="2026-07-14T23:59:59" onclick="requestReminder(this)">🔔 Remind Me</button>
+            <div class="poster-actions">
+              <button class="read-more-btn" onclick="openEventModal('pages')">Read More →</button>
+              <a class="submit-btn" href="https://docs.google.com/forms/d/e/1FAIpQLScn4hp3plfbKlPtpYuY5Df6Om_lnFFdcEhbkc2OZxHCQukDeA/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Entry ↗</a>
+            </div>
           </div>
         </div>
 
@@ -1409,6 +1417,107 @@
       <p class="footer-updated">Site last updated: June 2026</p>
     </div>
   </footer>
+
+  <!-- EVENT DETAIL MODAL -->
+  <div class="event-modal" id="eventModal">
+    <div class="event-modal-backdrop" onclick="closeEventModal()"></div>
+    <div class="event-modal-card">
+      <button class="event-modal-close" onclick="closeEventModal()">✕</button>
+
+      <!-- MRIGNAYANEE FULL DETAILS -->
+      <div class="event-modal-body" id="modal-mrignayanee" style="display:none">
+        <div class="event-modal-tag">Reel Making Competition</div>
+        <h2 class="event-modal-title">🌟 Mrignayanee 2026</h2>
+        <p class="event-modal-intro">Grab your cameras and unleash your creativity through reels! Whether it's a burst of comedy, an intense drama, a thriller, or a simple slice of life — your story deserves a screen.</p>
+
+        <div class="event-modal-prizes">
+          <span>🥇 1st — ₹1200</span><span>🥈 2nd — ₹900</span><span>🥉 3rd — ₹600</span>
+        </div>
+
+        <h3 class="event-modal-h3">📌 Rules &amp; Guidelines</h3>
+        <ol class="event-modal-list">
+          <li>Entries can be individual or group.</li>
+          <li>For group entries, at least one performer must be from IISER Kolkata.</li>
+          <li>Video duration: maximum 2 minutes.</li>
+          <li>Submissions may be in any native language, provided they include mandatory English subtitles.</li>
+          <li>No derogatory content, obscenity, or vulgarity allowed.</li>
+          <li>Sensitive content must include a trigger warning at the beginning.</li>
+          <li>Multiple entries from a single participant are allowed.</li>
+          <li>Judging will be based on both jury evaluation and social media reach.</li>
+        </ol>
+
+        <h3 class="event-modal-h3">‼️ Marks Distribution</h3>
+        <ul class="event-modal-marks">
+          <li><span>Creativity &amp; Originality</span><strong>20</strong></li>
+          <li><span>Theme &amp; Plot</span><strong>20</strong></li>
+          <li><span>Videography</span><strong>20</strong></li>
+          <li><span>Acting</span><strong>20</strong></li>
+          <li><span>Editing</span><strong>10</strong></li>
+          <li><span>Social Media Reach</span><strong>10</strong></li>
+        </ul>
+
+        <div class="event-modal-meta">
+          <p>🗓️ <strong>Last date for submission:</strong> 18th June 2025</p>
+          <p>For reference, check out last year's entries on the <a href="https://www.instagram.com/aarshi_iiserk" target="_blank" rel="noopener">official AARSHI Instagram page</a>.</p>
+          <p>📧 Queries: <a href="mailto:aarshi@iiserkol.ac.in">aarshi@iiserkol.ac.in</a></p>
+        </div>
+
+        <a class="event-modal-submit" href="https://docs.google.com/forms/d/e/1FAIpQLSdp-hDFtNow0ZLqoFLrJH5XY2R254-i5X4kxIJedARUnX4ejw/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Your Entry ↗</a>
+      </div>
+
+      <!-- PAGES TO STAGES FULL DETAILS -->
+      <div class="event-modal-body" id="modal-pages" style="display:none">
+        <div class="event-modal-tag">Script Writing Competition</div>
+        <h2 class="event-modal-title">🌟 Pages to Stages 2026</h2>
+        <p class="event-modal-intro">Every great play begins with a script. Every unforgettable performance starts with a writer. Whether it's drama, comedy, thriller, mystery, romance, fantasy, or satire — put your imagination on paper and let your words take centre stage.</p>
+
+        <div class="event-modal-prizes">
+          <span>🥇 Winner — ₹1200</span><span>🥈 1st Runner-Up — ₹900</span><span>🥉 2nd Runner-Up — ₹600</span>
+        </div>
+        <p class="event-modal-pool">💰 Total Prize Pool: ₹2700</p>
+
+        <h3 class="event-modal-h3">📌 Rules &amp; Guidelines</h3>
+        <ol class="event-modal-list">
+          <li>Participation is open to all.</li>
+          <li>Individual or group participation (maximum 3 members) is allowed.</li>
+          <li>Scripts must be original or adapted with proper acknowledgement.</li>
+          <li>Any form of plagiarism — copying scenes, dialogues, plotlines, characters, or ideas without credit — results in immediate disqualification.</li>
+          <li>Use of AI for entire script writing is strictly prohibited and will lead to disqualification.</li>
+          <li>Scripts may be written in any language.</li>
+          <li>For regional-language submissions, an English translation must be provided. Both the original script and translated version must be submitted. Google Translate or other sources may be used for translation with acknowledgement of the source.</li>
+          <li>Participants submitting scripts in a regional language are requested to inform the OBs beforehand so a person familiar with the language and cultural context can be arranged where possible.</li>
+          <li>Participants must submit: Full Script, Short Synopsis, and Genre of the Script.</li>
+          <li>Word limit: maximum 10,000 words, equating to a 30 min – 1 hr drama.</li>
+          <li>Only PDF submissions will be accepted.</li>
+          <li>The submitted file name must contain the Script Title and Author/Team Name.</li>
+        </ol>
+
+        <h3 class="event-modal-h3">🏆 Judging Criteria (100 Marks)</h3>
+        <ul class="event-modal-marks">
+          <li><span>Creativity &amp; Originality</span><strong>20</strong></li>
+          <li><span>Plot &amp; Structure</span><strong>20</strong></li>
+          <li><span>Character Development</span><strong>20</strong></li>
+          <li><span>Central Theme &amp; Message</span><strong>20</strong></li>
+          <li><span>Dialogues, Presentation &amp; Entertainment Value</span><strong>20</strong></li>
+        </ul>
+
+        <h3 class="event-modal-h3">🌟 Why Participate?</h3>
+        <ul class="event-modal-why">
+          <li>Get recognised as a scriptwriter by the IISER Kolkata dramatics community.</li>
+          <li>Opportunity to contribute scripts for future productions and drama events.</li>
+          <li>Become part of a growing repository of original dramatic works.</li>
+        </ul>
+
+        <div class="event-modal-meta">
+          <p>🗓️ <strong>Submission Window:</strong> 14th June 2026 – 14th July 2026</p>
+          <p>📧 Queries: <a href="mailto:aarshi@iiserkol.ac.in">aarshi@iiserkol.ac.in</a></p>
+        </div>
+
+        <a class="event-modal-submit" href="https://docs.google.com/forms/d/e/1FAIpQLScn4hp3plfbKlPtpYuY5Df6Om_lnFFdcEhbkc2OZxHCQukDeA/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Your Script ↗</a>
+      </div>
+
+    </div>
+  </div>
 
   <!-- POSTER LIGHTBOX -->
   <div class="poster-lb" id="posterLb">

@@ -795,3 +795,19 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") window.closePosterLightbox();
 });
 
+
+/* ── EVENT DETAIL MODAL ── */
+window.openEventModal = function(id) {
+  document.querySelectorAll(".event-modal-body").forEach(b => b.style.display = "none");
+  const target = document.getElementById("modal-" + id);
+  if (target) target.style.display = "block";
+  document.getElementById("eventModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+};
+window.closeEventModal = function() {
+  document.getElementById("eventModal").classList.remove("open");
+  document.body.style.overflow = "";
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") window.closeEventModal();
+});
