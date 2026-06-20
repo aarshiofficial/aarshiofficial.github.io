@@ -2176,10 +2176,10 @@ body[data-current-page="contact"] .contact { display: block; }
 body[data-current-page="events"] .timeline-section,
 body[data-current-page="events"] .downloads-section { display: block; }
 
-/* Active nav link */
-.nav-page-link { position: relative; }
-.nav-page-link.active { color: var(--gold) !important; }
-.nav-page-link.active::after {
+/* Active nav link — header nav bar only (footer links never get an underline) */
+.nav-header-link { position: relative; }
+.nav-header-link.active { color: var(--gold) !important; }
+.nav-header-link.active::after {
   content: '';
   position: absolute;
   bottom: -2px; left: 0.85rem; right: 0.85rem;
@@ -2187,6 +2187,8 @@ body[data-current-page="events"] .downloads-section { display: block; }
   background: var(--gold);
   border-radius: 2px;
 }
+/* Footer links: colour change only on active state, no underline bar */
+.footer-links .nav-page-link.active { color: var(--gold) !important; }
 
 /* ── NAV PORTAL BUTTON ── */
 .nav-portal-btn {
