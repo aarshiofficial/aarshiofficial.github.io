@@ -821,3 +821,51 @@ window.closeBioModal = function() {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape") window.closeBioModal();
 });
+
+/* ── COPY PHONE NUMBER ── */
+window.copyPhone = function(btn, number) {
+  navigator.clipboard.writeText(number).then(() => {
+    const original = btn.innerHTML;
+    btn.innerHTML = "✓ Copied";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.innerHTML = original;
+      btn.classList.remove("copied");
+    }, 1500);
+  }).catch(() => {
+    alert("Number: " + number);
+  });
+};
+
+/* ── CURSOR SPOTLIGHT (hero, desktop only) ── */
+(function(){
+  const hero = document.querySelector(".hero");
+  if (!hero || window.matchMedia("(hover: none)").matches) return;
+  const dot = document.createElement("div");
+  dot.className = "cursor-spotlight";
+  hero.appendChild(dot);
+  hero.addEventListener("mousemove", e => {
+    const rect = hero.getBoundingClientRect();
+    dot.style.left = (e.clientX - rect.left) + "px";
+    dot.style.top  = (e.clientY - rect.top) + "px";
+    dot.classList.add("active");
+  });
+  hero.addEventListener("mouseleave", () => dot.classList.remove("active"));
+})();
+
+/* ── 404 / KONAMI EASTER EGG (harmless, dead code unless triggered) ── */
+(function(){
+  const seq = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+  let pos = 0;
+  document.addEventListener("keydown", e => {
+    pos = (e.key === seq[pos]) ? pos + 1 : 0;
+    if (pos === seq.length) {
+      pos = 0;
+      const msg = document.createElement("div");
+      msg.textContent = "🎭 You found the easter egg! The show must go on.";
+      msg.style.cssText = "position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:#E8C547;color:#0D0D0D;padding:0.85rem 1.5rem;border-radius:8px;font-weight:700;font-family:'Playfair Display',serif;font-style:italic;z-index:99999;box-shadow:0 8px 30px rgba(0,0,0,0.4)";
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 3500);
+    }
+  });
+})();

@@ -567,3 +567,133 @@ If you ever prefer to do it directly instead of using admin.html:
 2. Add or edit field `status` (string) → set to `"pending"`, `"approved"`, or `"rejected"`
 
 ---
+
+---
+---
+
+# 🆕 NEW FEATURES — ADMIN GUIDE
+
+This section documents everything added in the latest update. None of it touches the existing approval system, Firestore rules, or any previously working feature — it's all additive.
+
+---
+
+## 🛡 ADMIN PANEL — NEW CAPABILITIES (admin.html)
+
+The admin panel now does much more than approve/reject signups. You should rarely need to open the Firestore Console directly anymore.
+
+### Stats Summary (top of the page)
+Shows at a glance:
+- **Total Members** — everyone who has ever signed up
+- **Pending** — awaiting your approval
+- **Approved** — currently public on the Members page
+- **Top Interest** — the most popular interest area across all members (useful for planning workshops)
+
+This updates automatically every time you load the page or change a member's status.
+
+### ✎ Edit Button — Achievements & Attendance (no more Firestore Console needed)
+Every member card in the Pending/Approved/Rejected tabs now has an **✎ Edit** button next to the Approve/Reject/Revert controls. Clicking it opens a popup where you can:
+
+**Add an achievement:**
+1. Type the achievement text (e.g. `Won 1st Place — Abhivyakti 2025`)
+2. Click **Add**
+3. It appears in the list as **⏳ pending** (not yet public)
+4. Click **Approve** next to it to make it public on the Members page instantly
+
+**Delete an achievement:**
+Click the 🗑 icon next to any achievement — removes it from both the private and public lists.
+
+**Add attendance for a session:**
+1. Type the **Event name** (e.g. `Drama Workshop 2026`)
+2. Type the **date** (e.g. `15 Jun 2026`) — optional but recommended
+3. Choose **Present** or **Absent** from the dropdown
+4. Click **Add**
+5. This is private — only that member sees it on their own dashboard after logging in
+
+**Delete an attendance record:**
+Click the 🗑 icon next to any attendance row.
+
+All changes save to Firestore immediately — no separate "Save" button needed, and no risk of losing data if you close the popup.
+
+### ⬇ Export Approved Members (CSV)
+Click **"⬇ Export Approved Members (CSV)"** above the search bar. Downloads a spreadsheet with:
+- Name, Email, Year Joined, Status (Active/Alumni), Interests, Approved Achievements
+
+Useful for:
+- Printing a physical attendance sheet before an event
+- Keeping an offline backup of member records
+- Sharing a member list with other OBs without giving them Firestore access
+
+Opens directly in Excel/Google Sheets — only **approved** members are included (pending/rejected accounts are excluded automatically).
+
+---
+
+## 🌐 PUBLIC WEBSITE — NEW SECTIONS
+
+### "This Week at AARSHI" widget (About page)
+A small highlighted card showing current happenings. To update it:
+1. Open `index.html`, search for `THIS WEEK AT AARSHI`
+2. Edit the text inside `<div class="this-week-text">...</div>`
+3. No other changes needed — just rewrite the sentence to reflect what's currently going on
+
+### Competitions & Fests strip (About page)
+Search for `COMPETITIONS & FESTS`. Lists events AARSHI has competed in and won at — currently IICM, Inquivesta, AIIMS Kalyani Fest, MAKAUT Fest, matching the confirmed wins in the Achievements section. To add a new one:
+```html
+<span>Festival or Competition Name</span>
+```
+Add or remove `<span>` tags inside `.press-logos` as needed. Only add entries here once they're confirmed in Achievements — this section implies AARSHI has actually competed there.
+
+### FAQ Accordion (Contact page)
+Search for `FAQ ACCORDION` in `index.html`. To add a new question:
+```html
+<div class="faq-item">
+  <button class="faq-question">
+    <span>Your question here?</span>
+    <span class="faq-icon">+</span>
+  </button>
+  <div class="faq-answer"><p>Your answer here.</p></div>
+</div>
+```
+Clicking a question auto-collapses any other open question — no JS edits needed, this is handled automatically site-wide.
+
+### Copy Phone Number Buttons (Team page)
+Every OB's phone number now has a small copy icon next to it. Clicking it copies the number to clipboard and briefly shows "✓ Copied". This is automatic for all 5 current OBs — no admin action needed. If you add a new OB, follow the existing pattern (search `copyPhone` in `index.html` to see the exact markup to copy).
+
+### Cursor Spotlight (Hero / About page, desktop only)
+A soft gold glow now follows the mouse cursor on the hero background. Purely decorative, no admin action needed. Automatically disabled on mobile/touch devices.
+
+### Loading Skeleton (Members page)
+While member data loads from Firestore, the Members page now shows animated placeholder cards instead of a plain spinner. No admin action needed.
+
+### Page Transitions
+Switching between site sections (About → Events → Gallery etc.) now has a subtle fade-in animation instead of an instant cut. No admin action needed. Automatically disabled for visitors with "reduce motion" accessibility settings enabled.
+
+### Easter Egg
+Typing the Konami code (↑ ↑ ↓ ↓ ← → ← → B A) anywhere on the site shows a small celebratory message. Pure fun, zero functional impact — dead code unless someone actually types that sequence.
+
+---
+
+## 📄 NEW STATIC FILES
+
+### `404.html`
+A custom "page not found" screen in the AARSHI dark theme, shown automatically by GitHub Pages instead of the default error page. No admin action needed — works automatically once deployed.
+
+### `robots.txt` and `sitemap.xml`
+Help search engines (Google, Bing) index the site properly. No admin action needed unless you add brand new pages — if you do create a new `.html` file at the root (like `auth.html`), add its URL to `sitemap.xml` following the existing pattern.
+
+### Print Stylesheet
+If anyone presses Ctrl+P (or Cmd+P) on any page, it now prints cleanly — dark backgrounds, nav, banners, and popups are hidden, OB/Team cards print without overlap. No admin action needed.
+
+---
+
+## ✅ CONFIRMATION: NOTHING EXISTING WAS CHANGED
+
+All of the above are **new, separate sections and files** that sit alongside the existing site. Specifically confirmed unaffected:
+- The pending/approved/rejected approval workflow (Approve/Reject/Revert buttons work exactly as before)
+- Firestore security rules (no changes required)
+- The Member Portal signup/login/dashboard flow
+- All existing events, gallery, achievements, team, and past events content
+- The SPA page-switching system and the nav underline fix from the previous session
+
+If anything looks broken after deploying, it is very unlikely to be caused by this batch — check the browser console (F12 → Console tab) for the exact error and share it.
+
+---

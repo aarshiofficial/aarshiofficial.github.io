@@ -77,6 +77,43 @@
     .search-icon{position:absolute;left:0.85rem;top:50%;transform:translateY(-50%);color:var(--muted)}
 
     @media(max-width:600px){.req-actions{width:100%;justify-content:flex-end}}
+
+    /* ── STATS SUMMARY ── */
+    .stats-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin-bottom:1.75rem}
+    .stat-box{background:var(--dark);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1rem;text-align:center}
+    .stat-box-num{font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--gold);line-height:1}
+    .stat-box-lbl{font-size:0.65rem;color:var(--muted);margin-top:0.35rem;letter-spacing:0.05em;text-transform:uppercase}
+    @media(max-width:600px){.stats-summary{grid-template-columns:1fr 1fr}}
+
+    /* ── EXPORT BUTTON ── */
+    .export-btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1rem;background:transparent;border:1.5px solid rgba(232,197,71,0.35);border-radius:6px;color:var(--gold);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;margin-bottom:1.25rem}
+    .export-btn:hover{background:rgba(232,197,71,0.1);border-color:var(--gold)}
+
+    /* ── EDIT BUTTON ON CARD ── */
+    .btn-edit{background:transparent;border:1.5px solid rgba(255,255,255,0.15);color:var(--muted);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+    .btn-edit:hover{border-color:var(--gold);color:var(--gold)}
+
+    /* ── EDIT MODAL ── */
+    .edit-modal{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;padding:1.5rem}
+    .edit-modal.open{display:flex}
+    .edit-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.8)}
+    .edit-card{position:relative;background:var(--dark);border:1px solid rgba(232,197,71,0.2);border-radius:14px;padding:1.75rem;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;z-index:1}
+    .edit-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.08);border:none;color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer}
+    .edit-title{font-family:var(--font-display);font-size:1.3rem;color:#fff;margin-bottom:0.2rem}
+    .edit-sub{font-size:0.78rem;color:var(--muted);margin-bottom:1.5rem}
+    .edit-section-label{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:1.25rem 0 0.6rem;padding-bottom:0.35rem;border-bottom:1px solid rgba(232,197,71,0.15)}
+    .edit-section-label:first-of-type{margin-top:0}
+    .ach-row,.att-row{display:flex;gap:0.5rem;align-items:center;margin-bottom:0.5rem;background:var(--dark-2);padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem}
+    .ach-row span,.att-row span{flex:1}
+    .ach-row .badge-approved{color:var(--green);font-size:0.68rem;font-weight:700}
+    .ach-row .badge-pending{color:var(--muted);font-size:0.68rem}
+    .row-del{background:none;border:none;color:#E74C3C;cursor:pointer;font-size:0.9rem;padding:0.2rem}
+    .row-approve{background:none;border:none;color:var(--green);cursor:pointer;font-size:0.75rem;font-weight:600;padding:0.2rem 0.4rem}
+    .add-row{display:flex;gap:0.5rem;margin-top:0.5rem}
+    .add-row input,.add-row select{flex:1;padding:0.55rem 0.75rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:var(--parchment);font-size:0.82rem;outline:none}
+    .add-row input:focus,.add-row select:focus{border-color:var(--gold)}
+    .add-row button{padding:0.55rem 1rem;background:var(--gold);color:var(--black);border:none;border-radius:6px;font-weight:700;font-size:0.8rem;cursor:pointer;white-space:nowrap}
+    .empty-row{font-size:0.78rem;color:var(--muted);font-style:italic;padding:0.5rem 0}
   </style>
 </head>
 <body>
@@ -107,6 +144,16 @@
       <h1 class="page-title">🛡 Admin Panel</h1>
       <p class="page-sub">Review and manage member account requests</p>
 
+      <!-- STATS SUMMARY -->
+      <div class="stats-summary">
+        <div class="stat-box"><div class="stat-box-num" id="statTotal">0</div><div class="stat-box-lbl">Total Members</div></div>
+        <div class="stat-box"><div class="stat-box-num" id="statPendingS">0</div><div class="stat-box-lbl">Pending</div></div>
+        <div class="stat-box"><div class="stat-box-num" id="statApprovedS">0</div><div class="stat-box-lbl">Approved</div></div>
+        <div class="stat-box"><div class="stat-box-num" id="statTopInterest">–</div><div class="stat-box-lbl">Top Interest</div></div>
+      </div>
+
+      <button class="export-btn" onclick="exportCSV()">⬇ Export Approved Members (CSV)</button>
+
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input type="text" id="searchInput" placeholder="Search by name or email…" oninput="renderList()"/>
@@ -119,6 +166,35 @@
       </div>
 
       <div id="listContainer"></div>
+    </div>
+  </div>
+
+  <!-- EDIT MEMBER MODAL: achievements + attendance -->
+  <div class="edit-modal" id="editModal">
+    <div class="edit-backdrop" onclick="closeEdit()"></div>
+    <div class="edit-card">
+      <button class="edit-close" onclick="closeEdit()">✕</button>
+      <div class="edit-title" id="editName">–</div>
+      <div class="edit-sub" id="editEmail">–</div>
+
+      <div class="edit-section-label">🏆 Achievements</div>
+      <div id="achList"></div>
+      <div class="add-row">
+        <input type="text" id="newAchInput" placeholder="e.g. Won 1st Place — Abhivyakti 2025"/>
+        <button onclick="addAchievement()">Add</button>
+      </div>
+
+      <div class="edit-section-label">🗓 Attendance</div>
+      <div id="attList"></div>
+      <div class="add-row">
+        <input type="text" id="newAttEvent" placeholder="Event name" style="flex:1.4"/>
+        <input type="text" id="newAttDate" placeholder="DD Mon YYYY"/>
+        <select id="newAttStatus">
+          <option value="present">Present</option>
+          <option value="absent">Absent</option>
+        </select>
+        <button onclick="addAttendance()">Add</button>
+      </div>
     </div>
   </div>
 
@@ -169,12 +245,29 @@
           yearJoined: d.yearJoined || "–",
           yearLeft: d.yearLeft || "Present",
           interests: d.interests || [],
+          achievements: d.achievements || [],
+          achievementsApproved: d.achievementsApproved || [],
+          attendance: d.attendance || {},
           // Accounts created before this feature has no status field — treat as approved
           status: d.status || "approved",
           role: d.role || "member"
         };
       }).sort((a,b) => a.name.localeCompare(b.name));
       renderList();
+      renderStats();
+    }
+
+    function renderStats() {
+      const total = allMembers.length;
+      const pending = allMembers.filter(m=>m.status==="pending").length;
+      const approved = allMembers.filter(m=>m.status==="approved").length;
+      const interestCount = {};
+      allMembers.forEach(m => (m.interests||[]).forEach(i => interestCount[i] = (interestCount[i]||0)+1));
+      const top = Object.entries(interestCount).sort((a,b)=>b[1]-a[1])[0];
+      document.getElementById("statTotal").textContent = total;
+      document.getElementById("statPendingS").textContent = pending;
+      document.getElementById("statApprovedS").textContent = approved;
+      document.getElementById("statTopInterest").textContent = top ? top[0] : "–";
     }
 
     function getInitials(name) {
@@ -241,7 +334,10 @@
               ${chips}
             </div>
           </div>
-          <div class="req-actions">${actions}</div>
+          <div class="req-actions">
+            <button class="btn-edit" onclick="openEdit('${m.uid}')">✎ Edit</button>
+            ${actions}
+          </div>
         </div>`;
       }).join("");
     }
@@ -259,12 +355,148 @@
         const m = allMembers.find(x => x.uid === uid);
         if (m) m.status = status;
         renderList();
+        renderStats();
       } catch(e) {
         alert("Failed to update status: " + e.message);
         if (card) card.style.opacity = "1";
       }
     }
     window.setStatus = setStatus;
+
+    /* ── EDIT MODAL: ACHIEVEMENTS + ATTENDANCE ── */
+    let editingUid = null;
+
+    function openEdit(uid) {
+      editingUid = uid;
+      const m = allMembers.find(x => x.uid === uid);
+      if (!m) return;
+      document.getElementById("editName").textContent = m.name;
+      document.getElementById("editEmail").textContent = m.email;
+      renderAchList(m);
+      renderAttList(m);
+      document.getElementById("editModal").classList.add("open");
+    }
+    window.openEdit = openEdit;
+
+    function closeEdit() {
+      document.getElementById("editModal").classList.remove("open");
+      editingUid = null;
+    }
+    window.closeEdit = closeEdit;
+
+    function renderAchList(m) {
+      const el = document.getElementById("achList");
+      const all = m.achievements || [];
+      if (!all.length) { el.innerHTML = '<div class="empty-row">No achievements yet.</div>'; return; }
+      el.innerHTML = all.map((a, i) => {
+        const isApproved = (m.achievementsApproved||[]).includes(a);
+        return `<div class="ach-row">
+          <span>${escHtml(a)}</span>
+          ${isApproved
+            ? '<span class="badge-approved">✓ Approved</span>'
+            : `<button class="row-approve" onclick="approveAchievement(${i})">Approve</button>`}
+          <button class="row-del" onclick="deleteAchievement(${i})" title="Delete">🗑</button>
+        </div>`;
+      }).join("");
+    }
+
+    function renderAttList(m) {
+      const el = document.getElementById("attList");
+      const entries = Object.entries(m.attendance || {});
+      if (!entries.length) { el.innerHTML = '<div class="empty-row">No attendance records yet.</div>'; return; }
+      el.innerHTML = entries.sort((a,b)=>b[0].localeCompare(a[0])).map(([key, status]) => {
+        const [name, date] = key.split("||");
+        return `<div class="att-row">
+          <span>${escHtml(name||key)} ${date?`· ${escHtml(date)}`:""}</span>
+          <span style="flex:0;color:${status==='present'?'#2ECC71':'#E74C3C'};font-size:0.7rem;font-weight:700">${status}</span>
+          <button class="row-del" onclick="deleteAttendance('${encodeURIComponent(key)}')" title="Delete">🗑</button>
+        </div>`;
+      }).join("");
+    }
+
+    async function addAchievement() {
+      const input = document.getElementById("newAchInput");
+      const text = input.value.trim();
+      if (!text || !editingUid) return;
+      const m = allMembers.find(x => x.uid === editingUid);
+      m.achievements = [...(m.achievements||[]), text];
+      await db.collection("members").doc(editingUid).update({ achievements: m.achievements });
+      input.value = "";
+      renderAchList(m);
+    }
+    window.addAchievement = addAchievement;
+
+    async function approveAchievement(idx) {
+      const m = allMembers.find(x => x.uid === editingUid);
+      const text = m.achievements[idx];
+      m.achievementsApproved = [...new Set([...(m.achievementsApproved||[]), text])];
+      await db.collection("members").doc(editingUid).update({ achievementsApproved: m.achievementsApproved });
+      renderAchList(m);
+    }
+    window.approveAchievement = approveAchievement;
+
+    async function deleteAchievement(idx) {
+      const m = allMembers.find(x => x.uid === editingUid);
+      const text = m.achievements[idx];
+      m.achievements = m.achievements.filter((_, i) => i !== idx);
+      m.achievementsApproved = (m.achievementsApproved||[]).filter(a => a !== text);
+      await db.collection("members").doc(editingUid).update({
+        achievements: m.achievements,
+        achievementsApproved: m.achievementsApproved
+      });
+      renderAchList(m);
+    }
+    window.deleteAchievement = deleteAchievement;
+
+    async function addAttendance() {
+      const evName = document.getElementById("newAttEvent").value.trim();
+      const evDate = document.getElementById("newAttDate").value.trim();
+      const status = document.getElementById("newAttStatus").value;
+      if (!evName || !editingUid) return;
+      const m = allMembers.find(x => x.uid === editingUid);
+      const key = evDate ? `${evName}||${evDate}` : evName;
+      m.attendance = { ...(m.attendance||{}), [key]: status };
+      await db.collection("members").doc(editingUid).update({ attendance: m.attendance });
+      document.getElementById("newAttEvent").value = "";
+      document.getElementById("newAttDate").value = "";
+      renderAttList(m);
+    }
+    window.addAttendance = addAttendance;
+
+    async function deleteAttendance(encodedKey) {
+      const key = decodeURIComponent(encodedKey);
+      const m = allMembers.find(x => x.uid === editingUid);
+      const updated = { ...m.attendance };
+      delete updated[key];
+      m.attendance = updated;
+      await db.collection("members").doc(editingUid).update({ attendance: m.attendance });
+      renderAttList(m);
+    }
+    window.deleteAttendance = deleteAttendance;
+
+    /* ── CSV EXPORT (approved members only) ── */
+    function exportCSV() {
+      const approved = allMembers.filter(m => m.status === "approved");
+      if (!approved.length) { alert("No approved members to export."); return; }
+      const headers = ["Name","Email","Year Joined","Status","Interests","Approved Achievements"];
+      const rows = approved.map(m => [
+        m.name, m.email, m.yearJoined,
+        m.yearLeft === "Present" ? "Active" : `Alumni ${m.yearLeft}`,
+        (m.interests||[]).join("; "),
+        (m.achievementsApproved||[]).join("; ")
+      ]);
+      const csv = [headers, ...rows]
+        .map(row => row.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(","))
+        .join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `aarshi-members-${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    window.exportCSV = exportCSV;
   </script>
 </body>
 </html>

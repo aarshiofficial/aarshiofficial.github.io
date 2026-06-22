@@ -2272,22 +2272,6 @@ body[data-current-page="events"] .downloads-section { display: block; }
 [data-theme="light"] .booking-section { background:#FFFFFF; }
 [data-theme="light"] .booking-title { color:#0D0A06; }
 
-/* ── SENIORS SECTION ── */
-.seniors-section { margin-top:3rem; }
-.seniors-title { font-family:var(--font-display); font-size:1.4rem; color:var(--white); margin-bottom:1.5rem; }
-[data-theme="light"] .seniors-title { color:#0D0A06; }
-.seniors-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
-.senior-card { background:var(--dark); border:1px solid var(--border); border-radius:10px; padding:1.25rem; display:flex; align-items:center; gap:1rem; transition:border-color 0.2s,transform 0.2s; }
-.senior-card:hover { border-color:var(--border-accent); transform:translateY(-2px); }
-.senior-photo-wrap { flex-shrink:0; }
-.senior-photo { width:56px!important; height:56px!important; border-radius:50%; object-fit:cover; border:2px solid rgba(232,197,71,0.3)!important; }
-.senior-name { font-weight:600; font-size:0.9rem; color:var(--parchment); }
-.senior-batch { font-size:0.72rem; color:var(--gold); margin:0.15rem 0; letter-spacing:0.06em; }
-.senior-now { font-size:0.75rem; color:var(--muted); }
-[data-theme="light"] .senior-card { background:#FFFFFF; border-color:rgba(0,0,0,0.08); }
-[data-theme="light"] .senior-name { color:#1C1712; }
-@media(max-width:640px){ .seniors-grid{grid-template-columns:1fr} }
-
 /* ── ACHIEVEMENTS TICKER ── */
 .ach-ticker-wrap { overflow:hidden; background:rgba(232,197,71,0.06); border:1px solid rgba(232,197,71,0.15); border-radius:8px; padding:0.65rem 0; margin-bottom:2.5rem; }
 .ach-ticker { display:flex; gap:3rem; white-space:nowrap; animation:tickerScroll 30s linear infinite; }
@@ -2388,3 +2372,77 @@ body[data-current-page="events"] .downloads-section { display: block; }
 .event-modal-submit:hover { background:var(--gold-dim); }
 
 @media(max-width:640px){ .event-modal-card{padding:2rem 1.25rem; max-height:90vh;} }
+
+/* ============================================================
+   ADDITIVE FEATURE BATCH — print, copy-btn, transitions, spotlight
+   ============================================================ */
+
+/* --- PRINT STYLESHEET --- */
+@media print {
+  .nav, .ann-banner, .rehearsal-banner, .back-to-top, .theme-toggle,
+  .story-popup, .story-backdrop, .curtain, .footer, .hero-bg-grid,
+  .spotlight, .nav-toggle, .cursor-spotlight,
+  .poster-lb, .event-modal, .lightbox { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .section { display: block !important; padding: 1rem 0 !important; }
+  .team-card, .contact-card, .ob-table { break-inside: avoid; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.7em; color: #555; }
+  .team-photo, .renowned-photo { filter: none !important; }
+}
+
+/* --- COPY PHONE NUMBER BUTTON --- */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  background: none; border: none; cursor: pointer;
+  color: inherit; font: inherit; padding: 0; margin-left: 0.35rem;
+  opacity: 0.6; transition: opacity 0.2s;
+  vertical-align: middle;
+}
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { color: #2ECC71; opacity: 1; }
+.copy-btn svg { width: 13px; height: 13px; }
+
+/* --- SPA PAGE TRANSITION --- */
+.hero, .section {
+  animation: pageFadeIn 0.35s ease;
+}
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero, .section { animation: none; }
+}
+
+/* --- CURSOR SPOTLIGHT (hero only, desktop only) --- */
+.cursor-spotlight {
+  position: absolute;
+  width: 380px; height: 380px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,197,71,0.10) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  will-change: transform;
+}
+.cursor-spotlight.active { opacity: 1; }
+@media (hover: none) { .cursor-spotlight { display: none; } }
+
+/* --- LOADING SKELETON (members.html style, reused via class) --- */
+.skeleton-card {
+  background: var(--dark); border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px; padding: 1.5rem 1.25rem; display: flex;
+  flex-direction: column; align-items: center; gap: 0.6rem;
+}
+.skeleton-circle, .skeleton-line {
+  background: linear-gradient(90deg, rgba(255,255,255,0.06) 25%, rgba(255,255,255,0.12) 37%, rgba(255,255,255,0.06) 63%);
+  background-size: 400% 100%;
+  animation: skeletonShine 1.4s ease infinite;
+  border-radius: 6px;
+}
+.skeleton-circle { width: 68px; height: 68px; border-radius: 50%; }
+.skeleton-line { height: 12px; width: 70%; }
+.skeleton-line.short { width: 45%; }
+@keyframes skeletonShine { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
