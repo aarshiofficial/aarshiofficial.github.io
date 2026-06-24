@@ -697,3 +697,4 @@ All of the above are **new, separate sections and files** that sit alongside the
 If anything looks broken after deploying, it is very unlikely to be caused by this batch — check the browser console (F12 → Console tab) for the exact error and share it.
 
 ---
+

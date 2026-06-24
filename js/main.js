@@ -64,14 +64,9 @@
     localStorage.setItem("aarshi-theme", theme);
   }
 
-  if (themeToggle) {
-    themeToggle.addEventListener("click", () => {
-      const current = root.getAttribute("data-theme");
-      applyTheme(current === "dark" ? "light" : "dark");
-    });
-  }
+  // Click handled by the curtain theatrical toggle below — no listener here
 
-  // Listen for OS-level changes
+  // Listen for OS-level theme changes (only when user hasn't manually chosen)
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
     if (!localStorage.getItem("aarshi-theme")) {
       applyTheme(e.matches ? "dark" : "light");
